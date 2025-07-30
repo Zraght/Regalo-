@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <section class="poema2020">
+  <!-- Sección del Poema 2020 -->
+  <section id="poema2020" class="poema2020">
     <img src="img/bg.2020.jpg" alt="Poema 2020" class="poema-fondo" />
     <div class="poema-contenido">
       <p class="verso-2020">
@@ -15,23 +16,25 @@
         pero fue tu forma de ser la que me agradó :)"
       </p>
     </div>
-    <button id="mostrarPoema2025">Poema 2025 🌻</button>
+    <button id="boton2025">Poema 2025 🌻</button>
   </section>
 
+  <!-- Sección del Poema 2025 -->
   <section class="poema2025 oculto">
-    <video autoplay muted loop class="video-fondo">
+    <video id="video2025" autoplay muted loop class="video-fondo">
       <source src="video/bg.2025.mp4" type="video/mp4" />
       Tu navegador no soporta el video.
     </video>
-    <div class="poema-contenido" id="lineas-poema">
-      <!-- Líneas del poema aparecerán aquí dinámicamente -->
+    <div class="poema-contenido" id="poema2025">
+      <!-- Las líneas del poema aparecerán aquí -->
     </div>
-    <div class="frase-final oculto" id="fraseFinal">
-      “Nunca dejes de florecer, para así poder disfrutar y admirar un mejor amanecer.”
+    <div class="frase-final oculto" id="frase-final">
+      <!-- Mensaje final -->
     </div>
-    <button id="reiniciarPoema" class="oculto">Volver a ver</button>
+    <button id="volver" class="oculto">Volver a ver</button>
   </section>
 
+  <!-- Efecto de brillos -->
   <canvas id="brillosCanvas"></canvas>
 
   <script src="script.js"></script>

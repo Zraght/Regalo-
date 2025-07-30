@@ -17,6 +17,15 @@ body {
   justify-content: center;
 }
 
+/* Canvas de brillos */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
 /* Fondo poema 2020 */
 #poema2020 {
   background-image: url('poema2020.jpg');
@@ -56,10 +65,12 @@ body {
   border-radius: 10px;
   z-index: 10;
   animation: pulse 2s infinite;
+  transition: transform 0.3s ease;
 }
 
 #boton2025:hover {
   background-color: #fff17633;
+  transform: scale(1.05);
 }
 
 /* Video 2025 */
@@ -86,11 +97,14 @@ body {
   animation: resplandor 3s ease-in-out infinite alternate;
   opacity: 0;
   transition: opacity 1s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  z-index: 3;
 }
 
 /* Frase final */
 #frase-final {
-  display: none;
+  opacity: 0;
   font-size: 2em;
   margin-top: 20px;
   color: #fff45f;
@@ -99,6 +113,9 @@ body {
   padding: 20px;
   position: relative;
   z-index: 3;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  transition: opacity 1.5s ease-in-out;
 }
 
 /* Botón volver */
@@ -115,6 +132,11 @@ body {
   animation: pulse 2s infinite;
   position: relative;
   z-index: 3;
+  transition: transform 0.3s ease;
+}
+
+#volver:hover {
+  transform: scale(1.05);
 }
 
 /* Animaciones */
@@ -142,6 +164,17 @@ body {
   }
   100% {
     box-shadow: 0 0 20px #fff59d;
+  }
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

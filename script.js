@@ -34,7 +34,6 @@ boton2025.addEventListener('click', () => {
   boton2025.style.display = 'none';
   video.style.display = 'block';
   poema2025.style.display = 'block';
-
   mostrarLineasPoema(0);
 });
 
@@ -60,15 +59,12 @@ function mostrarFraseFinal() {
   volverBtn.style.display = 'block';
 }
 
-// VOLVER A VER
 volverBtn.addEventListener('click', () => {
   location.reload();
 });
 
-// BRILLOS INTERACTIVOS (Canvas)
 function iniciarBrillos() {
-  const canvas = document.createElement('canvas');
-  document.body.appendChild(canvas);
+  const canvas = document.getElementById('brillosCanvas');
   const ctx = canvas.getContext('2d');
 
   canvas.width = window.innerWidth;
