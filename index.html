@@ -4,11 +4,525 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Regalo 🌻</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+    /* Reset y base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background-color: black;
+      color: #fffad1;
+      overflow: hidden;
+      min-height: 100vh;
+    }
+
+    .oculto {
+      display: none !important;
+    }
+
+    /* Pantalla de contraseña */
+    #pantalla-password {
+      background: linear-gradient(135deg, #000000, #1a1a1a);
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.8s ease-out;
+    }
+
+    #pantalla-password.saliendo {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    .banner-password {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #fff8c2;
+      text-shadow: 0 0 20px rgba(255, 248, 194, 0.6);
+      margin-bottom: 3rem;
+      text-align: center;
+      animation: brilloSuave 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes brilloSuave {
+      from {
+        text-shadow: 0 0 15px rgba(255, 248, 194, 0.4);
+      }
+      to {
+        text-shadow: 0 0 25px rgba(255, 248, 194, 0.8);
+      }
+    }
+
+    #inputPassword {
+      padding: 15px 20px;
+      font-size: 1.3rem;
+      font-family: 'Playfair Display', serif;
+      border-radius: 50px;
+      border: 2px solid #fff8c2;
+      outline: none;
+      background: rgba(255, 248, 194, 0.1);
+      color: #fff8c2;
+      width: 300px;
+      text-align: center;
+      margin-bottom: 20px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    #inputPassword:focus {
+      border-color: #ffe066;
+      box-shadow: 0 0 20px rgba(255, 224, 102, 0.5);
+      background: rgba(255, 248, 194, 0.15);
+    }
+
+    #inputPassword::placeholder {
+      color: rgba(255, 248, 194, 0.7);
+    }
+
+    #verificarPassword {
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      background: linear-gradient(45deg, transparent, rgba(255, 248, 194, 0.2));
+      color: #fff8c2;
+      border: 2px solid #fff8c2;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    #verificarPassword:hover {
+      background: rgba(255, 248, 194, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 25px rgba(255, 248, 194, 0.4);
+    }
+
+    #errorPassword {
+      color: #ff6b6b;
+      margin-top: 15px;
+      font-size: 1.1rem;
+      text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+    }
+
+    /* Contenido principal */
+    #contenido {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      opacity: 0;
+      transform: scale(1.05);
+      transition: all 1s ease-out;
+    }
+
+    #contenido.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Poema 2020 */
+    .poema2020 {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      transition: all 0.8s ease-in-out;
+    }
+
+    .poema2020.saliendo {
+      opacity: 0;
+      transform: scale(0.95) translateY(-30px);
+    }
+
+    .poema-fondo {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    /* Placeholder para la imagen 2020 */
+    .poema2020::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #4a5568, #2d3748, #1a202c);
+      z-index: -2;
+    }
+
+    .verso-2020 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      color: #fff8c2;
+      text-shadow: 
+        0 0 20px rgba(255, 248, 194, 0.8),
+        2px 2px 4px rgba(0, 0, 0, 0.8);
+      animation: resplandor 3s ease-in-out infinite alternate;
+      padding: 20px;
+      margin-bottom: 2rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    @keyframes resplandor {
+      from {
+        text-shadow: 
+          0 0 15px rgba(255, 248, 194, 0.6),
+          2px 2px 4px rgba(0, 0, 0, 0.8);
+      }
+      to {
+        text-shadow: 
+          0 0 30px rgba(255, 248, 194, 1),
+          0 0 50px rgba(255, 224, 102, 0.6),
+          2px 2px 4px rgba(0, 0, 0, 0.8);
+      }
+    }
+
+    /* Botón 2025 */
+    #boton2025 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      background: linear-gradient(45deg, transparent, rgba(255, 248, 194, 0.2));
+      color: #fff8c2;
+      border: 2px solid #ffe066;
+      padding: 15px 30px;
+      cursor: pointer;
+      border-radius: 50px;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 15px rgba(255, 224, 102, 0.3);
+      backdrop-filter: blur(5px);
+    }
+
+    #boton2025:hover {
+      background: rgba(255, 248, 194, 0.2);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 30px rgba(255, 224, 102, 0.5);
+    }
+
+    /* Poema 2025 */
+    .poema2025 {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(1.1);
+      transition: all 0.8s ease-in-out;
+    }
+
+    .poema2025.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .video-fondo {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    /* Placeholder para el video 2025 */
+    .poema2025::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      z-index: -2;
+    }
+
+    .poema-contenido {
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+      max-width: 90%;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #lineas-poema {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2rem;
+      color: #fff8c2;
+      text-shadow: 
+        0 0 20px rgba(255, 248, 194, 0.8),
+        2px 2px 4px rgba(0, 0, 0, 0.9);
+      line-height: 1.6;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .linea-verso {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: aparecerLinea 1.2s ease-out forwards;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    @keyframes aparecerLinea {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Frase final con efectos especiales */
+    .frase-final {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      text-align: center;
+      padding: 2rem;
+      max-width: 95%;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.8);
+      transition: all 1.5s ease-out;
+    }
+
+    .frase-final.visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .texto-final {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8rem;
+      color: #fff570;
+      text-shadow: 
+        0 0 30px rgba(255, 255, 112, 1),
+        0 0 60px rgba(255, 224, 102, 0.8),
+        0 0 90px rgba(255, 215, 0, 0.6),
+        3px 3px 6px rgba(0, 0, 0, 1);
+      animation: brilloIntenso 2.5s ease-in-out infinite alternate;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+      line-height: 1.4;
+    }
+
+    .texto-final:hover {
+      transform: scale(1.02);
+      text-shadow: 
+        0 0 40px rgba(255, 255, 112, 1),
+        0 0 80px rgba(255, 224, 102, 1),
+        0 0 120px rgba(255, 215, 0, 0.8),
+        3px 3px 8px rgba(0, 0, 0, 1);
+    }
+
+    @keyframes brilloIntenso {
+      from {
+        text-shadow: 
+          0 0 25px rgba(255, 255, 112, 0.8),
+          0 0 50px rgba(255, 224, 102, 0.6),
+          3px 3px 6px rgba(0, 0, 0, 1);
+      }
+      to {
+        text-shadow: 
+          0 0 40px rgba(255, 255, 112, 1),
+          0 0 80px rgba(255, 224, 102, 0.9),
+          0 0 120px rgba(255, 215, 0, 0.7),
+          3px 3px 6px rgba(0, 0, 0, 1);
+      }
+    }
+
+    .felicitacion {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: #fff570;
+      margin-top: 1.5rem;
+      font-weight: 600;
+      text-shadow: 0 0 20px rgba(255, 248, 194, 0.6);
+    }
+
+    /* Botón volver */
+    #volver {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      background: linear-gradient(45deg, transparent, rgba(255, 248, 194, 0.2));
+      border: 2px solid #ffe066;
+      padding: 12px 25px;
+      color: #fff8c2;
+      cursor: pointer;
+      border-radius: 50px;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(5px);
+      display: none;
+      opacity: 0;
+    }
+
+    #volver.visible {
+      display: block;
+      opacity: 1;
+      animation: aparecerBoton 1s ease-out forwards;
+    }
+
+    @keyframes aparecerBoton {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    #volver:hover {
+      background: rgba(255, 248, 194, 0.2);
+      transform: translateX(-50%) translateY(-2px) scale(1.05);
+      box-shadow: 0 5px 25px rgba(255, 224, 102, 0.4);
+    }
+
+    /* Canvas de brillos */
+    #brillosCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Partículas brillantes */
+    .particula-brillo {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: radial-gradient(circle, #fff570, rgba(255, 245, 112, 0.3));
+      border-radius: 50%;
+      pointer-events: none;
+      animation: flotarParticula 4s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    @keyframes flotarParticula {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+        transform: translateY(-20px) rotate(45deg) scale(1);
+      }
+      50% {
+        opacity: 0.8;
+        transform: translateY(-100px) rotate(180deg) scale(1.2);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-200px) rotate(360deg) scale(0);
+      }
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 768px) {
+      .banner-password {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      #inputPassword {
+        width: 280px;
+        font-size: 1.2rem;
+      }
+
+      .verso-2020 {
+        font-size: 2rem;
+        padding: 15px;
+      }
+
+      #boton2025 {
+        font-size: 1.2rem;
+        padding: 12px 25px;
+      }
+
+      #lineas-poema {
+        font-size: 1.8rem;
+      }
+
+      .texto-final {
+        font-size: 2.2rem;
+      }
+
+      .felicitacion {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .banner-password {
+        font-size: 1.7rem;
+      }
+
+      #inputPassword {
+        width: 250px;
+        font-size: 1.1rem;
+      }
+
+      .verso-2020 {
+        font-size: 1.7rem;
+      }
+
+      #lineas-poema {
+        font-size: 1.5rem;
+      }
+
+      .texto-final {
+        font-size: 1.9rem;
+      }
+
+      .felicitacion {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Pantalla de contraseña -->
   <div id="pantalla-password">
+    <h1 class="banner-password">Escriba la contraseña:</h1>
     <input type="password" id="inputPassword" placeholder="Ingresa la contraseña..." />
     <button id="verificarPassword">Entrar</button>
     <p id="errorPassword"></p>
@@ -18,7 +532,8 @@
   <div id="contenido" class="oculto">
     <!-- Poema 2020 -->
     <section id="poema2020" class="poema2020">
-      <img src="img/bg.2020.jpg" alt="Poema 2020" class="poema-fondo" />
+      <!-- Placeholder para imagen - reemplazar con tu imagen -->
+      <div class="poema-fondo" style="background-image: url('img/bg.2020.jpg'); background-size: cover; background-position: center;"></div>
       <div class="poema-contenido">
         <p class="verso-2020">
           "Tu apariencia me encantó,<br />
@@ -30,20 +545,300 @@
 
     <!-- Poema 2025 -->
     <section id="poema2025" class="poema2025 oculto">
-      <video id="video2025" autoplay muted loop class="video-fondo">
+      <!-- Placeholder para video - reemplazar con tu video -->
+      <video autoplay muted loop class="video-fondo" style="display: none;">
         <source src="video/bg.2025.mp4" type="video/mp4" />
-        Tu navegador no soporta el video.
       </video>
-      <div class="poema-contenido" id="lineas-poema"></div>
-      <div class="frase-final oculto" id="fraseFinal">
-        “Nunca dejes de florecer, para así poder disfrutar y admirar un mejor amanecer.”
+      <div class="poema-contenido">
+        <div id="lineas-poema"></div>
+      </div>
+      <div class="frase-final" id="fraseFinal">
+        <div class="texto-final" id="textoFinal">
+          "Nunca dejes de florecer, para así poder disfrutar y admirar un mejor amanecer."
+        </div>
+        <div class="felicitacion">Feliz cumpleaños, Johana 🌻</div>
       </div>
       <button id="volver">Volver a ver</button>
     </section>
 
     <canvas id="brillosCanvas"></canvas>
+    <div id="particulas-container"></div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // Elementos del DOM
+    const passwordInput = document.getElementById("inputPassword");
+    const verificarBtn = document.getElementById("verificarPassword");
+    const errorPassword = document.getElementById("errorPassword");
+    const pantallaPassword = document.getElementById("pantalla-password");
+    const contenido = document.getElementById("contenido");
+    const seccion2020 = document.getElementById("poema2020");
+    const seccion2025 = document.getElementById("poema2025");
+    const boton2025 = document.getElementById("boton2025");
+    const lineasPoema = document.getElementById("lineas-poema");
+    const fraseFinal = document.getElementById("fraseFinal");
+    const textoFinal = document.getElementById("textoFinal");
+    const volverBtn = document.getElementById("volver");
+    const canvas = document.getElementById("brillosCanvas");
+    const ctx = canvas.getContext("2d");
+    const particulasContainer = document.getElementById("particulas-container");
+
+    // Configurar canvas
+    function setupCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    setupCanvas();
+    window.addEventListener('resize', setupCanvas);
+
+    // Variables de brillos
+    let brillos = [];
+    let animacionActiva = false;
+
+    // Versos del poema 2025
+    const versos = [
+      "Cuando todo era simple y sin condición,",
+      "brillabas sin dar explicación.",
+      "Con pasos suaves, sonrisas sinceras,",
+      "sin saber que ya eras primavera.",
+      "",
+      "Vinieron pruebas, caminos cerrados,",
+      "y tú seguiste avanzando, aún en caminos quebrados.",
+      "Decías \"soy fuerte\" en tu caminar,",
+      "como quien lucha sin aparentar.",
+      "",
+      "No es fácil subir a la cima cuando hay peso,",
+      "pero tú sigues avanzando, sin dar retroceso.",
+      "Porque en cada paso, Dios va contigo,",
+      "y es Él quien siempre guía tu camino.",
+      "",
+      "Yo siempre estuve presente, dispuesto a ayudarte,",
+      "ser quien te escuche, sin necesidad de juzgarte.",
+      "Porque no puedo alejarme, ni dejar de cuidar,",
+      "a quien tanto aprendí a atesorar."
+    ];
+
+    let index = 0;
+
+    // Verificación de contraseña
+    function verificarPassword() {
+      if (passwordInput.value === "poema2020") {
+        pantallaPassword.classList.add('saliendo');
+        setTimeout(() => {
+          pantallaPassword.style.display = "none";
+          contenido.classList.remove("oculto");
+          setTimeout(() => {
+            contenido.classList.add("visible");
+          }, 100);
+        }, 800);
+      } else {
+        errorPassword.textContent = "Contraseña incorrecta.";
+        passwordInput.style.borderColor = "#ff6b6b";
+        setTimeout(() => {
+          errorPassword.textContent = "";
+          passwordInput.style.borderColor = "#fff8c2";
+        }, 2000);
+      }
+    }
+
+    verificarBtn.addEventListener("click", verificarPassword);
+    passwordInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        verificarPassword();
+      }
+    });
+
+    // Inicializar brillos
+    function inicializarBrillos() {
+      brillos = [];
+      for (let i = 0; i < 60; i++) {
+        brillos.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 2 + 1,
+          velocidad: Math.random() * 1.5 + 0.5,
+          opacity: Math.random() * 0.8 + 0.2,
+          color: `hsl(${50 + Math.random() * 10}, 100%, ${70 + Math.random() * 20}%)`
+        });
+      }
+    }
+
+    // Crear partículas interactivas
+    function crearParticulasInteractivas(x, y) {
+      for (let i = 0; i < 12; i++) {
+        const particula = document.createElement('div');
+        particula.className = 'particula-brillo';
+        particula.style.left = (x - 10 + Math.random() * 20) + 'px';
+        particula.style.top = (y - 10 + Math.random() * 20) + 'px';
+        particula.style.animationDelay = (Math.random() * 0.5) + 's';
+        particulasContainer.appendChild(particula);
+        
+        setTimeout(() => {
+          if (particula.parentNode) {
+            particula.parentNode.removeChild(particula);
+          }
+        }, 4000);
+      }
+    }
+
+    // Animar brillos
+    function animarBrillos() {
+      if (!animacionActiva) return;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      brillos.forEach((brillo, index) => {
+        brillo.y -= brillo.velocidad;
+        
+        if (brillo.y < -10) {
+          brillo.y = canvas.height + 10;
+          brillo.x = Math.random() * canvas.width;
+        }
+
+        ctx.save();
+        ctx.globalAlpha = brillo.opacity;
+        ctx.fillStyle = brillo.color;
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = brillo.color;
+        ctx.beginPath();
+        ctx.arc(brillo.x, brillo.y, brillo.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+
+      requestAnimationFrame(animarBrillos);
+    }
+
+    // Transición a poema 2025
+    boton2025.addEventListener("click", () => {
+      seccion2020.classList.add('saliendo');
+      
+      setTimeout(() => {
+        seccion2020.classList.add("oculto");
+        seccion2025.classList.remove("oculto");
+        
+        setTimeout(() => {
+          seccion2025.classList.add("visible");
+          mostrarVersos();
+        }, 100);
+      }, 800);
+    });
+
+    // Mostrar versos línea por línea
+    function mostrarVersos() {
+      if (index < versos.length) {
+        const verso = versos[index];
+        
+        if (verso.trim() === "") {
+          // Línea vacía, pausa más larga
+          index++;
+          setTimeout(mostrarVersos, 1500);
+          return;
+        }
+
+        const linea = document.createElement("span");
+        linea.className = "linea-verso";
+        linea.textContent = verso;
+        linea.style.animationDelay = '0.2s';
+        
+        // Limpiar contenedor y agregar nueva línea
+        lineasPoema.innerHTML = '';
+        lineasPoema.appendChild(linea);
+        
+        index++;
+        setTimeout(mostrarVersos, 3000);
+      } else {
+        // Mostrar frase final
+        setTimeout(() => {
+          lineasPoema.style.display = 'none';
+          fraseFinal.classList.add("visible");
+          volverBtn.classList.add("visible");
+          
+          // Iniciar brillos
+          animacionActiva = true;
+          inicializarBrillos();
+          animarBrillos();
+          
+          // Hacer interactivo el texto final
+          textoFinal.addEventListener('click', (e) => {
+            const rect = textoFinal.getBoundingClientRect();
+            crearParticulasInteractivas(e.clientX, e.clientY);
+          });
+
+          textoFinal.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            crearParticulasInteractivas(touch.clientX, touch.clientY);
+          });
+        }, 1000);
+      }
+    }
+
+    // Volver a ver
+    volverBtn.addEventListener("click", () => {
+      // Detener brillos
+      animacionActiva = false;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particulasContainer.innerHTML = '';
+      
+      // Resetear elementos
+      fraseFinal.classList.remove("visible");
+      volverBtn.classList.remove("visible");
+      lineasPoema.style.display = 'flex';
+      lineasPoema.innerHTML = "";
+      index = 0;
+      
+      // Reiniciar poema
+      setTimeout(() => {
+        mostrarVersos();
+      }, 500);
+    });
+
+    // Brillos ambientales iniciales (sutiles)
+    function iniciarBrillosAmbientales() {
+      const brillosAmbientales = [];
+      for (let i = 0; i < 30; i++) {
+        brillosAmbientales.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1 + 0.5,
+          velocidad: Math.random() * 0.5 + 0.2,
+          opacity: Math.random() * 0.3 + 0.1
+        });
+      }
+
+      function animarAmbientales() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        brillosAmbientales.forEach(brillo => {
+          brillo.y -= brillo.velocidad;
+          
+          if (brillo.y < -10) {
+            brillo.y = canvas.height + 10;
+            brillo.x = Math.random() * canvas.width;
+          }
+
+          ctx.save();
+          ctx.globalAlpha = brillo.opacity;
+          ctx.fillStyle = "#fff8c2";
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = "#fff8c2";
+          ctx.beginPath();
+          ctx.arc(brillo.x, brillo.y, brillo.r, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        });
+
+        if (!animacionActiva) {
+          requestAnimationFrame(animarAmbientales);
+        }
+      }
+
+      animarAmbientales();
+    }
+
+    // Iniciar brillos ambientales cuando se carga la página
+    setTimeout(iniciarBrillosAmbientales, 2000);
+  </script>
 </body>
 </html>
