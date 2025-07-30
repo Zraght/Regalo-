@@ -4,6 +4,7 @@ const video = document.getElementById('video2025');
 const poema2025 = document.getElementById('poema2025');
 const fraseFinal = document.getElementById('frase-final');
 const volverBtn = document.getElementById('volver');
+const contenedorLineas = document.getElementById('lineas-poema');
 
 const lineasPoema = [
   "Cuando todo era simple y sin condición,",
@@ -33,17 +34,17 @@ boton2025.addEventListener('click', () => {
   poema2020.style.display = 'none';
   boton2025.style.display = 'none';
   video.style.display = 'block';
-  poema2025.style.display = 'block';
+  poema2025.classList.remove('oculto');
   mostrarLineasPoema(0);
 });
 
 function mostrarLineasPoema(i) {
   if (i < lineasPoema.length) {
-    poema2025.innerText = lineasPoema[i];
-    poema2025.style.opacity = 0;
-    setTimeout(() => poema2025.style.opacity = 1, 100);
+    contenedorLineas.innerHTML = `<p class="linea">${lineasPoema[i]}</p>`;
+    contenedorLineas.style.opacity = 0;
+    setTimeout(() => contenedorLineas.style.opacity = 1, 100);
     setTimeout(() => {
-      poema2025.style.opacity = 0;
+      contenedorLineas.style.opacity = 0;
       mostrarLineasPoema(i + 1);
     }, 4000);
   } else {
@@ -52,11 +53,11 @@ function mostrarLineasPoema(i) {
 }
 
 function mostrarFraseFinal() {
-  poema2025.style.display = 'none';
+  contenedorLineas.innerHTML = ''; // limpiar líneas
   fraseFinal.innerText = mensajeFinal;
-  fraseFinal.style.display = 'block';
+  fraseFinal.classList.remove('oculto');
   iniciarBrillos();
-  volverBtn.style.display = 'block';
+  volverBtn.classList.remove('oculto');
 }
 
 volverBtn.addEventListener('click', () => {
