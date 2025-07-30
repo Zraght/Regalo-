@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Regalo 🌻</title>
+  <title>Poema Especial</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Canvas de brillos -->
+  <canvas id="brillosCanvas"></canvas>
+
   <!-- Sección del Poema 2020 -->
   <section id="poema2020" class="poema2020">
     <img src="img/bg.2020.jpg" alt="Poema 2020" class="poema-fondo" />
@@ -21,20 +24,14 @@
 
   <!-- Sección del Poema 2025 -->
   <section id="poema2025" class="poema2025 oculto">
-  <video id="video2025" autoplay muted loop class="video-fondo">
-    <source src="video/bg.2025.mp4" type="video/mp4" />
-    Tu navegador no soporta el video.
-  </video>
-
-  <div class="poema-contenido" id="lineas-poema">
-  </div>
-
-  <div class="frase-final oculto" id="frase-final"></div>
-  <button id="volver" class="oculto">Volver a ver</button>
-</section>
-
-  <!-- Efecto de brillos -->
-  <canvas id="brillosCanvas"></canvas>
+    <video id="video2025" autoplay muted loop class="video-fondo">
+      <source src="video/bg.2025.mp4" type="video/mp4" />
+      Tu navegador no soporta el video.
+    </video>
+    <div class="poema-contenido" id="lineas-poema"></div>
+    <div id="frase-final"></div>
+    <button id="volver">Volver</button>
+  </section>
 
   <script src="script.js"></script>
 </body>

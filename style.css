@@ -10,10 +10,11 @@ body {
   background-color: black;
   color: #fffad1;
   overflow-x: hidden;
+  text-align: center;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 /* Canvas de brillos */
@@ -27,9 +28,9 @@ canvas {
 
 /* Fondo poema 2020 */
 #poema2020 {
-  background-image: url('poema2020.jpg');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -40,13 +41,18 @@ canvas {
   z-index: 2;
 }
 
-#poema2020 h1 {
+.poema-fondo {
+  display: none;
+}
+
+.verso-2020 {
   font-size: 2.2em;
   color: #fff8c2;
   text-shadow: 0 0 10px #fff176;
   animation: resplandor 3s ease-in-out infinite alternate;
   max-width: 80%;
   line-height: 1.5;
+  background: none;
 }
 
 /* Botón 2025 🌻 */
@@ -62,7 +68,7 @@ canvas {
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 10px;
-  z-index: 5;
+  z-index: 10;
   animation: pulse 2s infinite;
   transition: transform 0.3s ease;
 }
@@ -81,56 +87,55 @@ canvas {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 0;
+  z-index: -1;
 }
 
 /* Poema 2025 línea por línea */
 #poema2025 {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 3;
+}
+
+#lineas-poema {
   font-size: 2em;
   padding: 20px;
   color: #fff8c2;
   text-shadow: 0 0 12px #fff176;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 15px;
+  animation: resplandor 3s ease-in-out infinite alternate;
   opacity: 0;
   transition: opacity 1s ease-in-out;
-  z-index: 3;
-  max-width: 80%;
-  text-align: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
 }
 
 /* Frase final */
 #frase-final {
-  display: none;
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  opacity: 0;
   font-size: 2em;
+  margin-top: 20px;
   color: #fff45f;
   text-shadow: 0 0 25px #ffe066;
+  animation: resplandor-intenso 2s ease-in-out infinite alternate;
+  padding: 20px;
+  position: relative;
+  z-index: 3;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 15px;
-  padding: 20px;
-  z-index: 4;
   transition: opacity 1.5s ease-in-out;
-  animation: resplandor-intenso 2s ease-in-out infinite alternate;
-  max-width: 80%;
-  text-align: center;
 }
 
 /* Botón volver */
 #volver {
   display: none;
-  margin-top: 20px;
-  position: absolute;
-  top: 80%;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: 30px;
   background-color: transparent;
   border: 2px solid #ffe066;
   padding: 10px 20px;
@@ -139,7 +144,8 @@ canvas {
   cursor: pointer;
   border-radius: 10px;
   animation: pulse 2s infinite;
-  z-index: 5;
+  position: relative;
+  z-index: 3;
   transition: transform 0.3s ease;
 }
 
@@ -149,36 +155,24 @@ canvas {
 
 /* Animaciones */
 @keyframes resplandor {
-  0% {
-    text-shadow: 0 0 8px #fff176;
-  }
-  100% {
-    text-shadow: 0 0 16px #fff8c2;
-  }
+  0% { text-shadow: 0 0 8px #fff176; }
+  100% { text-shadow: 0 0 16px #fff8c2; }
 }
 
 @keyframes resplandor-intenso {
-  0% {
-    text-shadow: 0 0 10px #ffe066;
-  }
-  100% {
-    text-shadow: 0 0 35px #ffef8f;
-  }
+  0% { text-shadow: 0 0 10px #ffe066; }
+  100% { text-shadow: 0 0 35px #ffef8f; }
 }
 
 @keyframes pulse {
-  0% {
-    box-shadow: 0 0 5px #ffe066;
-  }
-  100% {
-    box-shadow: 0 0 20px #fff59d;
-  }
+  0% { box-shadow: 0 0 5px #ffe066; }
+  100% { box-shadow: 0 0 20px #fff59d; }
 }
 
 /* Responsive */
 @media screen and (max-width: 768px) {
-  #poema2020 h1,
-  #poema2025,
+  .verso-2020,
+  #lineas-poema,
   #frase-final {
     font-size: 1.4em;
     padding: 10px;
