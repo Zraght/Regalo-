@@ -1,0 +1,162 @@
+/* Reset y base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Georgia', serif;
+  background-color: black;
+  color: #fffad1;
+  overflow-x: hidden;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Fondo poema 2020 */
+#poema2020 {
+  background-image: url('poema2020.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+#poema2020 h1 {
+  font-size: 2.2em;
+  color: #fff8c2;
+  text-shadow: 0 0 10px #fff176;
+  animation: resplandor 3s ease-in-out infinite alternate;
+  max-width: 80%;
+  line-height: 1.5;
+  background: none;
+}
+
+/* Botón 2025 🌻 */
+#boton2025 {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: transparent;
+  color: #fffad1;
+  border: 2px solid #ffe066;
+  font-size: 1.3em;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  z-index: 10;
+  animation: pulse 2s infinite;
+}
+
+#boton2025:hover {
+  background-color: #fff17633;
+}
+
+/* Video 2025 */
+#video2025 {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Poema 2025 línea por línea */
+#poema2025 {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  font-size: 2em;
+  padding: 20px;
+  color: #fff8c2;
+  text-shadow: 0 0 12px #fff176;
+  animation: resplandor 3s ease-in-out infinite alternate;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+/* Frase final */
+#frase-final {
+  display: none;
+  font-size: 2em;
+  margin-top: 20px;
+  color: #fff45f;
+  text-shadow: 0 0 25px #ffe066;
+  animation: resplandor-intenso 2s ease-in-out infinite alternate;
+  padding: 20px;
+  position: relative;
+  z-index: 3;
+}
+
+/* Botón volver */
+#volver {
+  display: none;
+  margin-top: 30px;
+  background-color: transparent;
+  border: 2px solid #ffe066;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  color: #fffad1;
+  cursor: pointer;
+  border-radius: 10px;
+  animation: pulse 2s infinite;
+  position: relative;
+  z-index: 3;
+}
+
+/* Animaciones */
+@keyframes resplandor {
+  0% {
+    text-shadow: 0 0 8px #fff176;
+  }
+  100% {
+    text-shadow: 0 0 16px #fff8c2;
+  }
+}
+
+@keyframes resplandor-intenso {
+  0% {
+    text-shadow: 0 0 10px #ffe066;
+  }
+  100% {
+    text-shadow: 0 0 35px #ffef8f;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 5px #ffe066;
+  }
+  100% {
+    box-shadow: 0 0 20px #fff59d;
+  }
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  #poema2020 h1,
+  #poema2025,
+  #frase-final {
+    font-size: 1.4em;
+    padding: 10px;
+  }
+
+  #boton2025,
+  #volver {
+    font-size: 1em;
+    padding: 8px 16px;
+  }
+}

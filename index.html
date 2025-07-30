@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regalo 🌻</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section class="poema2020">
+    <img src="poema2020.jpg" alt="Poema 2020" class="poema-fondo" />
+    <div class="poema-contenido">
+      <p class="verso-2020">
+        "Tu apariencia me encantó,<br />
+        pero fue tu forma de ser la que me agradó :)"
+      </p>
+    </div>
+    <button id="mostrarPoema2025">Poema 2025 🌻</button>
+  </section>
+
+  <section class="poema2025 oculto">
+    <video autoplay muted loop class="video-fondo">
+      <source src="poema2025.mp4" type="video/mp4" />
+      Tu navegador no soporta el video.
+    </video>
+    <div class="poema-contenido" id="lineas-poema">
+      <!-- Líneas del poema aparecerán aquí dinámicamente -->
+    </div>
+    <div class="frase-final oculto" id="fraseFinal">
+      “Nunca dejes de florecer, para así poder disfrutar y admirar un mejor amanecer.”
+    </div>
+    <button id="reiniciarPoema" class="oculto">Volver a ver</button>
+  </section>
+
+  <canvas id="brillosCanvas"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
