@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -59,6 +60,7 @@
       from {
         text-shadow: 0 0 15px rgba(255, 248, 194, 0.4);
       }
+
       to {
         text-shadow: 0 0 25px rgba(255, 248, 194, 0.8);
       }
@@ -191,7 +193,7 @@
       font-family: 'Great Vibes', cursive;
       font-size: 2.5rem;
       color: #fff8c2;
-      text-shadow: 
+      text-shadow:
         0 0 20px rgba(255, 248, 194, 0.8),
         2px 2px 4px rgba(0, 0, 0, 0.8);
       animation: resplandor 3s ease-in-out infinite alternate;
@@ -207,12 +209,13 @@
 
     @keyframes resplandor {
       from {
-        text-shadow: 
+        text-shadow:
           0 0 15px rgba(255, 248, 194, 0.6),
           2px 2px 4px rgba(0, 0, 0, 0.8);
       }
+
       to {
-        text-shadow: 
+        text-shadow:
           0 0 30px rgba(255, 248, 194, 1),
           0 0 50px rgba(255, 224, 102, 0.6),
           2px 2px 4px rgba(0, 0, 0, 0.8);
@@ -283,9 +286,9 @@
 
     #lineas-poema {
       font-family: 'Great Vibes', cursive;
-      font-size: 2.2rem;
+      font-size: 2.8rem;
       color: #fff8c2;
-      text-shadow: 
+      text-shadow:
         0 0 20px rgba(255, 248, 194, 0.8),
         2px 2px 4px rgba(0, 0, 0, 0.9);
       line-height: 1.6;
@@ -336,7 +339,7 @@
       font-family: 'Great Vibes', cursive;
       font-size: 2.8rem;
       color: #fff570;
-      text-shadow: 
+      text-shadow:
         0 0 30px rgba(255, 255, 112, 1),
         0 0 60px rgba(255, 224, 102, 0.8),
         0 0 90px rgba(255, 215, 0, 0.6),
@@ -353,7 +356,7 @@
 
     .texto-final:hover {
       transform: scale(1.02);
-      text-shadow: 
+      text-shadow:
         0 0 40px rgba(255, 255, 112, 1),
         0 0 80px rgba(255, 224, 102, 1),
         0 0 120px rgba(255, 215, 0, 0.8),
@@ -362,13 +365,14 @@
 
     @keyframes brilloIntenso {
       from {
-        text-shadow: 
+        text-shadow:
           0 0 25px rgba(255, 255, 112, 0.8),
           0 0 50px rgba(255, 224, 102, 0.6),
           3px 3px 6px rgba(0, 0, 0, 1);
       }
+
       to {
-        text-shadow: 
+        text-shadow:
           0 0 40px rgba(255, 255, 112, 1),
           0 0 80px rgba(255, 224, 102, 0.9),
           0 0 120px rgba(255, 215, 0, 0.7),
@@ -418,6 +422,7 @@
         opacity: 0;
         transform: translateX(-50%) translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateX(-50%) translateY(0);
@@ -458,14 +463,17 @@
         transform: translateY(0) rotate(0deg) scale(0);
         opacity: 0;
       }
+
       10% {
         opacity: 1;
         transform: translateY(-20px) rotate(45deg) scale(1);
       }
+
       50% {
         opacity: 0.8;
         transform: translateY(-100px) rotate(180deg) scale(1.2);
       }
+
       100% {
         opacity: 0;
         transform: translateY(-200px) rotate(360deg) scale(0);
@@ -477,19 +485,19 @@
       .banner-password {
         font-size: 2.2rem;
       }
-      
+
       .verso-2020 {
         font-size: 2.2rem;
       }
-      
+
       #lineas-poema {
         font-size: 2rem;
       }
-      
+
       .texto-final {
         font-size: 2.5rem;
       }
-      
+
       .frase-final {
         max-width: 85%;
       }
@@ -603,13 +611,15 @@
         font-size: 1.2rem;
       }
     }
+
     .carita {
-  font-family: 'Courier New', monospace;
-  font-size: 0.9em;
-  opacity: 0.8;
-}
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
   </style>
 </head>
+
 <body>
   <!-- Pantalla de contraseña -->
   <div id="pantalla-password">
@@ -652,18 +662,18 @@
     </section>
 
     <script>
-  const videoSource = document.getElementById("videoSource");
-  const screenWidth = window.innerWidth;
+      const videoSource = document.getElementById("videoSource");
+      const screenWidth = window.innerWidth;
 
-  if (screenWidth <= 768) {
-    videoSource.src = "bg.2025_movil.mp4"; // versión comprimida
-  } else {
-    videoSource.src = "bg.2025.mp4"; // versión full HD
-  }
+      if (screenWidth <= 768) {
+        videoSource.src = "bg.2025_movil.mp4"; // versión comprimida
+      } else {
+        videoSource.src = "bg.2025.mp4"; // versión full HD
+      }
 
-  <!-- Video correcto según el ancho de pantalla -->
-  document.getElementById("videoFondo").load();
-</script>
+      <!-- Video correcto según el ancho de pantalla -->
+      document.getElementById("videoFondo").load();
+    </script>
 
     <canvas id="brillosCanvas"></canvas>
     <div id="particulas-container"></div>
@@ -689,8 +699,11 @@
 
     // Configurar canvas
     function setupCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * 0.7;
+      canvas.height = window.innerHeight * 0.7;
+      ctx.scale(dpr, dpr);
+
     }
     setupCanvas();
     window.addEventListener('resize', setupCanvas);
@@ -755,14 +768,15 @@
     // Inicializar brillos
     function inicializarBrillos() {
       brillos = [];
-      for (let i = 0; i < 60; i++) {
+      for (let i = 0; i < 40; i++) { // Reducido de 60 a 40
         brillos.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           r: Math.random() * 2 + 1,
           velocidad: Math.random() * 1.5 + 0.5,
           opacity: Math.random() * 0.8 + 0.2,
-          color: `hsl(${50 + Math.random() * 10}, 100%, ${70 + Math.random() * 20}%)`
+          color: `hsl(${50 + Math.random() * 10}, 100%, ${70 + Math.random() * 20}%)`,
+          blur: true
         });
       }
     }
@@ -776,7 +790,7 @@
         particula.style.top = (y - 10 + Math.random() * 20) + 'px';
         particula.style.animationDelay = (Math.random() * 0.5) + 's';
         particulasContainer.appendChild(particula);
-        
+
         setTimeout(() => {
           if (particula.parentNode) {
             particula.parentNode.removeChild(particula);
@@ -791,9 +805,9 @@
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      brillos.forEach((brillo, index) => {
+      brillos.forEach((brillo) => {
         brillo.y -= brillo.velocidad;
-        
+
         if (brillo.y < -10) {
           brillo.y = canvas.height + 10;
           brillo.x = Math.random() * canvas.width;
@@ -802,8 +816,10 @@
         ctx.save();
         ctx.globalAlpha = brillo.opacity;
         ctx.fillStyle = brillo.color;
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = brillo.color;
+        if (brillo.blur) {
+          ctx.shadowBlur = 10; // más bajo
+          ctx.shadowColor = brillo.color;
+        }
         ctx.beginPath();
         ctx.arc(brillo.x, brillo.y, brillo.r, 0, Math.PI * 2);
         ctx.fill();
@@ -813,14 +829,24 @@
       requestAnimationFrame(animarBrillos);
     }
 
+    // Reducir brillos y blur en los últimos 3 segundos (después de 6 segundos)
+    setTimeout(() => {
+      brillos.forEach(brillo => brillo.blur = false); // sin sombra
+    }, 6000);
+
+    // Detener la animación justo al final (9 segundos)
+    setTimeout(() => {
+      animacionActiva = false;
+    }, 8800);
+
     // Transición a poema 2025
     boton2025.addEventListener("click", () => {
       seccion2020.classList.add('saliendo');
-      
+
       setTimeout(() => {
         seccion2020.classList.add("oculto");
         seccion2025.classList.remove("oculto");
-        
+
         setTimeout(() => {
           seccion2025.classList.add("visible");
           mostrarVersos();
@@ -829,10 +855,12 @@
     });
 
     // Mostrar versos línea por línea
-    function mostrarVersos() {
+    async function mostrarVersos() {
+      {
+    }
       if (index < versos.length) {
         const verso = versos[index];
-        
+
         if (verso.trim() === "") {
           // Línea vacía, pausa más larga
           index++;
@@ -844,11 +872,11 @@
         linea.className = "linea-verso";
         linea.textContent = verso;
         linea.style.animationDelay = '0.2s';
-        
+
         // Limpiar contenedor y agregar nueva línea
         lineasPoema.innerHTML = '';
         lineasPoema.appendChild(linea);
-        
+
         index++;
         setTimeout(mostrarVersos, 3000);
       } else {
@@ -857,92 +885,103 @@
           lineasPoema.style.display = 'none';
           fraseFinal.classList.add("visible");
           volverBtn.classList.add("visible");
-          
+
           // Iniciar brillos
           animacionActiva = true;
           inicializarBrillos();
           animarBrillos();
-          
+
           // Hacer interactivo el texto final
-          textoFinal.addEventListener('click', (e) => {
-            const rect = textoFinal.getBoundingClientRect();
-            crearParticulasInteractivas(e.clientX, e.clientY);
-          });
+          let eventosAsignados = false;
 
-          textoFinal.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            const touch = e.touches[0];
-            crearParticulasInteractivas(touch.clientX, touch.clientY);
-          });
-        }, 1000);
-      }
-    }
+          function asignarEventosTextoFinal() {
+            if (eventosAsignados) return;
 
-    // Volver a ver
-    volverBtn.addEventListener("click", () => {
-      // Detener brillos
-      animacionActiva = false;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particulasContainer.innerHTML = '';
-      
-      // Resetear elementos
-      fraseFinal.classList.remove("visible");
-      volverBtn.classList.remove("visible");
-      lineasPoema.style.display = 'flex';
-      lineasPoema.innerHTML = "";
-      index = 0;
-      
-      // Reiniciar poema
-      setTimeout(() => {
-        mostrarVersos();
-      }, 500);
-    });
+            // Click en escritorio
+            textoFinal.addEventListener('click', (e) => {
+              crearParticulasInteractivas(e.clientX, e.clientY);
+            });
 
-    // Brillos ambientales iniciales (sutiles)
-    function iniciarBrillosAmbientales() {
-      const brillosAmbientales = [];
-      for (let i = 0; i < 30; i++) {
-        brillosAmbientales.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          r: Math.random() * 1 + 0.5,
-          velocidad: Math.random() * 0.5 + 0.2,
-          opacity: Math.random() * 0.3 + 0.1
-        });
-      }
+            // Touch en móviles
+            textoFinal.addEventListener('touchstart', (e) => {
+              e.preventDefault();
+              if (e.touches.length > 0) {
+                const touch = e.touches[0];
+                crearParticulasInteractivas(touch.clientX, touch.clientY);
+              }
+            });
 
-      function animarAmbientales() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        brillosAmbientales.forEach(brillo => {
-          brillo.y -= brillo.velocidad;
-          
-          if (brillo.y < -10) {
-            brillo.y = canvas.height + 10;
-            brillo.x = Math.random() * canvas.width;
+            eventosAsignados = true;
           }
 
-          ctx.save();
-          ctx.globalAlpha = brillo.opacity;
-          ctx.fillStyle = "#fff8c2";
-          ctx.shadowBlur = 10;
-          ctx.shadowColor = "#fff8c2";
-          ctx.beginPath();
-          ctx.arc(brillo.x, brillo.y, brillo.r, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.restore();
-        });
+          // Volver a ver
+          volverBtn.addEventListener("click", () => {
+            // Detener brillos
+            animacionActiva = false;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particulasContainer.innerHTML = '';
 
-        if (!animacionActiva) {
-          requestAnimationFrame(animarAmbientales);
-        }
-      }
+            // Resetear elementos
+            fraseFinal.classList.remove("visible");
+            volverBtn.classList.remove("visible");
+            lineasPoema.style.display = 'flex';
+            lineasPoema.innerHTML = "";
+            index = 0;
 
-      animarAmbientales();
-    }
+            // Reiniciar poema
+            setTimeout(() => {
+              mostrarVersos();
+            }, 500);
+          });
 
-    // Iniciar brillos ambientales cuando se carga la página
-    setTimeout(iniciarBrillosAmbientales, 2000);
-  </script>
+          // Brillos ambientales iniciales (sutiles)
+          function iniciarBrillosAmbientales() {
+            const brillosAmbientales = [];
+            for (let i = 0; i < 30; i++) {
+              brillosAmbientales.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 1 + 0.5,
+                velocidad: Math.random() * 0.5 + 0.2,
+                opacity: Math.random() * 0.3 + 0.1
+              });
+            }
+
+            function animarAmbientales() {
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+              brillosAmbientales.forEach(brillo => {
+                brillo.y -= brillo.velocidad;
+
+                if (brillo.y < -10) {
+                  brillo.y = canvas.height + 10;
+                  brillo.x = Math.random() * canvas.width;
+                }
+
+                ctx.save();
+                ctx.globalAlpha = brillo.opacity;
+                ctx.fillStyle = "#fff8c2";
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = "#fff8c2";
+                ctx.beginPath();
+                ctx.arc(brillo.x, brillo.y, brillo.r, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+              });
+
+              if (!animacionActiva) {
+                requestAnimationFrame(animarAmbientales);
+              }
+            }
+
+            animarAmbientales();
+          }
+
+          // Iniciar brillos ambientales cuando se carga la página
+          setTimeout(iniciarBrillosAmbientales, 2000);
+    }, 1000);
+  }
+}
+</script>
 </body>
 </html>
