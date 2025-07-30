@@ -158,14 +158,33 @@
       z-index: -1;
     }
 
-    /* Placeholder para la imagen 2020 */
+    /* Fondo de girasoles 2020 */
     .poema2020::before {
       content: '';
       position: absolute;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, #4a5568, #2d3748, #1a202c);
+      background-image: url("bg.2020.jpg");
+      background-size: cover;
+      background-position: center bottom;
+      background-repeat: no-repeat;
       z-index: -2;
+    }
+
+    /* Para PC - mostrar horizontal con flores abajo */
+    @media screen and (min-width: 769px) {
+      .poema2020::before {
+        background-position: center bottom;
+        background-size: cover;
+      }
+    }
+
+    /* Para móviles - ajustar verticalmente */
+    @media screen and (max-width: 768px) {
+      .poema2020::before {
+        background-position: center center;
+        background-size: cover;
+      }
     }
 
     .verso-2020 {
@@ -180,6 +199,10 @@
       margin-bottom: 2rem;
       line-height: 1.4;
       text-align: center;
+    }
+
+    .verso-2020 .carita {
+      font-size: 0.7em;
     }
 
     @keyframes resplandor {
@@ -246,16 +269,6 @@
       z-index: -1;
     }
 
-    /* Placeholder para el video 2025 */
-    .poema2025::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-      z-index: -2;
-    }
-
     .poema-contenido {
       z-index: 2;
       text-align: center;
@@ -307,7 +320,8 @@
       z-index: 3;
       text-align: center;
       padding: 2rem;
-      max-width: 95%;
+      max-width: 90%;
+      width: 100%;
       opacity: 0;
       transform: translate(-50%, -50%) scale(0.8);
       transition: all 1.5s ease-out;
@@ -333,6 +347,8 @@
       position: relative;
       display: inline-block;
       line-height: 1.4;
+      max-width: 100%;
+      word-wrap: break-word;
     }
 
     .texto-final:hover {
@@ -456,11 +472,35 @@
       }
     }
 
-    /* Responsive */
+    /* Responsive para tablets */
+    @media screen and (max-width: 1024px) {
+      .banner-password {
+        font-size: 2.2rem;
+      }
+      
+      .verso-2020 {
+        font-size: 2.2rem;
+      }
+      
+      #lineas-poema {
+        font-size: 2rem;
+      }
+      
+      .texto-final {
+        font-size: 2.5rem;
+      }
+      
+      .frase-final {
+        max-width: 85%;
+      }
+    }
+
+    /* Responsive para móviles */
     @media screen and (max-width: 768px) {
       .banner-password {
         font-size: 2rem;
         margin-bottom: 2rem;
+        padding: 0 1rem;
       }
 
       #inputPassword {
@@ -469,7 +509,7 @@
       }
 
       .verso-2020 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         padding: 15px;
       }
 
@@ -479,15 +519,27 @@
       }
 
       #lineas-poema {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
       }
 
       .texto-final {
-        font-size: 2.2rem;
+        font-size: 2rem;
+        padding: 0 1rem;
       }
 
       .felicitacion {
         font-size: 1.5rem;
+      }
+
+      .frase-final {
+        max-width: 95%;
+        padding: 1rem;
+      }
+
+      #volver {
+        bottom: 30px;
+        font-size: 1.1rem;
+        padding: 10px 20px;
       }
     }
 
@@ -502,19 +554,53 @@
       }
 
       .verso-2020 {
-        font-size: 1.7rem;
-      }
-
-      #lineas-poema {
         font-size: 1.5rem;
       }
 
+      #lineas-poema {
+        font-size: 1.3rem;
+      }
+
       .texto-final {
-        font-size: 1.9rem;
+        font-size: 1.7rem;
       }
 
       .felicitacion {
         font-size: 1.3rem;
+      }
+
+      #volver {
+        bottom: 20px;
+        font-size: 1rem;
+        padding: 8px 16px;
+      }
+    }
+
+    /* Responsive para pantallas muy pequeñas */
+    @media screen and (max-width: 360px) {
+      .banner-password {
+        font-size: 1.5rem;
+      }
+
+      #inputPassword {
+        width: 220px;
+        font-size: 1rem;
+      }
+
+      .verso-2020 {
+        font-size: 1.3rem;
+      }
+
+      #lineas-poema {
+        font-size: 1.1rem;
+      }
+
+      .texto-final {
+        font-size: 1.5rem;
+      }
+
+      .felicitacion {
+        font-size: 1.2rem;
       }
     }
   </style>
@@ -532,12 +618,10 @@
   <div id="contenido" class="oculto">
     <!-- Poema 2020 -->
     <section id="poema2020" class="poema2020">
-      <!-- Placeholder para imagen - reemplazar con tu imagen -->
-      <div class="poema-fondo" style="background-image: url('img/bg.2020.jpg'); background-size: cover; background-position: center;"></div>
       <div class="poema-contenido">
         <p class="verso-2020">
           "Tu apariencia me encantó,<br />
-          pero fue tu forma de ser la que me agradó :)"
+          pero fue tu forma de ser la que me agradó <span class="carita">:)</span>"
         </p>
       </div>
       <button id="boton2025">Poema 2025 🌻</button>
@@ -545,9 +629,10 @@
 
     <!-- Poema 2025 -->
     <section id="poema2025" class="poema2025 oculto">
-      <!-- Placeholder para video - reemplazar con tu video -->
-      <video autoplay muted loop class="video-fondo" style="display: none;">
-        <source src="video/bg.2025.mp4" type="video/mp4" />
+      <!-- Video de fondo -->
+      <video autoplay muted loop playsinline class="video-fondo">
+        <source src="bg.2025.mp4" type="video/mp4" />
+        Tu navegador no soporta el elemento video.
       </video>
       <div class="poema-contenido">
         <div id="lineas-poema"></div>
@@ -622,7 +707,7 @@
 
     // Verificación de contraseña
     function verificarPassword() {
-      if (passwordInput.value === "poema2020") {
+      if (passwordInput.value.trim() === "poema2020") {
         pantallaPassword.classList.add('saliendo');
         setTimeout(() => {
           pantallaPassword.style.display = "none";
