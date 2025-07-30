@@ -603,6 +603,11 @@
         font-size: 1.2rem;
       }
     }
+    .carita {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  opacity: 0.8;
+}
   </style>
 </head>
 <body>
@@ -632,6 +637,7 @@
       <!-- Video de fondo -->
       <video autoplay muted loop playsinline class="video-fondo">
         <source src="bg.2025.mp4" type="video/mp4" />
+        <source src="bg.2025_movil.mp4" type="video/mp4" />
         Tu navegador no soporta el elemento video.
       </video>
       <div class="poema-contenido">
@@ -645,6 +651,20 @@
       </div>
       <button id="volver">Volver a ver</button>
     </section>
+
+    <script>
+  const videoSource = document.getElementById("videoSource");
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth <= 768) {
+    videoSource.src = "bg.2025_movil.mp4"; // versión comprimida
+  } else {
+    videoSource.src = "bg.2025.mp4"; // versión full HD
+  }
+
+  <!-- Video correcto según el ancho de pantalla -->
+  document.getElementById("videoFondo").load();
+</script>
 
     <canvas id="brillosCanvas"></canvas>
     <div id="particulas-container"></div>
