@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Regalo 🌻</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
 
     /* Reset y base */
     * {
@@ -285,8 +285,10 @@
     }
 
     #lineas-poema {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.8rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-style: italic;
+      font-size: 2.4rem;
       color: #fff8c2;
       text-shadow:
         0 0 20px rgba(255, 248, 194, 0.8),
@@ -314,7 +316,7 @@
       }
     }
 
-    /* Frase final con efectos especiales */
+    /* Frase final con efectos especiales - OPTIMIZADA */
     .frase-final {
       position: absolute;
       top: 50%;
@@ -327,7 +329,8 @@
       width: 100%;
       opacity: 0;
       transform: translate(-50%, -50%) scale(0.8);
-      transition: all 1.5s ease-out;
+      transition: opacity 1s ease-out, transform 1s ease-out;
+      will-change: opacity, transform;
     }
 
     .frase-final.visible {
@@ -336,53 +339,37 @@
     }
 
     .texto-final {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.8rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-style: italic;
+      font-size: 3.2rem;
       color: #fff570;
       text-shadow:
-        0 0 30px rgba(255, 255, 112, 1),
-        0 0 60px rgba(255, 224, 102, 0.8),
-        0 0 90px rgba(255, 215, 0, 0.6),
+        0 0 25px rgba(255, 255, 112, 0.9),
+        0 0 50px rgba(255, 224, 102, 0.7),
         3px 3px 6px rgba(0, 0, 0, 1);
-      animation: brilloIntenso 2.5s ease-in-out infinite alternate;
       cursor: pointer;
-      transition: all 0.3s ease;
       position: relative;
       display: inline-block;
       line-height: 1.4;
       max-width: 100%;
       word-wrap: break-word;
+      user-select: none;
+      will-change: transform;
+      transition: transform 0.2s ease-out;
     }
 
     .texto-final:hover {
       transform: scale(1.02);
-      text-shadow:
-        0 0 40px rgba(255, 255, 112, 1),
-        0 0 80px rgba(255, 224, 102, 1),
-        0 0 120px rgba(255, 215, 0, 0.8),
-        3px 3px 8px rgba(0, 0, 0, 1);
     }
 
-    @keyframes brilloIntenso {
-      from {
-        text-shadow:
-          0 0 25px rgba(255, 255, 112, 0.8),
-          0 0 50px rgba(255, 224, 102, 0.6),
-          3px 3px 6px rgba(0, 0, 0, 1);
-      }
-
-      to {
-        text-shadow:
-          0 0 40px rgba(255, 255, 112, 1),
-          0 0 80px rgba(255, 224, 102, 0.9),
-          0 0 120px rgba(255, 215, 0, 0.7),
-          3px 3px 6px rgba(0, 0, 0, 1);
-      }
+    .texto-final:active {
+      transform: scale(0.98);
     }
 
     .felicitacion {
       font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
+      font-size: 2rem;
       color: #fff570;
       margin-top: 1.5rem;
       font-weight: 600;
@@ -435,7 +422,7 @@
       box-shadow: 0 5px 25px rgba(255, 224, 102, 0.4);
     }
 
-    /* Canvas de brillos */
+    /* Canvas de brillos - OPTIMIZADO */
     #brillosCanvas {
       position: fixed;
       top: 0;
@@ -444,18 +431,20 @@
       height: 100%;
       z-index: 1;
       pointer-events: none;
+      will-change: auto;
     }
 
-    /* Partículas brillantes */
+    /* Partículas brillantes - OPTIMIZADAS */
     .particula-brillo {
       position: absolute;
-      width: 6px;
-      height: 6px;
+      width: 4px;
+      height: 4px;
       background: radial-gradient(circle, #fff570, rgba(255, 245, 112, 0.3));
       border-radius: 50%;
       pointer-events: none;
-      animation: flotarParticula 4s ease-in-out infinite;
+      animation: flotarParticula 3s ease-out forwards;
       z-index: 2;
+      will-change: transform, opacity;
     }
 
     @keyframes flotarParticula {
@@ -466,17 +455,17 @@
 
       10% {
         opacity: 1;
-        transform: translateY(-20px) rotate(45deg) scale(1);
+        transform: translateY(-15px) rotate(45deg) scale(1);
       }
 
       50% {
         opacity: 0.8;
-        transform: translateY(-100px) rotate(180deg) scale(1.2);
+        transform: translateY(-80px) rotate(180deg) scale(1.1);
       }
 
       100% {
         opacity: 0;
-        transform: translateY(-200px) rotate(360deg) scale(0);
+        transform: translateY(-150px) rotate(360deg) scale(0);
       }
     }
 
@@ -495,7 +484,11 @@
       }
 
       .texto-final {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
+      }
+
+      .felicitacion {
+        font-size: 1.8rem;
       }
 
       .frase-final {
@@ -527,16 +520,16 @@
       }
 
       #lineas-poema {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
       }
 
       .texto-final {
-        font-size: 2rem;
+        font-size: 2.4rem;
         padding: 0 1rem;
       }
 
       .felicitacion {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
       }
 
       .frase-final {
@@ -566,15 +559,15 @@
       }
 
       #lineas-poema {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
       }
 
       .texto-final {
-        font-size: 1.7rem;
+        font-size: 2rem;
       }
 
       .felicitacion {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
       }
 
       #volver {
@@ -600,11 +593,11 @@
       }
 
       #lineas-poema {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
       }
 
       .texto-final {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
       }
 
       .felicitacion {
@@ -616,6 +609,23 @@
       font-family: 'Courier New', monospace;
       font-size: 0.9em;
       opacity: 0.8;
+    }
+
+    /* Overlay invisible para capturar eventos - PANTALLA COMPLETA */
+    .evento-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 5;
+      background: transparent;
+      cursor: pointer;
+      display: none;
+    }
+
+    .evento-overlay.activo {
+      display: block;
     }
   </style>
 </head>
@@ -658,22 +668,9 @@
         </div>
         <div class="felicitacion">Feliz cumpleaños, Johana 🌻</div>
       </div>
+      <div class="evento-overlay" id="eventoOverlay"></div>
       <button id="volver">Volver a ver</button>
     </section>
-
-    <script>
-      const videoSource = document.getElementById("videoSource");
-      const screenWidth = window.innerWidth;
-
-      if (screenWidth <= 768) {
-        videoSource.src = "bg.2025_movil.mp4"; // versión comprimida
-      } else {
-        videoSource.src = "bg.2025.mp4"; // versión full HD
-      }
-
-      <!-- Video correcto según el ancho de pantalla -->
-      document.getElementById("videoFondo").load();
-    </script>
 
     <canvas id="brillosCanvas"></canvas>
     <div id="particulas-container"></div>
@@ -692,18 +689,26 @@
     const lineasPoema = document.getElementById("lineas-poema");
     const fraseFinal = document.getElementById("fraseFinal");
     const textoFinal = document.getElementById("textoFinal");
+    const eventoOverlay = document.getElementById("eventoOverlay");
     const volverBtn = document.getElementById("volver");
     const canvas = document.getElementById("brillosCanvas");
     const ctx = canvas.getContext("2d");
     const particulasContainer = document.getElementById("particulas-container");
 
-    // Configurar canvas
+    // Variables de control de interacción
+    let isPressed = false;
+    let pressTimeout = null;
+    const poolParticulas = [];
+
+    // Configurar canvas con optimización
     function setupCanvas() {
       const dpr = window.devicePixelRatio || 1;
-      canvas.width = window.innerWidth * 0.7;
-      canvas.height = window.innerHeight * 0.7;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
       ctx.scale(dpr, dpr);
-
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
     }
     setupCanvas();
     window.addEventListener('resize', setupCanvas);
@@ -711,6 +716,7 @@
     // Variables de brillos
     let brillos = [];
     let animacionActiva = false;
+    let lastTime = 0;
 
     // Versos del poema 2025
     const versos = [
@@ -739,7 +745,9 @@
 
     // Verificación de contraseña
     function verificarPassword() {
-      if (passwordInput.value.trim() === "poema2020") {
+      const password = passwordInput.value.trim();
+      
+      if (password === "poema2020") {
         pantallaPassword.classList.add('saliendo');
         setTimeout(() => {
           pantallaPassword.style.display = "none";
@@ -765,44 +773,74 @@
       }
     });
 
-    // Inicializar brillos
+    // Pool de partículas para optimización
+    function crearPoolParticulas() {
+      for (let i = 0; i < 50; i++) {
+        const particula = document.createElement('div');
+        particula.className = 'particula-brillo';
+        particula.style.display = 'none';
+        particulasContainer.appendChild(particula);
+        poolParticulas.push(particula);
+      }
+    }
+
+    // Obtener partícula del pool
+    function obtenerParticula() {
+      return poolParticulas.find(p => p.style.display === 'none');
+    }
+
+    // Liberar partícula al pool
+    function liberarParticula(particula) {
+      particula.style.display = 'none';
+      particula.style.animation = '';
+    }
+
+    // Crear brillos sutiles optimizados
+    function crearBrillosSutiles(x, y, cantidad = 8) {
+      for (let i = 0; i < cantidad; i++) {
+        const particula = obtenerParticula();
+        if (!particula) continue;
+
+        const offsetX = (Math.random() - 0.5) * 40;
+        const offsetY = (Math.random() - 0.5) * 40;
+        
+        particula.style.left = (x + offsetX) + 'px';
+        particula.style.top = (y + offsetY) + 'px';
+        particula.style.display = 'block';
+        particula.style.animation = `flotarParticula 3s ease-out forwards`;
+
+        setTimeout(() => liberarParticula(particula), 3000);
+      }
+    }
+
+    // Inicializar brillos ambientales
     function inicializarBrillos() {
       brillos = [];
-      for (let i = 0; i < 40; i++) { // Reducido de 60 a 40
+      const cantidad = window.innerWidth < 768 ? 20 : 30;
+      
+      for (let i = 0; i < cantidad; i++) {
         brillos.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          r: Math.random() * 2 + 1,
-          velocidad: Math.random() * 1.5 + 0.5,
-          opacity: Math.random() * 0.8 + 0.2,
+          r: Math.random() * 1.5 + 0.5,
+          velocidad: Math.random() * 1 + 0.3,
+          opacity: Math.random() * 0.6 + 0.2,
           color: `hsl(${50 + Math.random() * 10}, 100%, ${70 + Math.random() * 20}%)`,
           blur: true
         });
       }
     }
 
-    // Crear partículas interactivas
-    function crearParticulasInteractivas(x, y) {
-      for (let i = 0; i < 12; i++) {
-        const particula = document.createElement('div');
-        particula.className = 'particula-brillo';
-        particula.style.left = (x - 10 + Math.random() * 20) + 'px';
-        particula.style.top = (y - 10 + Math.random() * 20) + 'px';
-        particula.style.animationDelay = (Math.random() * 0.5) + 's';
-        particulasContainer.appendChild(particula);
-
-        setTimeout(() => {
-          if (particula.parentNode) {
-            particula.parentNode.removeChild(particula);
-          }
-        }, 4000);
-      }
-    }
-
-    // Animar brillos
-    function animarBrillos() {
+    // Animar brillos con optimización de frame rate
+    function animarBrillos(currentTime) {
       if (!animacionActiva) return;
 
+      if (currentTime - lastTime < 16.67) { // 60 FPS máximo
+        requestAnimationFrame(animarBrillos);
+        return;
+      }
+
+      lastTime = currentTime;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       brillos.forEach((brillo) => {
@@ -817,7 +855,7 @@
         ctx.globalAlpha = brillo.opacity;
         ctx.fillStyle = brillo.color;
         if (brillo.blur) {
-          ctx.shadowBlur = 10; // más bajo
+          ctx.shadowBlur = 8;
           ctx.shadowColor = brillo.color;
         }
         ctx.beginPath();
@@ -829,15 +867,71 @@
       requestAnimationFrame(animarBrillos);
     }
 
-    // Reducir brillos y blur en los últimos 3 segundos (después de 6 segundos)
-    setTimeout(() => {
-      brillos.forEach(brillo => brillo.blur = false); // sin sombra
-    }, 6000);
+    // Configurar eventos de interacción mejorados
+    function configurarEventosInteraccion() {
+      // Eventos de mouse
+      eventoOverlay.addEventListener('mousedown', (e) => {
+        isPressed = true;
+        crearBrillosSutiles(e.clientX, e.clientY, 6);
+        
+        // Crear brillos continuos mientras se mantiene presionado
+        pressTimeout = setInterval(() => {
+          if (isPressed) {
+            crearBrillosSutiles(e.clientX, e.clientY, 4);
+          }
+        }, 150);
+      });
 
-    // Detener la animación justo al final (9 segundos)
-    setTimeout(() => {
-      animacionActiva = false;
-    }, 8800);
+      eventoOverlay.addEventListener('mouseup', () => {
+        isPressed = false;
+        if (pressTimeout) {
+          clearInterval(pressTimeout);
+          pressTimeout = null;
+        }
+      });
+
+      eventoOverlay.addEventListener('mouseleave', () => {
+        isPressed = false;
+        if (pressTimeout) {
+          clearInterval(pressTimeout);
+          pressTimeout = null;
+        }
+      });
+
+      // Eventos táctiles para móviles
+      eventoOverlay.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        isPressed = true;
+        const touch = e.touches[0];
+        const rect = eventoOverlay.getBoundingClientRect();
+        const x = touch.clientX - rect.left;
+        const y = touch.clientY - rect.top;
+        
+        crearBrillosSutiles(touch.clientX, touch.clientY, 6);
+        
+        pressTimeout = setInterval(() => {
+          if (isPressed) {
+            crearBrillosSutiles(touch.clientX, touch.clientY, 4);
+          }
+        }, 150);
+      });
+
+      eventoOverlay.addEventListener('touchend', () => {
+        isPressed = false;
+        if (pressTimeout) {
+          clearInterval(pressTimeout);
+          pressTimeout = null;
+        }
+      });
+
+      eventoOverlay.addEventListener('touchcancel', () => {
+        isPressed = false;
+        if (pressTimeout) {
+          clearInterval(pressTimeout);
+          pressTimeout = null;
+        }
+      });
+    }
 
     // Transición a poema 2025
     boton2025.addEventListener("click", () => {
@@ -856,8 +950,6 @@
 
     // Mostrar versos línea por línea
     async function mostrarVersos() {
-      {
-    }
       if (index < versos.length) {
         const verso = versos[index];
 
@@ -886,47 +978,41 @@
           fraseFinal.classList.add("visible");
           volverBtn.classList.add("visible");
 
+          // Inicializar pool de partículas
+          crearPoolParticulas();
+
+          // Configurar eventos de interacción para toda la pantalla
+          eventoOverlay.classList.add('activo');
+          configurarEventosInteraccion();
+
           // Iniciar brillos
           animacionActiva = true;
           inicializarBrillos();
-          animarBrillos();
-
-          // Hacer interactivo el texto final
-          let eventosAsignados = false;
-
-          function asignarEventosTextoFinal() {
-            if (eventosAsignados) return;
-
-            // Click en escritorio
-            textoFinal.addEventListener('click', (e) => {
-              crearParticulasInteractivas(e.clientX, e.clientY);
-            });
-
-            // Touch en móviles
-            textoFinal.addEventListener('touchstart', (e) => {
-              e.preventDefault();
-              if (e.touches.length > 0) {
-                const touch = e.touches[0];
-                crearParticulasInteractivas(touch.clientX, touch.clientY);
-              }
-            });
-
-            eventosAsignados = true;
-          }
+          requestAnimationFrame(animarBrillos);
 
           // Volver a ver
           volverBtn.addEventListener("click", () => {
             // Detener brillos
             animacionActiva = false;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particulasContainer.innerHTML = '';
+            
+            // Limpiar partículas
+            poolParticulas.forEach(p => liberarParticula(p));
 
             // Resetear elementos
+            eventoOverlay.classList.remove('activo');
             fraseFinal.classList.remove("visible");
             volverBtn.classList.remove("visible");
             lineasPoema.style.display = 'flex';
             lineasPoema.innerHTML = "";
             index = 0;
+
+            // Detener eventos
+            isPressed = false;
+            if (pressTimeout) {
+              clearInterval(pressTimeout);
+              pressTimeout = null;
+            }
 
             // Reiniciar poema
             setTimeout(() => {
@@ -934,54 +1020,9 @@
             }, 500);
           });
 
-          // Brillos ambientales iniciales (sutiles)
-          function iniciarBrillosAmbientales() {
-            const brillosAmbientales = [];
-            for (let i = 0; i < 30; i++) {
-              brillosAmbientales.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                r: Math.random() * 1 + 0.5,
-                velocidad: Math.random() * 0.5 + 0.2,
-                opacity: Math.random() * 0.3 + 0.1
-              });
-            }
-
-            function animarAmbientales() {
-              ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-              brillosAmbientales.forEach(brillo => {
-                brillo.y -= brillo.velocidad;
-
-                if (brillo.y < -10) {
-                  brillo.y = canvas.height + 10;
-                  brillo.x = Math.random() * canvas.width;
-                }
-
-                ctx.save();
-                ctx.globalAlpha = brillo.opacity;
-                ctx.fillStyle = "#fff8c2";
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = "#fff8c2";
-                ctx.beginPath();
-                ctx.arc(brillo.x, brillo.y, brillo.r, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
-              });
-
-              if (!animacionActiva) {
-                requestAnimationFrame(animarAmbientales);
-              }
-            }
-
-            animarAmbientales();
-          }
-
-          // Iniciar brillos ambientales cuando se carga la página
-          setTimeout(iniciarBrillosAmbientales, 2000);
-    }, 1000);
-  }
-}
-</script>
+        }, 1000);
+      }
+    }
+  </script>
 </body>
 </html>
