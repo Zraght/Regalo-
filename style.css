@@ -17,6 +17,51 @@ body {
   justify-content: center;
 }
 
+/* Pantalla de contraseña */
+#pantalla-password {
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#inputPassword {
+  padding: 12px;
+  font-size: 1.2em;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: #333;
+  color: white;
+  width: 250px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#verificarPassword {
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #555;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#verificarPassword:hover {
+  background-color: #777;
+}
+
+#errorPassword {
+  color: red;
+  margin-top: 10px;
+}
+
 /* Canvas de brillos */
 canvas {
   position: fixed;
@@ -27,40 +72,36 @@ canvas {
 }
 
 /* Fondo poema 2020 */
-#poema2020 {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.poema2020 {
   width: 100vw;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
   position: relative;
+  overflow: hidden;
   z-index: 2;
 }
 
-.poema-fondo {
-  display: none;
+.poema2020 .poema-fondo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 .verso-2020 {
-  font-size: 2.2em;
+  font-size: 2em;
   color: #fff8c2;
   text-shadow: 0 0 10px #fff176;
   animation: resplandor 3s ease-in-out infinite alternate;
-  max-width: 80%;
-  line-height: 1.5;
-  background: none;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  margin-top: 30vh;
 }
 
-/* Botón 2025 🌻 */
+/* Botón 2025 */
 #boton2025 {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: 30px;
   background-color: transparent;
   color: #fffad1;
   border: 2px solid #ffe066;
@@ -68,7 +109,6 @@ canvas {
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 10px;
-  z-index: 10;
   animation: pulse 2s infinite;
   transition: transform 0.3s ease;
 }
@@ -79,54 +119,49 @@ canvas {
 }
 
 /* Video 2025 */
-#video2025 {
+.video-fondo {
   width: 100vw;
   height: 100vh;
   object-fit: cover;
-  display: none;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: -2;
 }
 
 /* Poema 2025 línea por línea */
 #poema2025 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  display: none;
-  align-items: center;
-  justify-content: center;
+  padding: 20px;
+  color: #fff8c2;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   z-index: 3;
+  position: relative;
 }
 
 #lineas-poema {
   font-size: 2em;
-  padding: 20px;
-  color: #fff8c2;
   text-shadow: 0 0 12px #fff176;
   animation: resplandor 3s ease-in-out infinite alternate;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 15px;
+  padding: 20px;
+  min-height: 100px;
 }
 
 /* Frase final */
-#frase-final {
+.frase-final {
   opacity: 0;
   font-size: 2em;
-  margin-top: 20px;
+  margin-top: 30px;
   color: #fff45f;
   text-shadow: 0 0 25px #ffe066;
   animation: resplandor-intenso 2s ease-in-out infinite alternate;
   padding: 20px;
-  position: relative;
-  z-index: 3;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 15px;
   transition: opacity 1.5s ease-in-out;
@@ -144,8 +179,6 @@ canvas {
   cursor: pointer;
   border-radius: 10px;
   animation: pulse 2s infinite;
-  position: relative;
-  z-index: 3;
   transition: transform 0.3s ease;
 }
 
@@ -173,7 +206,7 @@ canvas {
 @media screen and (max-width: 768px) {
   .verso-2020,
   #lineas-poema,
-  #frase-final {
+  .frase-final {
     font-size: 1.4em;
     padding: 10px;
   }

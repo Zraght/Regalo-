@@ -3,35 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Poema Especial</title>
+  <title>Regalo 🌻</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Canvas de brillos -->
-  <canvas id="brillosCanvas"></canvas>
+  <!-- Pantalla de contraseña -->
+  <div id="pantalla-password">
+    <input type="password" id="inputPassword" placeholder="Ingresa la contraseña..." />
+    <button id="verificarPassword">Entrar</button>
+    <p id="errorPassword"></p>
+  </div>
 
-  <!-- Sección del Poema 2020 -->
-  <section id="poema2020" class="poema2020">
-    <img src="img/bg.2020.jpg" alt="Poema 2020" class="poema-fondo" />
-    <div class="poema-contenido">
-      <p class="verso-2020">
-        "Tu apariencia me encantó,<br />
-        pero fue tu forma de ser la que me agradó :)"
-      </p>
-    </div>
-    <button id="boton2025">Poema 2025 🌻</button>
-  </section>
+  <!-- Contenido protegido -->
+  <div id="contenido" class="oculto">
+    <!-- Poema 2020 -->
+    <section id="poema2020" class="poema2020">
+      <img src="img/bg.2020.jpg" alt="Poema 2020" class="poema-fondo" />
+      <div class="poema-contenido">
+        <p class="verso-2020">
+          "Tu apariencia me encantó,<br />
+          pero fue tu forma de ser la que me agradó :)"
+        </p>
+      </div>
+      <button id="boton2025">Poema 2025 🌻</button>
+    </section>
 
-  <!-- Sección del Poema 2025 -->
-  <section id="poema2025" class="poema2025 oculto">
-    <video id="video2025" autoplay muted loop class="video-fondo">
-      <source src="video/bg.2025.mp4" type="video/mp4" />
-      Tu navegador no soporta el video.
-    </video>
-    <div class="poema-contenido" id="lineas-poema"></div>
-    <div id="frase-final"></div>
-    <button id="volver">Volver</button>
-  </section>
+    <!-- Poema 2025 -->
+    <section id="poema2025" class="poema2025 oculto">
+      <video id="video2025" autoplay muted loop class="video-fondo">
+        <source src="video/bg.2025.mp4" type="video/mp4" />
+        Tu navegador no soporta el video.
+      </video>
+      <div class="poema-contenido" id="lineas-poema"></div>
+      <div class="frase-final oculto" id="fraseFinal">
+        “Nunca dejes de florecer, para así poder disfrutar y admirar un mejor amanecer.”
+      </div>
+      <button id="volver">Volver a ver</button>
+    </section>
+
+    <canvas id="brillosCanvas"></canvas>
+  </div>
 
   <script src="script.js"></script>
 </body>

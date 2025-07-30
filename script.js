@@ -1,116 +1,97 @@
-const poema2020 = document.getElementById('poema2020');
-const boton2025 = document.getElementById('boton2025');
-const video = document.getElementById('video2025');
-const poema2025 = document.getElementById('poema2025');
-const fraseFinal = document.getElementById('frase-final');
-const volverBtn = document.getElementById('volver');
-const lineasPoemaContenedor = document.getElementById('lineas-poema');
+const passwordInput = document.getElementById("inputPassword");
+const verificarBtn = document.getElementById("verificarPassword");
+const errorPassword = document.getElementById("errorPassword");
+const pantallaPassword = document.getElementById("pantalla-password");
+const contenido = document.getElementById("contenido");
 
-const lineasPoema = [
-  "Cuando todo era simple y sin condición,",
-  "brillabas sin dar explicación.",
-  "Con pasos suaves, sonrisas sinceras,",
-  "sin saber que ya eras primavera.",
-  "",
-  "Vinieron pruebas, caminos cerrados,",
-  "y tú seguiste avanzando, aún en caminos quebrados.",
-  "Decías “soy fuerte” en tu caminar,",
-  "como quien lucha sin aparentar.",
-  "",
-  "No es fácil subir a la cima cuando hay peso,",
-  "pero tú sigue avanzando, sin dar retroceso.",
-  "Porque en cada paso, Dios va contigo con un amor sin condición,",
-  "Y es Él quien siempre guía tus pasos y tu gran corazón",
-  "",
-  "Yo siempre estuve presente, dispuesto a ayudarte",
-  "Ser quien te escuche, sin necesidad de juzgarte",
-  "Porque no puedo alejarme, ni dejar de cuidar,",
-  "a quien tanto aprendí a atesorar"
+verificarBtn.addEventListener("click", () => {
+  if (passwordInput.value === "poema2020") {
+    pantallaPassword.style.display = "none";
+    contenido.classList.remove("oculto");
+  } else {
+    errorPassword.textContent = "Contraseña incorrecta.";
+  }
+});
+
+// Brillos (Canvas opcional)
+const canvas = document.getElementById("brillosCanvas");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+let brillos = [];
+
+for (let i = 0; i < 80; i++) {
+  brillos.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.5 + 0.5,
+    dx: Math.random() * 0.3,
+    dy: Math.random() * 0.3
+  });
+}
+
+function dibujarBrillos() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  brillos.forEach(b => {
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+    ctx.fillStyle = "#fff59d";
+    ctx.fill();
+    b.x += b.dx;
+    b.y += b.dy;
+    if (b.x > canvas.width || b.y > canvas.height) {
+      b.x = Math.random() * canvas.width;
+      b.y = 0;
+    }
+  });
+  requestAnimationFrame(dibujarBrillos);
+}
+dibujarBrillos();
+
+// Poema 2025
+const boton2025 = document.getElementById("boton2025");
+const seccion2020 = document.getElementById("poema2020");
+const seccion2025 = document.getElementById("poema2025");
+const lineasPoema = document.getElementById("lineas-poema");
+const fraseFinal = document.getElementById("fraseFinal");
+const volverBtn = document.getElementById("volver");
+
+const versos = [
+  "Nunca supe por qué llegaste, 🌻",
+  "ni por qué te quedaste en mis días más fríos.",
+  "Tampoco entendí por qué me diste calma,",
+  "ni por qué incluso en tu ausencia, sonreía contigo.",
+  "Solo sé que mientras florezcas...",
+  "yo también encontraré una razón para seguir 🌅"
 ];
 
-const mensajeFinal = "“Nunca dejes de florecer, para así poder disfrutar y admirar un mejor amanecer.”";
+let index = 0;
 
-boton2025.addEventListener('click', () => {
-  poema2020.style.display = 'none';
-  boton2025.style.display = 'none';
-  video.style.display = 'block';
-  poema2025.style.display = 'flex';
-  mostrarLineasPoema(0);
+boton2025.addEventListener("click", () => {
+  seccion2020.classList.add("oculto");
+  seccion2025.classList.remove("oculto");
+  mostrarVersos();
 });
 
-function mostrarLineasPoema(i) {
-  if (i < lineasPoema.length) {
-    lineasPoemaContenedor.innerText = lineasPoema[i];
-    lineasPoemaContenedor.style.opacity = 0;
-    setTimeout(() => lineasPoemaContenedor.style.opacity = 1, 100);
-    setTimeout(() => {
-      lineasPoemaContenedor.style.opacity = 0;
-      mostrarLineasPoema(i + 1);
-    }, 4000);
+function mostrarVersos() {
+  if (index < versos.length) {
+    const linea = document.createElement("p");
+    linea.textContent = versos[index];
+    linea.style.animation = "fadeUp 1.5s ease";
+    lineasPoema.appendChild(linea);
+    index++;
+    setTimeout(mostrarVersos, 2500);
   } else {
-    mostrarFraseFinal();
+    fraseFinal.classList.remove("oculto");
+    fraseFinal.style.opacity = "1";
+    volverBtn.style.display = "block";
   }
 }
 
-function mostrarFraseFinal() {
-  lineasPoemaContenedor.style.display = 'none';
-  fraseFinal.innerText = mensajeFinal;
-  fraseFinal.style.opacity = 1;
-  iniciarBrillos();
-  volverBtn.style.display = 'block';
-}
-
-volverBtn.addEventListener('click', () => {
-  location.reload();
+volverBtn.addEventListener("click", () => {
+  lineasPoema.innerHTML = "";
+  fraseFinal.style.opacity = "0";
+  volverBtn.style.display = "none";
+  index = 0;
+  mostrarVersos();
 });
-
-function iniciarBrillos() {
-  const canvas = document.getElementById('brillosCanvas');
-  const ctx = canvas.getContext('2d');
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  let brillos = [];
-
-  for (let i = 0; i < 100; i++) {
-    brillos.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 2 + 1,
-      d: Math.random() * 1 + 0.5
-    });
-  }
-
-  function dibujar() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#fff57c";
-    ctx.shadowBlur = 10;
-    ctx.shadowColor = "#fff570";
-    for (let i = 0; i < brillos.length; i++) {
-      let b = brillos[i];
-      ctx.beginPath();
-      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    actualizar();
-  }
-
-  function actualizar() {
-    for (let i = 0; i < brillos.length; i++) {
-      let b = brillos[i];
-      b.y += b.d;
-      if (b.y > canvas.height) {
-        b.y = 0;
-        b.x = Math.random() * canvas.width;
-      }
-    }
-  }
-
-  function loop() {
-    dibujar();
-    requestAnimationFrame(loop);
-  }
-
-  loop();
-}
