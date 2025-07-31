@@ -501,41 +501,44 @@
       }
     }
 
-    /* Firma del creador - Solo aparece en la frase final */
-    .firma-creador {
-      position: fixed;
-      top: 15px;
-      right: 20px;
-      z-index: 10;
-      font-family: 'Great Vibes', cursive;
-      font-size: 1.2rem;
-      color: rgba(255, 248, 194, 0.8);
-      text-shadow: 0 0 10px rgba(255, 248, 194, 0.4);
-      opacity: 0;
-      transition: all 0.5s ease-out;
-    }
+/* Firma del creador */
+.firma-creador {
+  position: fixed;
+  bottom: 15px;        
+  left: 20px;          
+  z-index: 10;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.2rem;
+  color: black;         
+  background-color: #fff8c2; 
+  padding: 5px 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 248, 194, 0.6);
+  opacity: 0;
+  transition: all 0.5s ease-out;
+}
 
-    .firma-creador.visible {
-      opacity: 1;
-      animation: aparecerFirma 1s ease-out forwards;
-    }
+.firma-creador.visible {
+  opacity: 1;
+  animation: aparecerFirma 1s ease-out forwards;
+}
 
-    @keyframes aparecerFirma {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+@keyframes aparecerFirma {
+  from {
+    opacity: 0;
+    transform: translateY(10px);  
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    .firma-creador:hover {
-      color: #fff8c2;
-      text-shadow: 0 0 15px rgba(255, 248, 194, 0.7);
-      transform: scale(1.05);
-    }
+.firma-creador:hover {
+  background-color: #fff1a8;
+  transform: scale(1.05);
+}
+
 
     /* Botón volver */
     #volver {
