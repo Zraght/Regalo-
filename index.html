@@ -152,14 +152,6 @@
       transform: scale(0.95) translateY(-30px);
     }
 
-    .poema-fondo {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
-    }
-
     /* Fondo de girasoles 2020 */
     .poema2020::before {
       content: '';
@@ -316,7 +308,7 @@
       }
     }
 
-    /* Frase final con efectos especiales - OPTIMIZADA */
+    /* Frase final con efectos especiales */
     .frase-final {
       position: absolute;
       top: 50%;
@@ -342,7 +334,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-weight: 600;
       font-style: italic;
-      font-size: 3.2rem;
+      font-size: 2.2rem;
       color: #fff570;
       text-shadow:
         0 0 25px rgba(255, 255, 112, 0.9),
@@ -369,11 +361,180 @@
 
     .felicitacion {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+      font-size: 1.6rem;
       color: #fff570;
       margin-top: 1.5rem;
       font-weight: 600;
       text-shadow: 0 0 20px rgba(255, 248, 194, 0.6);
+    }
+
+    /* Girasol estilo emoji 2D */
+    .girasol-container {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      opacity: 0;
+      transition: opacity 1s ease-out;
+    }
+
+    .girasol-container.visible {
+      opacity: 1;
+    }
+
+    .girasol-emoji {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s ease-out;
+      will-change: transform;
+    }
+
+    .girasol-emoji:hover {
+      transform: scale(1.1);
+    }
+
+    .girasol-flor {
+      width: 60px;
+      height: 60px;
+      position: relative;
+      margin-bottom: -5px;
+    }
+
+    .girasol-centro-pequeno {
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #5D4037, #3E2723);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+    }
+
+    .petalo-pequeno {
+      position: absolute;
+      width: 12px;
+      height: 25px;
+      background: linear-gradient(to top, #FFD700, #FFC107);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      top: 50%;
+      left: 50%;
+    }
+
+    .petalo-pequeno:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-18px); }
+    .petalo-pequeno:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg) translateY(-18px); }
+    .petalo-pequeno:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg) translateY(-18px); }
+    .petalo-pequeno:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg) translateY(-18px); }
+    .petalo-pequeno:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg) translateY(-18px); }
+    .petalo-pequeno:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg) translateY(-18px); }
+    .petalo-pequeno:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg) translateY(-18px); }
+    .petalo-pequeno:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg) translateY(-18px); }
+
+    .girasol-tallo {
+      width: 4px;
+      height: 40px;
+      background: linear-gradient(to bottom, #4CAF50, #2E7D32);
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .girasol-hoja {
+      position: absolute;
+      width: 15px;
+      height: 8px;
+      background: linear-gradient(45deg, #4CAF50, #66BB6A);
+      border-radius: 50% 10px 50% 10px;
+      top: 15px;
+      left: -8px;
+      transform: rotate(-30deg);
+    }
+
+    .girasol-emoji.balanceando {
+      animation: balanceoSuave 2s ease-in-out;
+    }
+
+    @keyframes balanceoSuave {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-10deg) scale(1.05); }
+      75% { transform: rotate(10deg) scale(1.05); }
+    }
+
+    /* Brillos decorativos de fondo */
+    .brillos-decorativos {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 1s ease-out;
+    }
+
+    .brillos-decorativos.visible {
+      opacity: 1;
+    }
+
+    .brillo-decorativo {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: radial-gradient(circle, #fff570, rgba(255, 245, 112, 0.2));
+      border-radius: 50%;
+      animation: brilloFlotante 4s ease-in-out infinite;
+      will-change: transform, opacity;
+    }
+
+    @keyframes brilloFlotante {
+      0%, 100% {
+        opacity: 0.3;
+        transform: scale(0.5) translateY(0px);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.2) translateY(-20px);
+      }
+    }
+
+    /* Firma del creador - Solo aparece en la frase final */
+    .firma-creador {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      z-index: 10;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.2rem;
+      color: rgba(255, 248, 194, 0.8);
+      text-shadow: 0 0 10px rgba(255, 248, 194, 0.4);
+      opacity: 0;
+      transition: all 0.5s ease-out;
+    }
+
+    .firma-creador.visible {
+      opacity: 1;
+      animation: aparecerFirma 1s ease-out forwards;
+    }
+
+    @keyframes aparecerFirma {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .firma-creador:hover {
+      color: #fff8c2;
+      text-shadow: 0 0 15px rgba(255, 248, 194, 0.7);
+      transform: scale(1.05);
     }
 
     /* Botón volver */
@@ -422,19 +583,19 @@
       box-shadow: 0 5px 25px rgba(255, 224, 102, 0.4);
     }
 
-    /* Canvas de brillos - OPTIMIZADO */
+    /* Canvas de brillos interactivos */
     #brillosCanvas {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 1;
+      z-index: 2;
       pointer-events: none;
       will-change: auto;
     }
 
-    /* Partículas brillantes - OPTIMIZADAS */
+    /* Partículas brillantes optimizadas */
     .particula-brillo {
       position: absolute;
       width: 4px;
@@ -469,6 +630,23 @@
       }
     }
 
+    /* Overlay invisible para capturar eventos */
+    .evento-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 3;
+      background: transparent;
+      cursor: pointer;
+      display: none;
+    }
+
+    .evento-overlay.activo {
+      display: block;
+    }
+
     /* Responsive para tablets */
     @media screen and (max-width: 1024px) {
       .banner-password {
@@ -480,23 +658,32 @@
       }
 
       #lineas-poema {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
 
       .texto-final {
-        font-size: 2.8rem;
+        font-size: 2rem;
       }
 
       .felicitacion {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
       }
 
       .frase-final {
         max-width: 85%;
       }
+
+      .girasol-flor {
+        width: 55px;
+        height: 55px;
+      }
+
+      .firma-creador {
+        font-size: 1.1rem;
+      }
     }
 
-    /* Responsive para móviles */
+    /* Responsive para móviles - TEXTO MÁS GRANDE */
     @media screen and (max-width: 768px) {
       .banner-password {
         font-size: 2rem;
@@ -510,37 +697,53 @@
       }
 
       .verso-2020 {
-        font-size: 1.8rem;
+        font-size: 2rem;
         padding: 15px;
       }
 
       #boton2025 {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         padding: 12px 25px;
       }
 
       #lineas-poema {
-        font-size: 1.8rem;
+        font-size: 2.6rem; /* Aumentado para móviles */
       }
 
       .texto-final {
-        font-size: 2.4rem;
+        font-size: 1.9rem; /* Reducido para que no tape */
         padding: 0 1rem;
       }
 
       .felicitacion {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
       }
 
       .frase-final {
         max-width: 95%;
         padding: 1rem;
+        top: 55%;
       }
 
       #volver {
         bottom: 30px;
         font-size: 1.1rem;
         padding: 10px 20px;
+      }
+
+      .girasol-flor {
+        width: 50px;
+        height: 50px;
+      }
+
+      .girasol-container {
+        top: 15%;
+      }
+
+      .firma-creador {
+        font-size: 1rem;
+        top: 10px;
+        right: 15px;
       }
     }
 
@@ -555,19 +758,19 @@
       }
 
       .verso-2020 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
       }
 
       #lineas-poema {
-        font-size: 1.5rem;
+        font-size: 2.4rem; /* Mejorado para pantallas pequeñas */
       }
 
       .texto-final {
-        font-size: 2rem;
+        font-size: 1.7rem; /* Reducido para pantallas pequeñas */
       }
 
       .felicitacion {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
       }
 
       #volver {
@@ -575,9 +778,17 @@
         font-size: 1rem;
         padding: 8px 16px;
       }
+
+      .girasol-flor {
+        width: 45px;
+        height: 45px;
+      }
+
+      .firma-creador {
+        font-size: 0.9rem;
+      }
     }
 
-    /* Responsive para pantallas muy pequeñas */
     @media screen and (max-width: 360px) {
       .banner-password {
         font-size: 1.5rem;
@@ -589,19 +800,28 @@
       }
 
       .verso-2020 {
-        font-size: 1.3rem;
+        font-size: 1.6rem;
       }
 
       #lineas-poema {
-        font-size: 1.3rem;
+        font-size: 2.2rem; /* Mejorado para pantallas muy pequeñas */
       }
 
       .texto-final {
-        font-size: 1.8rem;
+        font-size: 1.5rem; /* Reducido para pantallas muy pequeñas */
       }
 
       .felicitacion {
         font-size: 1.2rem;
+      }
+
+      .girasol-flor {
+        width: 40px;
+        height: 40px;
+      }
+
+      .firma-creador {
+        font-size: 0.8rem;
       }
     }
 
@@ -609,23 +829,6 @@
       font-family: 'Courier New', monospace;
       font-size: 0.9em;
       opacity: 0.8;
-    }
-
-    /* Overlay invisible para capturar eventos - PANTALLA COMPLETA */
-    .evento-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 5;
-      background: transparent;
-      cursor: pointer;
-      display: none;
-    }
-
-    .evento-overlay.activo {
-      display: block;
     }
   </style>
 </head>
@@ -659,6 +862,30 @@
         <source src="bg.2025.mp4" type="video/mp4" />
         Tu navegador no soporta el elemento video.
       </video>
+      
+      <!-- Girasol interactivo estilo emoji -->
+      <div class="girasol-container" id="girasolContainer">
+        <div class="girasol-emoji" id="girasolEmoji">
+          <div class="girasol-flor">
+            <div class="petalo-pequeno"></div>
+            <div class="petalo-pequeno"></div>
+            <div class="petalo-pequeno"></div>
+            <div class="petalo-pequeno"></div>
+            <div class="petalo-pequeno"></div>
+            <div class="petalo-pequeno"></div>
+            <div class="petalo-pequeno"></div>
+            <div class="petalo-pequeno"></div>
+            <div class="girasol-centro-pequeno"></div>
+          </div>
+          <div class="girasol-tallo">
+            <div class="girasol-hoja"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brillos decorativos -->
+      <div class="brillos-decorativos" id="brillosDecorativos"></div>
+
       <div class="poema-contenido">
         <div id="lineas-poema"></div>
       </div>
@@ -675,6 +902,9 @@
     <canvas id="brillosCanvas"></canvas>
     <div id="particulas-container"></div>
   </div>
+
+  <!-- Firma del creador -->
+  <div class="firma-creador">Creado por: Joseph 🌠</div>
 
   <script>
     // Elementos del DOM
@@ -694,29 +924,19 @@
     const canvas = document.getElementById("brillosCanvas");
     const ctx = canvas.getContext("2d");
     const particulasContainer = document.getElementById("particulas-container");
+    const girasol = document.getElementById("girasolEmoji");
+    const girasolContainer = document.getElementById("girasolContainer");
+    const brillosDecorativos = document.getElementById("brillosDecorativos");
+    const firmaCreador = document.querySelector(".firma-creador");
 
-    // Variables de control de interacción
+    // Variables de control
     let isPressed = false;
     let pressTimeout = null;
     const poolParticulas = [];
-
-    // Configurar canvas con optimización
-    function setupCanvas() {
-      const dpr = window.devicePixelRatio || 1;
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
-      canvas.style.width = rect.width + 'px';
-      canvas.style.height = rect.height + 'px';
-    }
-    setupCanvas();
-    window.addEventListener('resize', setupCanvas);
-
-    // Variables de brillos
-    let brillos = [];
+    let index = 0;
     let animacionActiva = false;
     let lastTime = 0;
+    let brillos = [];
 
     // Versos del poema 2025
     const versos = [
@@ -741,7 +961,18 @@
       "a quien tanto aprendí a atesorar."
     ];
 
-    let index = 0;
+    // Configurar canvas con optimización
+    function setupCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
+    }
+    setupCanvas();
+    window.addEventListener('resize', setupCanvas);
 
     // Verificación de contraseña
     function verificarPassword() {
@@ -813,6 +1044,48 @@
       }
     }
 
+    // Crear brillos decorativos alrededor de la pantalla
+    function crearBrillosDecorativos() {
+      brillosDecorativos.innerHTML = '';
+      const cantidad = window.innerWidth < 768 ? 15 : 25;
+      
+      for (let i = 0; i < cantidad; i++) {
+        const brillo = document.createElement('div');
+        brillo.className = 'brillo-decorativo';
+        
+        // Posicionamiento en los bordes de la pantalla
+        const lado = Math.floor(Math.random() * 4); // 0: arriba, 1: derecha, 2: abajo, 3: izquierda
+        let x, y;
+        
+        switch(lado) {
+          case 0: // Arriba
+            x = Math.random() * 100;
+            y = Math.random() * 15;
+            break;
+          case 1: // Derecha
+            x = 85 + Math.random() * 15;
+            y = Math.random() * 100;
+            break;
+          case 2: // Abajo
+            x = Math.random() * 100;
+            y = 85 + Math.random() * 15;
+            break;
+          case 3: // Izquierda
+            x = Math.random() * 15;
+            y = Math.random() * 100;
+            break;
+        }
+        
+        brillo.style.left = x + '%';
+        brillo.style.top = y + '%';
+        brillo.style.animationDelay = Math.random() * 2 + 's';
+        
+        brillosDecorativos.appendChild(brillo);
+      }
+      
+      brillosDecorativos.classList.add('visible');
+    }
+
     // Inicializar brillos ambientales
     function inicializarBrillos() {
       brillos = [];
@@ -874,7 +1147,6 @@
         isPressed = true;
         crearBrillosSutiles(e.clientX, e.clientY, 6);
         
-        // Crear brillos continuos mientras se mantiene presionado
         pressTimeout = setInterval(() => {
           if (isPressed) {
             crearBrillosSutiles(e.clientX, e.clientY, 4);
@@ -903,9 +1175,6 @@
         e.preventDefault();
         isPressed = true;
         const touch = e.touches[0];
-        const rect = eventoOverlay.getBoundingClientRect();
-        const x = touch.clientX - rect.left;
-        const y = touch.clientY - rect.top;
         
         crearBrillosSutiles(touch.clientX, touch.clientY, 6);
         
@@ -933,6 +1202,34 @@
       });
     }
 
+    // Configurar eventos del girasol
+    function configurarGirasol() {
+      girasol.addEventListener('click', () => {
+        girasol.classList.add('balanceando');
+        const rect = girasol.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        crearBrillosSutiles(centerX, centerY, 12);
+        
+        setTimeout(() => {
+          girasol.classList.remove('balanceando');
+        }, 2000);
+      });
+
+      girasol.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        girasol.classList.add('balanceando');
+        const rect = girasol.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        crearBrillosSutiles(centerX, centerY, 12);
+        
+        setTimeout(() => {
+          girasol.classList.remove('balanceando');
+        }, 2000);
+      });
+    }
+
     // Transición a poema 2025
     boton2025.addEventListener("click", () => {
       seccion2020.classList.add('saliendo');
@@ -954,7 +1251,6 @@
         const verso = versos[index];
 
         if (verso.trim() === "") {
-          // Línea vacía, pausa más larga
           index++;
           setTimeout(mostrarVersos, 1500);
           return;
@@ -965,7 +1261,6 @@
         linea.textContent = verso;
         linea.style.animationDelay = '0.2s';
 
-        // Limpiar contenedor y agregar nueva línea
         lineasPoema.innerHTML = '';
         lineasPoema.appendChild(linea);
 
@@ -976,10 +1271,18 @@
         setTimeout(() => {
           lineasPoema.style.display = 'none';
           fraseFinal.classList.add("visible");
+          girasolContainer.classList.add("visible");
           volverBtn.classList.add("visible");
+          firmaCreador.classList.add("visible");
+
+          // Crear brillos decorativos
+          crearBrillosDecorativos();
 
           // Inicializar pool de partículas
           crearPoolParticulas();
+
+          // Configurar girasol
+          configurarGirasol();
 
           // Configurar eventos de interacción para toda la pantalla
           eventoOverlay.classList.add('activo');
@@ -990,39 +1293,56 @@
           inicializarBrillos();
           requestAnimationFrame(animarBrillos);
 
-          // Volver a ver
-          volverBtn.addEventListener("click", () => {
-            // Detener brillos
-            animacionActiva = false;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Limpiar partículas
-            poolParticulas.forEach(p => liberarParticula(p));
-
-            // Resetear elementos
-            eventoOverlay.classList.remove('activo');
-            fraseFinal.classList.remove("visible");
-            volverBtn.classList.remove("visible");
-            lineasPoema.style.display = 'flex';
-            lineasPoema.innerHTML = "";
-            index = 0;
-
-            // Detener eventos
-            isPressed = false;
-            if (pressTimeout) {
-              clearInterval(pressTimeout);
-              pressTimeout = null;
-            }
-
-            // Reiniciar poema
-            setTimeout(() => {
-              mostrarVersos();
-            }, 500);
-          });
-
         }, 1000);
       }
     }
+
+    // Función para resetear completamente y volver al inicio
+    function volverAlInicio() {
+      // Detener todas las animaciones
+      animacionActiva = false;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Limpiar partículas
+      poolParticulas.forEach(p => liberarParticula(p));
+
+      // Resetear elementos de la frase final
+      eventoOverlay.classList.remove('activo');
+      fraseFinal.classList.remove("visible");
+      girasolContainer.classList.remove("visible");
+      brillosDecorativos.classList.remove('visible');
+      volverBtn.classList.remove("visible");
+      
+      // Resetear poema 2025
+      lineasPoema.style.display = 'flex';
+      lineasPoema.innerHTML = "";
+      index = 0;
+
+      // Detener eventos
+      isPressed = false;
+      if (pressTimeout) {
+        clearInterval(pressTimeout);
+        pressTimeout = null;
+      }
+
+      // Ocultar poema 2025 y mostrar 2020
+      seccion2025.classList.remove("visible");
+      setTimeout(() => {
+        seccion2025.classList.add("oculto");
+        seccion2020.classList.remove("oculto");
+        seccion2020.classList.remove('saliendo');
+        
+        setTimeout(() => {
+          // Asegurar que el poema 2020 esté completamente visible
+          seccion2020.style.opacity = '1';
+          seccion2020.style.transform = 'scale(1)';
+        }, 100);
+      }, 300);
+    }
+
+    // Event listener para el botón volver
+    volverBtn.addEventListener("click", volverAlInicio);
+
   </script>
 </body>
 </html>
