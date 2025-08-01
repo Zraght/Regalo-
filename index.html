@@ -56,6 +56,43 @@
       transform: scale(0.95);
     }
 
+    /* Aviso de volumen */
+    .aviso-volumen {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: rgba(255, 248, 194, 0.8);
+      text-shadow: 0 0 10px rgba(255, 248, 194, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(255, 248, 194, 0.05);
+      border: 1px solid rgba(255, 248, 194, 0.2);
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
+      animation: pulsarSuave 3s ease-in-out infinite;
+    }
+
+    @keyframes pulsarSuave {
+      0%, 100% {
+        opacity: 0.7;
+        transform: translateX(-50%) scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.02);
+      }
+    }
+
+    .icono-volumen {
+      font-size: 1.2em;
+      filter: drop-shadow(0 0 5px rgba(255, 248, 194, 0.5));
+    }
+
     .banner-password {
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
@@ -378,7 +415,7 @@
       text-shadow: 0 0 20px rgba(255, 248, 194, 0.6);
     }
 
-    /* Girasol estilo emoji 2D con brillo pulsante */
+    /* Girasol estilo emoji 2D con brillo pulsante MÁS NOTORIO */
     .girasol-container {
       position: absolute;
       top: 20%;
@@ -387,10 +424,25 @@
       z-index: 4;
       opacity: 0;
       transition: opacity 1s ease-out;
+      cursor: pointer;
     }
 
     .girasol-container.visible {
       opacity: 1;
+      animation: llamarAtencion 4s ease-in-out infinite;
+    }
+
+    /* Animación para llamar la atención */
+    @keyframes llamarAtencion {
+      0%, 70%, 100% {
+        transform: translateX(-50%) scale(1);
+      }
+      10%, 20% {
+        transform: translateX(-50%) scale(1.15);
+      }
+      15% {
+        transform: translateX(-50%) scale(1.2);
+      }
     }
 
     .girasol-emoji {
@@ -401,22 +453,24 @@
       transition: transform 0.3s ease-out;
       will-change: transform;
       position: relative;
+      filter: drop-shadow(0 0 15px rgba(255, 224, 102, 0.6));
     }
 
     .girasol-emoji:hover {
-      transform: scale(1.1);
+      transform: scale(1.2);
+      filter: drop-shadow(0 0 25px rgba(255, 224, 102, 0.8));
     }
 
     .girasol-flor {
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 70px;
       position: relative;
       margin-bottom: -5px;
     }
 
     .girasol-centro-pequeno {
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
       background: radial-gradient(circle, #5D4037, #3E2723);
       border-radius: 50%;
       position: absolute;
@@ -424,68 +478,74 @@
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 3;
+      box-shadow: 0 0 8px rgba(93, 64, 55, 0.8);
     }
 
     .petalo-pequeno {
       position: absolute;
-      width: 12px;
-      height: 25px;
-      background: linear-gradient(to top, #FFD700, #FFC107);
+      width: 15px;
+      height: 30px;
+      background: linear-gradient(to top, #FFD700, #FFC107, #FFEB3B);
       border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
       top: 50%;
       left: 50%;
+      box-shadow: 0 0 5px rgba(255, 215, 0, 0.6);
     }
 
-    .petalo-pequeno:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-18px); }
-    .petalo-pequeno:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg) translateY(-18px); }
-    .petalo-pequeno:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg) translateY(-18px); }
-    .petalo-pequeno:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg) translateY(-18px); }
-    .petalo-pequeno:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg) translateY(-18px); }
-    .petalo-pequeno:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg) translateY(-18px); }
-    .petalo-pequeno:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg) translateY(-18px); }
-    .petalo-pequeno:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg) translateY(-18px); }
+    .petalo-pequeno:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-20px); }
+    .petalo-pequeno:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg) translateY(-20px); }
+    .petalo-pequeno:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg) translateY(-20px); }
+    .petalo-pequeno:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg) translateY(-20px); }
+    .petalo-pequeno:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg) translateY(-20px); }
+    .petalo-pequeno:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg) translateY(-20px); }
+    .petalo-pequeno:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg) translateY(-20px); }
+    .petalo-pequeno:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg) translateY(-20px); }
 
     .girasol-tallo {
-      width: 4px;
-      height: 40px;
+      width: 5px;
+      height: 45px;
       background: linear-gradient(to bottom, #4CAF50, #2E7D32);
-      border-radius: 2px;
+      border-radius: 3px;
       position: relative;
+      box-shadow: 0 0 3px rgba(76, 175, 80, 0.5);
     }
 
     .girasol-hoja {
       position: absolute;
-      width: 15px;
-      height: 8px;
+      width: 18px;
+      height: 10px;
       background: linear-gradient(45deg, #4CAF50, #66BB6A);
       border-radius: 50% 10px 50% 10px;
-      top: 15px;
-      left: -8px;
+      top: 18px;
+      left: -10px;
       transform: rotate(-30deg);
+      box-shadow: 0 0 3px rgba(76, 175, 80, 0.4);
     }
 
-    /* Brillo pulsante del girasol */
+    /* Brillo pulsante del girasol MÁS INTENSO */
     .girasol-brillo {
       position: absolute;
-      top: -8px;
-      right: -8px;
-      width: 18px;
-      height: 18px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3), transparent);
+      top: -12px;
+      right: -12px;
+      width: 24px;
+      height: 24px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(255, 255, 0, 0.7), rgba(255, 224, 102, 0.4), transparent);
       border-radius: 50%;
       z-index: 5;
-      animation: brilloPulsante 2s ease-in-out infinite;
+      animation: brilloPulsanteIntensivo 2s ease-in-out infinite;
       pointer-events: none;
     }
 
-    @keyframes brilloPulsante {
+    @keyframes brilloPulsanteIntensivo {
       0%, 100% {
-        opacity: 0.6;
+        opacity: 0.8;
         transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 255, 0, 0.6);
       }
       50% {
         opacity: 1;
-        transform: scale(1.2);
+        transform: scale(1.4);
+        box-shadow: 0 0 20px rgba(255, 255, 0, 0.9);
       }
     }
 
@@ -495,8 +555,8 @@
 
     @keyframes balanceoSuave {
       0%, 100% { transform: rotate(0deg) scale(1); }
-      25% { transform: rotate(-10deg) scale(1.05); }
-      75% { transform: rotate(10deg) scale(1.05); }
+      25% { transform: rotate(-15deg) scale(1.1); }
+      75% { transform: rotate(15deg) scale(1.1); }
     }
 
     /* Brillos decorativos de fondo */
@@ -695,6 +755,11 @@
         font-size: 2.2rem;
       }
 
+      .aviso-volumen {
+        font-size: 0.95rem;
+        top: 18px;
+      }
+
       .verso-2020 {
         font-size: 2.2rem;
       }
@@ -716,15 +781,15 @@
       }
 
       .girasol-flor {
-        width: 55px;
-        height: 55px;
+        width: 65px;
+        height: 65px;
       }
 
       .girasol-brillo {
-        width: 16px;
-        height: 16px;
-        top: -6px;
-        right: -6px;
+        width: 22px;
+        height: 22px;
+        top: -10px;
+        right: -10px;
       }
 
       .firma-creador {
@@ -741,6 +806,12 @@
         font-size: 2rem;
         margin-bottom: 2rem;
         padding: 0 1rem;
+      }
+
+      .aviso-volumen {
+        font-size: 0.9rem;
+        top: 15px;
+        padding: 8px 16px;
       }
 
       #inputPassword {
@@ -784,15 +855,15 @@
       }
 
       .girasol-flor {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
       }
 
       .girasol-brillo {
-        width: 15px;
-        height: 15px;
-        top: -5px;
-        right: -5px;
+        width: 20px;
+        height: 20px;
+        top: -8px;
+        right: -8px;
       }
 
       .girasol-container {
@@ -811,6 +882,12 @@
     @media screen and (max-width: 480px) {
       .banner-password {
         font-size: 1.7rem;
+      }
+
+      .aviso-volumen {
+        font-size: 0.85rem;
+        top: 12px;
+        padding: 6px 14px;
       }
 
       #inputPassword {
@@ -841,15 +918,15 @@
       }
 
       .girasol-flor {
-        width: 45px;
-        height: 45px;
+        width: 55px;
+        height: 55px;
       }
 
       .girasol-brillo {
-        width: 14px;
-        height: 14px;
-        top: -4px;
-        right: -4px;
+        width: 18px;
+        height: 18px;
+        top: -6px;
+        right: -6px;
       }
 
       .firma-creador {
@@ -864,6 +941,12 @@
     @media screen and (max-width: 360px) {
       .banner-password {
         font-size: 1.5rem;
+      }
+
+      .aviso-volumen {
+        font-size: 0.8rem;
+        top: 10px;
+        padding: 5px 12px;
       }
 
       #inputPassword {
@@ -888,15 +971,15 @@
       }
 
       .girasol-flor {
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
       }
 
       .girasol-brillo {
-        width: 12px;
-        height: 12px;
-        top: -3px;
-        right: -3px;
+        width: 16px;
+        height: 16px;
+        top: -5px;
+        right: -5px;
       }
 
       .firma-creador {
@@ -917,8 +1000,20 @@
 </head>
 
 <body>
+  <!-- Audio elemento oculto -->
+  <audio id="audioFondo" preload="auto">
+    <source src="instrumental.mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento audio.
+  </audio>
+
   <!-- Pantalla de contraseña -->
   <div id="pantalla-password">
+    <!-- Aviso de volumen -->
+    <div class="aviso-volumen">
+      <span class="icono-volumen">🔊</span>
+      <span>Active su volumen para una mejor experiencia</span>
+    </div>
+    
     <h1 class="banner-password">Escriba la contraseña:</h1>
     <input type="password" id="inputPassword" placeholder="Ingresa la contraseña..." />
     <button id="verificarPassword">Entrar</button>
@@ -1013,6 +1108,7 @@
     const girasolContainer = document.getElementById("girasolContainer");
     const brillosDecorativos = document.getElementById("brillosDecorativos");
     const firmaCreador = document.querySelector(".firma-creador");
+    const audioFondo = document.getElementById("audioFondo");
 
     // Variables de control
     let isPressed = false;
@@ -1022,6 +1118,7 @@
     let animacionActiva = false;
     let lastTime = 0;
     let brillos = [];
+    let audioIniciado = false;
 
     // Versos del poema 2025
     const versos = [
@@ -1059,12 +1156,70 @@
     setupCanvas();
     window.addEventListener('resize', setupCanvas);
 
+    // Configurar audio con fade-in
+    function configurarAudio() {
+      audioFondo.volume = 0;
+      audioFondo.loop = false; // Sin loop como solicitado
+      
+      // Intentar cargar el audio
+      audioFondo.addEventListener('canplaythrough', () => {
+        console.log('Audio cargado y listo para reproducir');
+      });
+
+      audioFondo.addEventListener('error', (e) => {
+        console.warn('Error al cargar el audio:', e);
+      });
+    }
+
+    // Iniciar audio con fade-in suave
+    function iniciarAudioConFadeIn() {
+      if (audioIniciado) return;
+      
+      audioFondo.currentTime = 0;
+      audioFondo.volume = 0;
+      
+      // Intentar reproducir el audio
+      const playPromise = audioFondo.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          audioIniciado = true;
+          console.log('Audio iniciado correctamente');
+          
+          // Fade-in suave de 2.5 segundos
+          const fadeInDuration = 2500;
+          const targetVolume = 0.2; // 20% de volumen
+          const fadeInInterval = 50; // Cada 50ms
+          const volumeStep = targetVolume / (fadeInDuration / fadeInInterval);
+          
+          const fadeIn = setInterval(() => {
+            if (audioFondo.volume < targetVolume) {
+              audioFondo.volume = Math.min(audioFondo.volume + volumeStep, targetVolume);
+            } else {
+              clearInterval(fadeIn);
+              console.log('Fade-in completado. Volumen final:', audioFondo.volume);
+            }
+          }, fadeInInterval);
+          
+        }).catch((error) => {
+          console.warn('No se pudo reproducir el audio automáticamente:', error);
+          // El usuario necesitará interactuar primero (política del navegador)
+        });
+      }
+    }
+
     // Verificación de contraseña
     function verificarPassword() {
       const password = passwordInput.value.trim();
       
       if (password === "poema2020") {
         pantallaPassword.classList.add('saliendo');
+        
+        // Iniciar audio con fade-in después de verificar contraseña
+        setTimeout(() => {
+          iniciarAudioConFadeIn();
+        }, 500);
+        
         setTimeout(() => {
           pantallaPassword.style.display = "none";
           contenido.classList.remove("oculto");
@@ -1428,6 +1583,9 @@
 
     // Event listener para el botón volver
     volverBtn.addEventListener("click", volverAlInicio);
+
+    // Inicializar configuración de audio al cargar la página
+    configurarAudio();
 
   </script>
 </body>
