@@ -639,13 +639,13 @@
       transform: translateY(-2px) scale(1.02);
     }
 
-    /* Botón volver - MEJORADO CON ESPACIO SUFICIENTE */
+    /* Botón volver - MEJORADO PARA MÓVILES */
     #volver {
-      position: absolute;
-      bottom: 80px; /* Incrementado para dar más espacio */
+      position: fixed; /* Cambiado de absolute a fixed para mayor confiabilidad */
+      bottom: 80px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 4;
+      z-index: 1000; /* Incrementado el z-index */
       font-family: 'Playfair Display', serif;
       font-size: 1.2rem;
       font-weight: 600;
@@ -659,11 +659,13 @@
       backdrop-filter: blur(5px);
       display: none;
       opacity: 0;
+      pointer-events: none; /* Agregado para mejor control */
     }
 
     #volver.visible {
       display: block;
       opacity: 1;
+      pointer-events: auto; /* Activar eventos cuando sea visible */
       animation: aparecerBoton 1s ease-out forwards;
     }
 
@@ -804,7 +806,7 @@
       }
     }
 
-    /* Responsive para móviles - TEXTO MÁS GRANDE */
+    /* Responsive para móviles - BOTÓN CORREGIDO */
     @media screen and (max-width: 768px) {
       .banner-password {
         font-size: 2rem;
@@ -853,9 +855,10 @@
       }
 
       #volver {
-        bottom: 70px; /* Ajustado para móviles con más espacio */
+        bottom: 30px; /* Bajado significativamente para móviles */
         font-size: 1.1rem;
         padding: 10px 20px;
+        position: fixed; /* Asegurar que sea fixed en móviles */
       }
 
       .girasol-flor {
@@ -916,9 +919,10 @@
       }
 
       #volver {
-        bottom: 65px; /* Ajustado para pantallas pequeñas */
+        bottom: 25px; /* Muy bajo para pantallas pequeñas */
         font-size: 1rem;
         padding: 8px 16px;
+        position: fixed;
       }
 
       .girasol-flor {
@@ -975,9 +979,10 @@
       }
 
       #volver {
-        bottom: 60px; /* Ajustado para pantallas muy pequeñas */
+        bottom: 20px; /* Muy bajo para pantallas muy pequeñas */
         font-size: 0.95rem;
         padding: 7px 14px;
+        position: fixed;
       }
 
       .girasol-flor {
