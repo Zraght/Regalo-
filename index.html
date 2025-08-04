@@ -639,10 +639,10 @@
       transform: translateY(-2px) scale(1.02);
     }
 
-    /* Botón volver */
+    /* Botón volver - MEJORADO CON ESPACIO SUFICIENTE */
     #volver {
       position: absolute;
-      bottom: 50px;
+      bottom: 80px; /* Incrementado para dar más espacio */
       left: 50%;
       transform: translateX(-50%);
       z-index: 4;
@@ -798,6 +798,10 @@
         bottom: 18px;
         right: 18px;
       }
+
+      #volver {
+        bottom: 75px; /* Ajustado para tablets */
+      }
     }
 
     /* Responsive para móviles - TEXTO MÁS GRANDE */
@@ -849,7 +853,7 @@
       }
 
       #volver {
-        bottom: 30px;
+        bottom: 70px; /* Ajustado para móviles con más espacio */
         font-size: 1.1rem;
         padding: 10px 20px;
       }
@@ -912,7 +916,7 @@
       }
 
       #volver {
-        bottom: 20px;
+        bottom: 65px; /* Ajustado para pantallas pequeñas */
         font-size: 1rem;
         padding: 8px 16px;
       }
@@ -968,6 +972,12 @@
 
       .felicitacion {
         font-size: 1.2rem;
+      }
+
+      #volver {
+        bottom: 60px; /* Ajustado para pantallas muy pequeñas */
+        font-size: 0.95rem;
+        padding: 7px 14px;
       }
 
       .girasol-flor {
@@ -1485,7 +1495,7 @@
       }, 800);
     });
 
-    // Mostrar versos línea por línea
+    // Mostrar versos línea por línea con botón apareciendo 5 segundos después
     async function mostrarVersos() {
       if (index < versos.length) {
         const verso = versos[index];
@@ -1512,7 +1522,6 @@
           lineasPoema.style.display = 'none';
           fraseFinal.classList.add("visible");
           girasolContainer.classList.add("visible");
-          volverBtn.classList.add("visible");
           firmaCreador.classList.add("visible");
 
           // Crear brillos decorativos
@@ -1532,6 +1541,11 @@
           animacionActiva = true;
           inicializarBrillos();
           requestAnimationFrame(animarBrillos);
+
+          // Mostrar botón "Volver a ver" después de 5 segundos
+          setTimeout(() => {
+            volverBtn.classList.add("visible");
+          }, 5000);
 
         }, 1000);
       }
