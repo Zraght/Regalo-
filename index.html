@@ -262,7 +262,7 @@
     }
 
     /* Botón 2025 y botón Volver - Estilos unificados */
-    #boton2025, #volver {
+    #boton2025 {
       font-family: 'Playfair Display', serif;
       font-size: 1.4rem;
       font-weight: 600;
@@ -280,40 +280,65 @@
       white-space: nowrap;
     }
 
-    #boton2025:hover, #volver:hover {
+    #boton2025:hover {
       background: rgba(255, 248, 194, 0.2);
       transform: translateY(-3px) scale(1.05);
       box-shadow: 0 8px 30px rgba(255, 224, 102, 0.5);
     }
 
-    /* Posicionamiento específico del botón volver */
+    /* Botón Volver - Posicionamiento y funcionalidad corregidos */
     #volver {
-      position: relative;
-      margin: 7rem auto 0;
-      display: block;
-      z-index: 10000;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      background: linear-gradient(45deg, transparent, rgba(255, 248, 194, 0.2));
+      color: #fff8c2;
+      border: 2px solid #ffe066;
+      cursor: pointer;
+      border-radius: 50px;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 15px rgba(255, 224, 102, 0.3);
+      backdrop-filter: blur(5px);
+      text-align: center;
+      white-space: nowrap;
+      
+      /* Posicionamiento fijo y z-index alto */
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100000;
+      
       /* Estados iniciales */
       visibility: hidden;
       opacity: 0;
-      transform: translateY(30px) scale(0.8);
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      /* Evitar conflictos con otros elementos */
+      pointer-events: none;
     }
 
     /* Estado visible del botón volver */
     #volver.mostrar {
       visibility: visible;
       opacity: 1;
-      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    #volver:hover {
+      background: rgba(255, 248, 194, 0.2);
+      transform: translateX(-50%) translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 30px rgba(255, 224, 102, 0.5);
     }
 
     #volver:focus {
       background: rgba(255, 248, 194, 0.3);
-      transform: translateY(-3px) scale(1.05);
+      transform: translateX(-50%) translateY(-3px) scale(1.05);
       box-shadow: 0 8px 30px rgba(255, 224, 102, 0.6);
+      outline: none;
     }
 
     #volver:active {
-      transform: translateY(-1px) scale(1.02);
+      transform: translateX(-50%) translateY(-1px) scale(1.02);
     }
 
     /* Poema 2025 */
@@ -360,7 +385,6 @@
       font-family: 'Cormorant Garamond', serif;
       font-weight: 500;
       font-style: italic;
-      font-size: 2.4rem;
       color: #fff8c2;
       text-shadow:
         0 0 20px rgba(255, 248, 194, 0.8),
@@ -414,7 +438,6 @@
       font-family: 'Cormorant Garamond', serif;
       font-weight: 600;
       font-style: italic;
-      font-size: 2.2rem;
       color: #fff570;
       text-shadow:
         0 0 25px rgba(255, 255, 112, 0.9),
@@ -441,7 +464,6 @@
 
     .felicitacion {
       font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
       color: #fff570;
       margin-top: 1.5rem;
       font-weight: 600;
@@ -736,8 +758,76 @@
       display: block;
     }
 
-    /* Responsive para tablets */
-    @media screen and (max-width: 1024px) {
+    .carita {
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+
+    /* ============================================
+       RESPONSIVE DESIGN - TAMAÑOS OPTIMIZADOS
+    ============================================ */
+
+    /* DESKTOP - 1200px y más */
+    @media screen and (min-width: 1200px) {
+      #lineas-poema {
+        font-size: 3.2rem;
+      }
+
+      .texto-final {
+        font-size: 2.8rem;
+      }
+
+      .felicitacion {
+        font-size: 2rem;
+      }
+
+      #volver {
+        font-size: 1.5rem;
+        padding: 16px 32px;
+        min-width: 220px;
+        bottom: 40px;
+      }
+
+      .firma-creador {
+        font-size: 1.1rem;
+        padding: 10px 15px;
+        bottom: 25px;
+        right: 25px;
+      }
+    }
+
+    /* DESKTOP ESTÁNDAR - 1024px a 1199px */
+    @media screen and (max-width: 1199px) and (min-width: 1024px) {
+      #lineas-poema {
+        font-size: 2.8rem;
+      }
+
+      .texto-final {
+        font-size: 2.4rem;
+      }
+
+      .felicitacion {
+        font-size: 1.8rem;
+      }
+
+      #volver {
+        font-size: 1.4rem;
+        padding: 15px 30px;
+        min-width: 200px;
+        bottom: 30px;
+      }
+
+      .firma-creador {
+        font-size: 1rem;
+        padding: 9px 13px;
+        bottom: 22px;
+        right: 22px;
+      }
+    }
+
+    /* TABLETS - 769px a 1023px */
+    @media screen and (max-width: 1023px) and (min-width: 769px) {
       .banner-password {
         font-size: 2.2rem;
       }
@@ -752,15 +842,15 @@
       }
 
       #lineas-poema {
-        font-size: 2.2rem;
+        font-size: 2.4rem;
       }
 
       .texto-final {
-        font-size: 2rem;
+        font-size: 2.1rem;
       }
 
       .felicitacion {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
       }
 
       .frase-final {
@@ -786,15 +876,22 @@
         right: 18px;
       }
 
-      #boton2025, #volver {
+      #boton2025 {
         font-size: 1.3rem;
         padding: 13px 28px;
         min-width: 180px;
       }
+
+      #volver {
+        font-size: 1.3rem;
+        padding: 13px 28px;
+        min-width: 180px;
+        bottom: 25px;
+      }
     }
 
-    /* Responsive para móviles */
-    @media screen and (max-width: 768px) {
+    /* MÓVILES - 481px a 768px */
+    @media screen and (max-width: 768px) and (min-width: 481px) {
       .banner-password {
         font-size: 2rem;
         margin-bottom: 2rem;
@@ -818,7 +915,7 @@
       }
 
       #lineas-poema {
-        font-size: 2.6rem;
+        font-size: 2.2rem;
       }
 
       .texto-final {
@@ -836,7 +933,7 @@
         top: 55%;
       }
 
-      #boton2025, #volver {
+      #boton2025 {
         font-size: 1.2rem;
         padding: 12px 24px;
         min-width: 160px;
@@ -844,7 +941,10 @@
       }
 
       #volver {
-        bottom: 90px; /* Espacio suficiente para no tapar la firma */
+        font-size: 1.2rem;
+        padding: 12px 24px;
+        min-width: 160px;
+        bottom: 80px;
       }
 
       .girasol-flor {
@@ -872,7 +972,8 @@
       }
     }
 
-    @media screen and (max-width: 480px) {
+    /* MÓVILES PEQUEÑOS - 361px a 480px */
+    @media screen and (max-width: 480px) and (min-width: 361px) {
       .banner-password {
         font-size: 1.7rem;
       }
@@ -893,7 +994,7 @@
       }
 
       #lineas-poema {
-        font-size: 2.4rem;
+        font-size: 2rem;
       }
 
       .texto-final {
@@ -904,14 +1005,17 @@
         font-size: 1.3rem;
       }
 
-      #boton2025, #volver {
+      #boton2025 {
         font-size: 1.1rem;
         padding: 10px 20px;
         min-width: 140px;
       }
 
       #volver {
-        bottom: 80px;
+        font-size: 1.1rem;
+        padding: 10px 20px;
+        min-width: 140px;
+        bottom: 70px;
       }
 
       .girasol-flor {
@@ -935,6 +1039,7 @@
       }
     }
 
+    /* MÓVILES MUY PEQUEÑOS - 360px y menos */
     @media screen and (max-width: 360px) {
       .banner-password {
         font-size: 1.5rem;
@@ -956,7 +1061,7 @@
       }
 
       #lineas-poema {
-        font-size: 2.2rem;
+        font-size: 1.8rem;
       }
 
       .texto-final {
@@ -967,14 +1072,17 @@
         font-size: 1.2rem;
       }
 
-      #boton2025, #volver {
+      #boton2025 {
         font-size: 1rem;
         padding: 8px 16px;
         min-width: 120px;
       }
 
       #volver {
-        bottom: 70px;
+        font-size: 1rem;
+        padding: 8px 16px;
+        min-width: 120px;
+        bottom: 60px;
       }
 
       .girasol-flor {
@@ -996,12 +1104,6 @@
         right: 10px;
         border-radius: 6px;
       }
-    }
-
-    .carita {
-      font-family: 'Courier New', monospace;
-      font-size: 0.9em;
-      opacity: 0.8;
     }
   </style>
 </head>
@@ -1081,7 +1183,6 @@
           "Nunca dejes de florecer, para así poder disfrutar y admirar un mejor amanecer."
         </div>
         <div class="felicitacion">Feliz cumpleaños, Johana 🌻</div>
-        <button id="volver">Volver a ver</button>
       </div>
       <div class="evento-overlay" id="eventoOverlay"></div>
     </section>
@@ -1089,6 +1190,9 @@
     <canvas id="brillosCanvas"></canvas>
     <div id="particulas-container"></div>
   </div>
+
+  <!-- Botón Volver posicionado de forma fija -->
+  <button id="volver">Volver a ver</button>
 
   <!-- Firma del creador mejorada -->
   <div class="firma-creador">Creado por: Joseph 🌠</div>
@@ -1605,30 +1709,50 @@
       }, 300);
     }
 
-    // Event listeners para el botón volver
+    // Event listeners para el botón volver - CORREGIDOS Y SIMPLIFICADOS
     if (volverBtn) {
-      volverBtn.addEventListener("click", (e) => {
+      // Agregar eventos de forma simple y directa
+      volverBtn.addEventListener("click", function(e) {
         e.preventDefault();
         e.stopPropagation();
         console.log("🔄 Botón 'Volver a ver' clickeado");
         volverAlInicio();
       });
 
-      volverBtn.addEventListener("touchstart", (e) => {
+      volverBtn.addEventListener("touchstart", function(e) {
         e.preventDefault();
         e.stopPropagation();
         console.log("📱 Botón 'Volver a ver' tocado (touch)");
         volverAlInicio();
       });
 
-      volverBtn.addEventListener("touchend", (e) => {
+      // Agregar event listener para debug
+      volverBtn.addEventListener("mousedown", function(e) {
+        console.log("🖱️ Mouse down en botón volver");
+      });
+
+      // Para asegurar que funciona, agregar también doble click
+      volverBtn.addEventListener("dblclick", function(e) {
         e.preventDefault();
         e.stopPropagation();
+        console.log("🔄 Doble click en botón volver");
+        volverAlInicio();
       });
+    } else {
+      console.error("❌ ERROR CRÍTICO: Botón volver no encontrado en el DOM");
     }
 
     // Inicializar configuración de audio al cargar la página
     configurarAudio();
+
+    // Agregar debug para verificar que el botón está en el DOM
+    console.log("🔍 Verificando botón volver:", volverBtn);
+    console.log("🔍 Elemento existe:", !!volverBtn);
+    if (volverBtn) {
+      console.log("🔍 Posición del botón:", volverBtn.getBoundingClientRect());
+      console.log("🔍 Estilos computados z-index:", getComputedStyle(volverBtn).zIndex);
+      console.log("🔍 Pointer events:", getComputedStyle(volverBtn).pointerEvents);
+    }
   </script>
 </body>
 </html>
