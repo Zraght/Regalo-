@@ -278,7 +278,6 @@
       min-width: 200px;
       text-align: center;
       white-space: nowrap;
-      outline: none;
     }
 
     #boton2025:hover, #volver:hover {
@@ -287,18 +286,16 @@
       box-shadow: 0 8px 30px rgba(255, 224, 102, 0.5);
     }
 
-    /* Posicionamiento específico del botón volver - CORREGIDO */
+    /* Posicionamiento específico del botón volver */
     #volver {
-      position: absolute;
-      bottom: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      margin: 0;
-      z-index: 10001;
+      position: relative;
+      margin: 7rem auto 0;
+      display: block;
+      z-index: 10000;
       /* Estados iniciales */
       visibility: hidden;
       opacity: 0;
-      transform: translateX(-50%) translateY(30px) scale(0.8);
+      transform: translateY(30px) scale(0.8);
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -306,17 +303,17 @@
     #volver.mostrar {
       visibility: visible;
       opacity: 1;
-      transform: translateX(-50%) translateY(0) scale(1);
+      transform: translateY(0) scale(1);
     }
 
     #volver:focus {
       background: rgba(255, 248, 194, 0.3);
-      transform: translateX(-50%) translateY(-3px) scale(1.05);
+      transform: translateY(-3px) scale(1.05);
       box-shadow: 0 8px 30px rgba(255, 224, 102, 0.6);
     }
 
     #volver:active {
-      transform: translateX(-50%) translateY(-1px) scale(1.02);
+      transform: translateY(-1px) scale(1.02);
     }
 
     /* Poema 2025 */
@@ -447,7 +444,6 @@
       font-size: 1.6rem;
       color: #fff570;
       margin-top: 1.5rem;
-      margin-bottom: 2rem;
       font-weight: 600;
       text-shadow: 0 0 20px rgba(255, 248, 194, 0.6);
     }
@@ -795,10 +791,6 @@
         padding: 13px 28px;
         min-width: 180px;
       }
-
-      #volver {
-        bottom: 70px;
-      }
     }
 
     /* Responsive para móviles */
@@ -852,7 +844,7 @@
       }
 
       #volver {
-        bottom: 60px;
+        bottom: 90px; /* Espacio suficiente para no tapar la firma */
       }
 
       .girasol-flor {
@@ -919,7 +911,7 @@
       }
 
       #volver {
-        bottom: 50px;
+        bottom: 80px;
       }
 
       .girasol-flor {
@@ -982,7 +974,7 @@
       }
 
       #volver {
-        bottom: 40px;
+        bottom: 70px;
       }
 
       .girasol-flor {
@@ -1089,11 +1081,8 @@
           "Nunca dejes de florecer, para así poder disfrutar y admirar un mejor amanecer."
         </div>
         <div class="felicitacion">Feliz cumpleaños, Johana 🌻</div>
+        <button id="volver">Volver a ver</button>
       </div>
-      
-      <!-- Botón volver ahora está dentro de la sección 2025 -->
-      <button id="volver">Volver a ver</button>
-      
       <div class="evento-overlay" id="eventoOverlay"></div>
     </section>
 
@@ -1161,7 +1150,7 @@
       "a quien tanto aprendí a atesorar."
     ];
 
-    // FUNCIÓN OPTIMIZADA PARA MOSTRAR EL BOTÓN - CORREGIDA
+    // FUNCIÓN OPTIMIZADA PARA MOSTRAR EL BOTÓN
     function mostrarBotonVolver() {
       console.log("🎯 Mostrando botón volver...");
       
@@ -1569,7 +1558,7 @@
       }, 800);
     });
 
-    // Función para resetear completamente y volver al inicio - CORREGIDA
+    // Función para resetear completamente y volver al inicio
     function volverAlInicio() {
       console.log("🔄 Ejecutando volverAlInicio()");
       
@@ -1580,7 +1569,7 @@
       // Limpiar partículas
       poolParticulas.forEach(p => liberarParticula(p));
 
-      // Ocultar botón inmediatamente
+      // Ocultar botón
       ocultarBotonVolver();
 
       // Resetear elementos de la frase final
@@ -1616,10 +1605,8 @@
       }, 300);
     }
 
-    // Event listeners para el botón volver - CORREGIDOS
+    // Event listeners para el botón volver
     if (volverBtn) {
-      console.log("✅ Botón volver encontrado, configurando eventos...");
-      
       volverBtn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -1631,16 +1618,13 @@
         e.preventDefault();
         e.stopPropagation();
         console.log("📱 Botón 'Volver a ver' tocado (touch)");
+        volverAlInicio();
       });
 
       volverBtn.addEventListener("touchend", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log("📱 Botón 'Volver a ver' touch finalizado");
-        volverAlInicio();
       });
-    } else {
-      console.error("❌ ERROR: No se encontró el botón volver al cargar la página");
     }
 
     // Inicializar configuración de audio al cargar la página
