@@ -482,6 +482,13 @@
       cursor: pointer;
     }
 
+    /* Ajuste específico para PC - girasol más arriba */
+    @media screen and (min-width: 1024px) {
+      .girasol-container {
+        top: 12%;
+      }
+    }
+
     .girasol-container.visible {
       opacity: 1;
       animation: llamarAtencion 4s ease-in-out infinite;
