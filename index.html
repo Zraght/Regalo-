@@ -288,15 +288,14 @@
 
     /* Posicionamiento específico del botón volver */
     #volver {
-      position: fixed;
-      bottom: 120px; /* Aumentado para no tapar la firma */
-      left: 50%;
-      transform: translateX(-50%);
+      position: relative;
+      margin: 2rem auto 0;
+      display: block;
       z-index: 10000;
       /* Estados iniciales */
       visibility: hidden;
       opacity: 0;
-      transform: translateX(-50%) translateY(30px) scale(0.8);
+      transform: translateY(30px) scale(0.8);
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -304,17 +303,17 @@
     #volver.mostrar {
       visibility: visible;
       opacity: 1;
-      transform: translateX(-50%) translateY(0) scale(1);
+      transform: translateY(0) scale(1);
     }
 
     #volver:focus {
       background: rgba(255, 248, 194, 0.3);
-      transform: translateX(-50%) translateY(-3px) scale(1.05);
+      transform: translateY(-3px) scale(1.05);
       box-shadow: 0 8px 30px rgba(255, 224, 102, 0.6);
     }
 
     #volver:active {
-      transform: translateX(-50%) translateY(-1px) scale(1.02);
+      transform: translateY(-1px) scale(1.02);
     }
 
     /* Poema 2025 */
@@ -792,10 +791,6 @@
         padding: 13px 28px;
         min-width: 180px;
       }
-
-      #volver {
-        bottom: 100px;
-      }
     }
 
     /* Responsive para móviles */
@@ -1086,9 +1081,9 @@
           "Nunca dejes de florecer, para así poder disfrutar y admirar un mejor amanecer."
         </div>
         <div class="felicitacion">Feliz cumpleaños, Johana 🌻</div>
+        <button id="volver">Volver a ver</button>
       </div>
       <div class="evento-overlay" id="eventoOverlay"></div>
-      <button id="volver">Volver a ver</button>
     </section>
 
     <canvas id="brillosCanvas"></canvas>
