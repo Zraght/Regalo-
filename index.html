@@ -261,8 +261,8 @@
       }
     }
 
-    /* Botón 2025 */
-    #boton2025 {
+    /* Botón 2025 y botón Volver - Estilos unificados */
+    #boton2025, #volver {
       font-family: 'Playfair Display', serif;
       font-size: 1.4rem;
       font-weight: 600;
@@ -275,12 +275,46 @@
       transition: all 0.4s ease;
       box-shadow: 0 0 15px rgba(255, 224, 102, 0.3);
       backdrop-filter: blur(5px);
+      min-width: 200px;
+      text-align: center;
+      white-space: nowrap;
     }
 
-    #boton2025:hover {
+    #boton2025:hover, #volver:hover {
       background: rgba(255, 248, 194, 0.2);
       transform: translateY(-3px) scale(1.05);
       box-shadow: 0 8px 30px rgba(255, 224, 102, 0.5);
+    }
+
+    /* Posicionamiento específico del botón volver */
+    #volver {
+      position: fixed;
+      bottom: 120px; /* Aumentado para no tapar la firma */
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10000;
+      /* Estados iniciales */
+      visibility: hidden;
+      opacity: 0;
+      transform: translateX(-50%) translateY(30px) scale(0.8);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Estado visible del botón volver */
+    #volver.mostrar {
+      visibility: visible;
+      opacity: 1;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    #volver:focus {
+      background: rgba(255, 248, 194, 0.3);
+      transform: translateX(-50%) translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 30px rgba(255, 224, 102, 0.6);
+    }
+
+    #volver:active {
+      transform: translateX(-50%) translateY(-1px) scale(1.02);
     }
 
     /* Poema 2025 */
@@ -597,7 +631,7 @@
       }
     }
 
-   /* Firma del creador mejorada */
+    /* Firma del creador mejorada */
     .firma-creador {
       position: fixed;
       bottom: 20px;
@@ -637,51 +671,6 @@
       background: linear-gradient(135deg, rgba(255, 248, 194, 1), rgba(255, 235, 150, 0.9));
       box-shadow: 0 6px 20px rgba(255, 224, 102, 0.5);
       transform: translateY(-2px) scale(1.02);
-    }
-
-    /* BOTÓN VOLVER - CORREGIDO Y OPTIMIZADO */
-    #volver {
-      position: fixed;
-      bottom: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10000;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      background: linear-gradient(45deg, rgba(255, 248, 194, 0.4), rgba(255, 224, 102, 0.5));
-      border: 3px solid #ffe066;
-      padding: 15px 30px;
-      color: #fff8c2;
-      cursor: pointer;
-      border-radius: 50px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 25px rgba(255, 224, 102, 0.6);
-      min-width: 200px;
-      text-align: center;
-      white-space: nowrap;
-      /* Estados iniciales */
-      visibility: hidden;
-      opacity: 0;
-      transform: translateX(-50%) translateY(30px) scale(0.8);
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    /* Estado visible del botón */
-    #volver.mostrar {
-      visibility: visible;
-      opacity: 1;
-      transform: translateX(-50%) translateY(0) scale(1);
-    }
-
-    #volver:hover, #volver:focus {
-      background: linear-gradient(45deg, rgba(255, 248, 194, 0.6), rgba(255, 224, 102, 0.7));
-      transform: translateX(-50%) translateY(-3px) scale(1.05);
-      box-shadow: 0 12px 35px rgba(255, 224, 102, 0.8);
-    }
-
-    #volver:active {
-      transform: translateX(-50%) translateY(-1px) scale(1.02);
     }
 
     /* Canvas de brillos interactivos */
@@ -798,11 +787,14 @@
         right: 18px;
       }
 
-      #volver {
-        bottom: 70px;
-        font-size: 1.2rem;
+      #boton2025, #volver {
+        font-size: 1.3rem;
         padding: 13px 28px;
         min-width: 180px;
+      }
+
+      #volver {
+        bottom: 100px;
       }
     }
 
@@ -830,11 +822,6 @@
         padding: 15px;
       }
 
-      #boton2025 {
-        font-size: 1.3rem;
-        padding: 12px 25px;
-      }
-
       #lineas-poema {
         font-size: 2.6rem;
       }
@@ -854,12 +841,15 @@
         top: 55%;
       }
 
-      #volver {
-        bottom: 60px;
-        font-size: 1.1rem;
+      #boton2025, #volver {
+        font-size: 1.2rem;
         padding: 12px 24px;
         min-width: 160px;
         border-width: 2px;
+      }
+
+      #volver {
+        bottom: 90px; /* Espacio suficiente para no tapar la firma */
       }
 
       .girasol-flor {
@@ -919,11 +909,14 @@
         font-size: 1.3rem;
       }
 
-      #volver {
-        bottom: 50px;
-        font-size: 1rem;
+      #boton2025, #volver {
+        font-size: 1.1rem;
         padding: 10px 20px;
         min-width: 140px;
+      }
+
+      #volver {
+        bottom: 80px;
       }
 
       .girasol-flor {
@@ -979,11 +972,14 @@
         font-size: 1.2rem;
       }
 
-      #volver {
-        bottom: 40px;
-        font-size: 0.95rem;
+      #boton2025, #volver {
+        font-size: 1rem;
         padding: 8px 16px;
         min-width: 120px;
+      }
+
+      #volver {
+        bottom: 70px;
       }
 
       .girasol-flor {
@@ -1092,7 +1088,7 @@
         <div class="felicitacion">Feliz cumpleaños, Johana 🌻</div>
       </div>
       <div class="evento-overlay" id="eventoOverlay"></div>
-      <button id="volver">🔄 Volver a ver</button>
+      <button id="volver">Volver a ver</button>
     </section>
 
     <canvas id="brillosCanvas"></canvas>
@@ -1135,7 +1131,6 @@
     let lastTime = 0;
     let brillos = [];
     let audioIniciado = false;
-    let botonVolverTimeout = null; // Nueva variable para el timeout
 
     // Versos del poema 2025
     const versos = [
@@ -1160,174 +1155,31 @@
       "a quien tanto aprendí a atesorar."
     ];
 
-// ========================================
-    // SOLUCIÓN AGRESIVA PARA EL BOTÓN
-    // ========================================
-    let botonForzado = false;
-    let intentosBoton = 0;
-    let maxIntentos = 10;
-
-    // FUNCIÓN SUPER AGRESIVA PARA MOSTRAR EL BOTÓN
+    // FUNCIÓN OPTIMIZADA PARA MOSTRAR EL BOTÓN
     function mostrarBotonVolver() {
-      console.log("🎯 EJECUTANDO mostrarBotonVolver() - Intento:", ++intentosBoton);
+      console.log("🎯 Mostrando botón volver...");
       
-      if (botonForzado) {
-        console.log("⚠️ Botón ya forzado, saliendo...");
+      if (!volverBtn) {
+        console.error("❌ ERROR: Botón 'volver' no encontrado");
         return;
       }
 
-      if (!volverBtn) {
-        console.error("❌ ERROR CRÍTICO: Botón 'volver' no encontrado en el DOM!");
-        
-        // Buscar el botón de manera agresiva
-        const botonEncontrado = document.querySelector('#volverBtn') || 
-                               document.querySelector('.volver-btn') ||
-                               document.querySelector('[id*="volver"]') ||
-                               document.querySelector('[class*="volver"]');
-        
-        if (botonEncontrado) {
-          console.log("🔍 Botón encontrado con búsqueda agresiva!");
-          window.volverBtn = botonEncontrado; // Asignar globalmente
-        } else {
-          console.error("💀 BOTÓN NO ENCONTRADO EN NINGUNA PARTE DEL DOM");
-          return;
-        }
-      }
-
-      botonForzado = true;
-      console.log("🚀 FORZANDO APARICIÓN DEL BOTÓN...");
-
-      // FORZAR ESTILOS DE MANERA ULTRA AGRESIVA
-      volverBtn.style.cssText = `
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        position: fixed !important;
-        z-index: 999999 !important;
-        transform: translateY(0) scale(1) !important;
-        transition: all 0.3s ease !important;
-        background: rgba(255, 255, 255, 0.9) !important;
-        color: #333 !important;
-        padding: 10px 20px !important;
-        border-radius: 25px !important;
-        border: 2px solid #ccc !important;
-        cursor: pointer !important;
-        font-family: Arial, sans-serif !important;
-        font-size: 14px !important;
-        text-align: center !important;
-        left: 50% !important;
-        bottom: 20px !important;
-        margin-left: -60px !important;
-        min-width: 120px !important;
-        min-height: 40px !important;
-      `;
-
-      // AGREGAR CLASES DE MANERA FORZADA
-      volverBtn.classList.add('mostrar', 'visible', 'activo');
-      
-      // ASEGURAR QUE EL TEXTO SEA VISIBLE
-      if (!volverBtn.textContent || volverBtn.textContent.trim() === '') {
-        volverBtn.textContent = 'Volver a ver';
-        volverBtn.innerHTML = 'Volver a ver';
-      }
-
-      // FORZAR UN REFLOW DEL DOM
-      volverBtn.offsetHeight;
-      volverBtn.scrollIntoView({ behavior: 'smooth', block: 'end' });
-
-      console.log("✅ BOTÓN FORZADO EXITOSAMENTE");
-      console.log("📊 Estado del botón:", {
-        display: volverBtn.style.display,
-        visibility: volverBtn.style.visibility,
-        opacity: volverBtn.style.opacity,
-        pointerEvents: volverBtn.style.pointerEvents,
-        textContent: volverBtn.textContent
-      });
+      // Aplicar la clase mostrar para activar la transición
+      volverBtn.classList.add('mostrar');
+      console.log("✅ Botón volver mostrado exitosamente");
     }
 
     // FUNCIÓN PARA OCULTAR EL BOTÓN
     function ocultarBotonVolver() {
       console.log("🔄 Ocultando botón volver...");
       
-      botonForzado = false;
-      intentosBoton = 0;
-      
       if (volverBtn) {
-        volverBtn.style.cssText = `
-          display: none !important;
-          visibility: hidden !important;
-          opacity: 0 !important;
-          pointer-events: none !important;
-        `;
-        volverBtn.classList.remove('mostrar', 'visible', 'activo');
+        volverBtn.classList.remove('mostrar');
         console.log("✅ Botón ocultado correctamente");
       }
-
-      // Limpiar todos los timeouts
-      if (window.botonVolverTimeout) {
-        clearTimeout(window.botonVolverTimeout);
-        window.botonVolverTimeout = null;
-      }
     }
 
-    // FUNCIÓN DE VERIFICACIÓN CONSTANTE
-    function verificarBotonConstantemente() {
-      if (botonForzado) return;
-      
-      intentosBoton++;
-      console.log(`🔍 Verificación ${intentosBoton}/${maxIntentos}`);
-      
-      if (intentosBoton >= maxIntentos) {
-        console.log("🚨 MÁXIMO DE INTENTOS ALCANZADO - FORZANDO BOTÓN");
-        mostrarBotonVolver();
-        return;
-      }
-
-      setTimeout(verificarBotonConstantemente, 300);
-    }
-
-    // FUNCIÓN MÚLTIPLE DE TIMERS
-    function activarMultiplesTimers() {
-      console.log("🚀 Activando múltiples timers para garantizar aparición del botón...");
-      
-      // Timer 1: 3 segundos exactos
-      setTimeout(() => {
-        console.log("⏰ Timer 1 (3000ms) - Ejecutando");
-        mostrarBotonVolver();
-      }, 3000);
-
-      // Timer 2: 3.2 segundos (respaldo)
-      setTimeout(() => {
-        if (!botonForzado) {
-          console.log("⏰ Timer 2 (3200ms) - Ejecutando respaldo");
-          mostrarBotonVolver();
-        }
-      }, 3200);
-
-      // Timer 3: 3.5 segundos (respaldo de emergencia)
-      setTimeout(() => {
-        if (!botonForzado) {
-          console.log("⏰ Timer 3 (3500ms) - Ejecutando respaldo de emergencia");
-          mostrarBotonVolver();
-        }
-      }, 3500);
-
-      // Timer 4: 4 segundos (último recurso)
-      setTimeout(() => {
-        if (!botonForzado) {
-          console.log("🚨 Timer 4 (4000ms) - ÚLTIMO RECURSO");
-          mostrarBotonVolver();
-        }
-      }, 4000);
-
-      // Verificación constante cada 300ms
-      setTimeout(verificarBotonConstantemente, 300);
-    }
-
-    // ========================================
-    // FUNCIÓN MOSTRAR VERSOS ACTUALIZADA
-    // ========================================
+    // FUNCIÓN MOSTRAR VERSOS OPTIMIZADA
     async function mostrarVersos() {
       console.log("📝 Comenzando a mostrar versos");
       if (index < versos.length) {
@@ -1367,25 +1219,14 @@
           inicializarBrillos();
           requestAnimationFrame(animarBrillos);
 
-          // ========================================
-          // 🚨 ACTIVACIÓN AGRESIVA DE MÚLTIPLES TIMERS
-          // ========================================
-          console.log("🚨 INICIANDO SISTEMA AGRESIVO DE TIMERS...");
-          
-          // Resetear variables
-          botonForzado = false;
-          intentosBoton = 0;
-          
-          // Activar sistema múltiple
-          activarMultiplesTimers();
+          // MOSTRAR BOTÓN DESPUÉS DE 3 SEGUNDOS
+          setTimeout(() => {
+            mostrarBotonVolver();
+          }, 3000);
 
         }, 1000);
       }
     }
-
-    // ========================================
-    // FUNCIONES RESTANTES (SIN CAMBIOS)
-    // ========================================
 
     // Configurar canvas con optimización
     function setupCanvas() {
@@ -1769,7 +1610,7 @@
       }, 300);
     }
 
-    // Event listeners para el botón volver OPTIMIZADOS
+    // Event listeners para el botón volver
     if (volverBtn) {
       volverBtn.addEventListener("click", (e) => {
         e.preventDefault();
