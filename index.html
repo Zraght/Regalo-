@@ -639,13 +639,13 @@
       transform: translateY(-2px) scale(1.02);
     }
 
-    /* BOTÓN VOLVER - SIMPLIFICADO Y CORREGIDO */
+    /* BOTÓN VOLVER - CORREGIDO Y OPTIMIZADO */
     #volver {
       position: fixed;
       bottom: 80px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 50000;
+      z-index: 10000;
       font-family: 'Playfair Display', serif;
       font-size: 1.3rem;
       font-weight: 600;
@@ -660,34 +660,28 @@
       min-width: 200px;
       text-align: center;
       white-space: nowrap;
-      /* Estados de visibilidad simplificados */
-      display: none;
+      /* Estados iniciales */
+      visibility: hidden;
       opacity: 0;
-      transition: all 0.4s ease;
+      transform: translateX(-50%) translateY(30px) scale(0.8);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* Estado visible del botón */
     #volver.mostrar {
-      display: block;
+      visibility: visible;
       opacity: 1;
-      animation: aparecerBoton 1s ease-out;
-    }
-
-    @keyframes aparecerBoton {
-      0% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(30px) scale(0.8);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0) scale(1);
-      }
+      transform: translateX(-50%) translateY(0) scale(1);
     }
 
     #volver:hover, #volver:focus {
       background: linear-gradient(45deg, rgba(255, 248, 194, 0.6), rgba(255, 224, 102, 0.7));
       transform: translateX(-50%) translateY(-3px) scale(1.05);
       box-shadow: 0 12px 35px rgba(255, 224, 102, 0.8);
+    }
+
+    #volver:active {
+      transform: translateX(-50%) translateY(-1px) scale(1.02);
     }
 
     /* Canvas de brillos interactivos */
@@ -808,6 +802,7 @@
         bottom: 70px;
         font-size: 1.2rem;
         padding: 13px 28px;
+        min-width: 180px;
       }
     }
 
@@ -861,9 +856,9 @@
 
       #volver {
         bottom: 60px;
-        font-size: 1.2rem;
-        padding: 12px 25px;
-        min-width: 180px;
+        font-size: 1.1rem;
+        padding: 12px 24px;
+        min-width: 160px;
         border-width: 2px;
       }
 
@@ -926,9 +921,9 @@
 
       #volver {
         bottom: 50px;
-        font-size: 1.1rem;
+        font-size: 1rem;
         padding: 10px 20px;
-        min-width: 160px;
+        min-width: 140px;
       }
 
       .girasol-flor {
@@ -986,9 +981,9 @@
 
       #volver {
         bottom: 40px;
-        font-size: 1rem;
+        font-size: 0.95rem;
         padding: 8px 16px;
-        min-width: 140px;
+        min-width: 120px;
       }
 
       .girasol-flor {
@@ -1140,6 +1135,7 @@
     let lastTime = 0;
     let brillos = [];
     let audioIniciado = false;
+    let botonVolverTimeout = null; // Nueva variable para el timeout
 
     // Versos del poema 2025
     const versos = [
@@ -1164,7 +1160,7 @@
       "a quien tanto aprendí a atesorar."
     ];
 
-    // FUNCIÓN SIMPLIFICADA PARA MOSTRAR EL BOTÓN
+    // FUNCIÓN CORREGIDA PARA MOSTRAR EL BOTÓN
     function mostrarBotonVolver() {
       console.log("🎯 Mostrando botón volver...");
       
@@ -1173,9 +1169,34 @@
         return;
       }
 
-      // Método simple y directo
+      // Limpiar cualquier timeout previo
+      if (botonVolverTimeout) {
+        clearTimeout(botonVolverTimeout);
+      }
+
+      // Mostrar botón con animación suave
       volverBtn.classList.add('mostrar');
       console.log("✅ Botón mostrado correctamente");
+    }
+
+    // FUNCIÓN PARA OCULTAR EL BOTÓN
+    function ocultarBotonVolver() {
+      console.log("🔄 Ocultando botón volver...");
+      
+      if (!volverBtn) {
+        console.error("❌ ERROR: Botón 'volver' no encontrado!");
+        return;
+      }
+
+      // Limpiar timeout si existe
+      if (botonVolverTimeout) {
+        clearTimeout(botonVolverTimeout);
+        botonVolverTimeout = null;
+      }
+
+      // Ocultar botón
+      volverBtn.classList.remove('mostrar');
+      console.log("✅ Botón ocultado correctamente");
     }
 
     // Configurar canvas con optimización
@@ -1513,7 +1534,7 @@
       }, 800);
     });
 
-    // Mostrar versos línea por línea con botón apareciendo 3 segundos después
+    // Mostrar versos línea por línea con botón apareciendo EXACTAMENTE 3 segundos después
     async function mostrarVersos() {
       console.log("📝 Comenzando a mostrar versos");
       if (index < versos.length) {
@@ -1553,10 +1574,10 @@
           inicializarBrillos();
           requestAnimationFrame(animarBrillos);
 
-          // MOSTRAR BOTÓN "VOLVER A VER" DESPUÉS DE 3 SEGUNDOS
-          console.log("⏰ Configurando timeout para mostrar botón en 3 segundos...");
-          setTimeout(() => {
-            console.log("🎯 ¡3 segundos transcurridos! Mostrando botón...");
+          // PROGRAMAR BOTÓN "VOLVER A VER" PARA EXACTAMENTE 3 SEGUNDOS DESPUÉS
+          console.log("⏰ Programando botón para aparecer en 3000ms...");
+          botonVolverTimeout = setTimeout(() => {
+            console.log("🎯 ¡Timeout ejecutado! Mostrando botón después de 3 segundos exactos");
             mostrarBotonVolver();
           }, 3000);
 
@@ -1575,12 +1596,14 @@
       // Limpiar partículas
       poolParticulas.forEach(p => liberarParticula(p));
 
+      // Ocultar botón inmediatamente
+      ocultarBotonVolver();
+
       // Resetear elementos de la frase final
       eventoOverlay.classList.remove('activo');
       fraseFinal.classList.remove("visible");
       girasolContainer.classList.remove("visible");
       brillosDecorativos.classList.remove('visible');
-      volverBtn.classList.remove("mostrar");
       firmaCreador.classList.remove("visible");
       
       // Resetear poema 2025
@@ -1609,17 +1632,25 @@
       }, 300);
     }
 
-    // Event listeners para el botón volver
+    // Event listeners para el botón volver OPTIMIZADOS
     volverBtn.addEventListener("click", (e) => {
       e.preventDefault();
+      e.stopPropagation();
       console.log("🔄 Botón 'Volver a ver' clickeado");
       volverAlInicio();
     });
 
     volverBtn.addEventListener("touchstart", (e) => {
       e.preventDefault();
+      e.stopPropagation();
       console.log("📱 Botón 'Volver a ver' tocado (touch)");
       volverAlInicio();
+    });
+
+    // Prevenir eventos duplicados en mobile
+    volverBtn.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
     });
 
     // Inicializar configuración de audio al cargar la página
