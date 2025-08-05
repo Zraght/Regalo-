@@ -1161,152 +1161,230 @@
     ];
 
 // ========================================
-    // VARIABLES DE CONTROL PARA SISTEMA TRIPLE
+    // SOLUCIÓN AGRESIVA PARA EL BOTÓN
     // ========================================
-    let botonMostrado = false;
-    let tiempoInicioFraseFinal = null;
-    let frameCount = 0;
-    let intervalCheck = null;
-    let frameCheckActive = false;
+    let botonForzado = false;
+    let intentosBoton = 0;
+    let maxIntentos = 10;
 
-    // ========================================
-    // SISTEMA TRIPLE DE RESPALDO MEJORADO
-    // ========================================
-
-    // FUNCIÓN PRINCIPAL PARA MOSTRAR EL BOTÓN (MEJORADA)
+    // FUNCIÓN SUPER AGRESIVA PARA MOSTRAR EL BOTÓN
     function mostrarBotonVolver() {
-      console.log("🎯 mostrarBotonVolver() ejecutándose...");
+      console.log("🎯 EJECUTANDO mostrarBotonVolver() - Intento:", ++intentosBoton);
       
-      if (botonMostrado) {
-        console.log("⚠️ Botón ya mostrado, evitando duplicación");
+      if (botonForzado) {
+        console.log("⚠️ Botón ya forzado, saliendo...");
         return;
       }
 
       if (!volverBtn) {
-        console.error("❌ ERROR: Botón 'volver' no encontrado!");
-        return;
+        console.error("❌ ERROR CRÍTICO: Botón 'volver' no encontrado en el DOM!");
+        
+        // Buscar el botón de manera agresiva
+        const botonEncontrado = document.querySelector('#volverBtn') || 
+                               document.querySelector('.volver-btn') ||
+                               document.querySelector('[id*="volver"]') ||
+                               document.querySelector('[class*="volver"]');
+        
+        if (botonEncontrado) {
+          console.log("🔍 Botón encontrado con búsqueda agresiva!");
+          window.volverBtn = botonEncontrado; // Asignar globalmente
+        } else {
+          console.error("💀 BOTÓN NO ENCONTRADO EN NINGUNA PARTE DEL DOM");
+          return;
+        }
       }
 
-      botonMostrado = true;
-      frameCheckActive = false; // Detener verificación de frames
+      botonForzado = true;
+      console.log("🚀 FORZANDO APARICIÓN DEL BOTÓN...");
+
+      // FORZAR ESTILOS DE MANERA ULTRA AGRESIVA
+      volverBtn.style.cssText = `
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        position: fixed !important;
+        z-index: 999999 !important;
+        transform: translateY(0) scale(1) !important;
+        transition: all 0.3s ease !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+        color: #333 !important;
+        padding: 10px 20px !important;
+        border-radius: 25px !important;
+        border: 2px solid #ccc !important;
+        cursor: pointer !important;
+        font-family: Arial, sans-serif !important;
+        font-size: 14px !important;
+        text-align: center !important;
+        left: 50% !important;
+        bottom: 20px !important;
+        margin-left: -60px !important;
+        min-width: 120px !important;
+        min-height: 40px !important;
+      `;
+
+      // AGREGAR CLASES DE MANERA FORZADA
+      volverBtn.classList.add('mostrar', 'visible', 'activo');
       
-      // Limpiar todos los timers
-      if (botonVolverTimeout) {
-        clearTimeout(botonVolverTimeout);
-        botonVolverTimeout = null;
-      }
-      
-      if (intervalCheck) {
-        clearInterval(intervalCheck);
-        intervalCheck = null;
+      // ASEGURAR QUE EL TEXTO SEA VISIBLE
+      if (!volverBtn.textContent || volverBtn.textContent.trim() === '') {
+        volverBtn.textContent = 'Volver a ver';
+        volverBtn.innerHTML = 'Volver a ver';
       }
 
-      console.log("✅ Mostrando botón 'Volver a ver'");
-      
-      // Aplicar estilos directamente para máxima compatibilidad
-      volverBtn.style.display = 'block';
-      volverBtn.style.pointerEvents = 'auto';
-      volverBtn.style.opacity = '0';
-      volverBtn.style.transform = 'translateY(20px) scale(0.9)';
-      
-      // Forzar reflow y aplicar animación
-      volverBtn.offsetHeight; // Forzar reflow
-      
-      setTimeout(() => {
-        volverBtn.classList.add('mostrar');
-        console.log("🎊 Botón visible con animación aplicada");
-      }, 50);
+      // FORZAR UN REFLOW DEL DOM
+      volverBtn.offsetHeight;
+      volverBtn.scrollIntoView({ behavior: 'smooth', block: 'end' });
+
+      console.log("✅ BOTÓN FORZADO EXITOSAMENTE");
+      console.log("📊 Estado del botón:", {
+        display: volverBtn.style.display,
+        visibility: volverBtn.style.visibility,
+        opacity: volverBtn.style.opacity,
+        pointerEvents: volverBtn.style.pointerEvents,
+        textContent: volverBtn.textContent
+      });
     }
 
-    // FUNCIÓN PARA OCULTAR EL BOTÓN (MEJORADA)
+    // FUNCIÓN PARA OCULTAR EL BOTÓN
     function ocultarBotonVolver() {
       console.log("🔄 Ocultando botón volver...");
       
-      if (!volverBtn) {
-        console.error("❌ ERROR: Botón 'volver' no encontrado!");
-        return;
+      botonForzado = false;
+      intentosBoton = 0;
+      
+      if (volverBtn) {
+        volverBtn.style.cssText = `
+          display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
+          pointer-events: none !important;
+        `;
+        volverBtn.classList.remove('mostrar', 'visible', 'activo');
+        console.log("✅ Botón ocultado correctamente");
       }
 
-      // Resetear variables de control
-      botonMostrado = false;
-      frameCount = 0;
-      frameCheckActive = false;
-      tiempoInicioFraseFinal = null;
-      
-      // Limpiar todos los timers y verificaciones
-      if (botonVolverTimeout) {
-        clearTimeout(botonVolverTimeout);
-        botonVolverTimeout = null;
+      // Limpiar todos los timeouts
+      if (window.botonVolverTimeout) {
+        clearTimeout(window.botonVolverTimeout);
+        window.botonVolverTimeout = null;
       }
-      
-      if (intervalCheck) {
-        clearInterval(intervalCheck);
-        intervalCheck = null;
-      }
-
-      // Ocultar botón con estilos directos
-      volverBtn.classList.remove('mostrar');
-      volverBtn.style.display = 'none';
-      volverBtn.style.pointerEvents = 'none';
-      volverBtn.style.opacity = '0';
-      
-      console.log("✅ Botón ocultado correctamente");
     }
 
-    // ========================================
-    // MÉTODOS DE RESPALDO
-    // ========================================
-
-    // MÉTODO 2: Contador de frames optimizado
-    function verificarFrameCount() {
-      if (!frameCheckActive || botonMostrado || !animacionActiva) {
-        return;
-      }
+    // FUNCIÓN DE VERIFICACIÓN CONSTANTE
+    function verificarBotonConstantemente() {
+      if (botonForzado) return;
       
-      frameCount++;
-      console.log(`🎬 Frame ${frameCount}/180`);
+      intentosBoton++;
+      console.log(`🔍 Verificación ${intentosBoton}/${maxIntentos}`);
       
-      // Aproximadamente 180 frames = 3 segundos a 60fps
-      if (frameCount >= 180) {
-        console.log("🎬 Método 2 (frames): Mostrando botón después de ~180 frames");
+      if (intentosBoton >= maxIntentos) {
+        console.log("🚨 MÁXIMO DE INTENTOS ALCANZADO - FORZANDO BOTÓN");
         mostrarBotonVolver();
         return;
       }
-      
-      // Continuar verificación
-      requestAnimationFrame(verificarFrameCount);
+
+      setTimeout(verificarBotonConstantemente, 300);
     }
 
-    // MÉTODO 3: Verificación por tiempo real mejorada
-    function iniciarVerificacionTiempo() {
-      if (intervalCheck) {
-        clearInterval(intervalCheck);
-      }
+    // FUNCIÓN MÚLTIPLE DE TIMERS
+    function activarMultiplesTimers() {
+      console.log("🚀 Activando múltiples timers para garantizar aparición del botón...");
       
-      tiempoInicioFraseFinal = Date.now();
-      console.log("⏰ Método 3: Iniciando verificación por Date.now()");
-      
-      intervalCheck = setInterval(() => {
-        if (botonMostrado) {
-          clearInterval(intervalCheck);
-          intervalCheck = null;
-          return;
-        }
-        
-        const tiempoTranscurrido = Date.now() - tiempoInicioFraseFinal;
-        console.log(`⏰ Tiempo transcurrido: ${tiempoTranscurrido}ms / 3000ms`);
-        
-        if (tiempoTranscurrido >= 3000) {
-          console.log("⏰ Método 3 (Date.now): Mostrando botón después de", tiempoTranscurrido + "ms");
+      // Timer 1: 3 segundos exactos
+      setTimeout(() => {
+        console.log("⏰ Timer 1 (3000ms) - Ejecutando");
+        mostrarBotonVolver();
+      }, 3000);
+
+      // Timer 2: 3.2 segundos (respaldo)
+      setTimeout(() => {
+        if (!botonForzado) {
+          console.log("⏰ Timer 2 (3200ms) - Ejecutando respaldo");
           mostrarBotonVolver();
-          clearInterval(intervalCheck);
-          intervalCheck = null;
         }
-      }, 100); // Verificar cada 100ms
+      }, 3200);
+
+      // Timer 3: 3.5 segundos (respaldo de emergencia)
+      setTimeout(() => {
+        if (!botonForzado) {
+          console.log("⏰ Timer 3 (3500ms) - Ejecutando respaldo de emergencia");
+          mostrarBotonVolver();
+        }
+      }, 3500);
+
+      // Timer 4: 4 segundos (último recurso)
+      setTimeout(() => {
+        if (!botonForzado) {
+          console.log("🚨 Timer 4 (4000ms) - ÚLTIMO RECURSO");
+          mostrarBotonVolver();
+        }
+      }, 4000);
+
+      // Verificación constante cada 300ms
+      setTimeout(verificarBotonConstantemente, 300);
     }
 
     // ========================================
-    // FUNCIONES PRINCIPALES ACTUALIZADAS
+    // FUNCIÓN MOSTRAR VERSOS ACTUALIZADA
+    // ========================================
+    async function mostrarVersos() {
+      console.log("📝 Comenzando a mostrar versos");
+      if (index < versos.length) {
+        const verso = versos[index];
+
+        if (verso.trim() === "") {
+          index++;
+          setTimeout(mostrarVersos, 1500);
+          return;
+        }
+
+        const linea = document.createElement("span");
+        linea.className = "linea-verso";
+        linea.textContent = verso;
+        linea.style.animationDelay = '0.2s';
+
+        lineasPoema.innerHTML = '';
+        lineasPoema.appendChild(linea);
+
+        index++;
+        setTimeout(mostrarVersos, 3000);
+      } else {
+        console.log("📝 Todos los versos mostrados, mostrando frase final");
+        
+        setTimeout(() => {
+          lineasPoema.style.display = 'none';
+          fraseFinal.classList.add("visible");
+          girasolContainer.classList.add("visible");
+          firmaCreador.classList.add("visible");
+
+          crearBrillosDecorativos();
+          crearPoolParticulas();
+          configurarGirasol();
+          eventoOverlay.classList.add('activo');
+          configurarEventosInteraccion();
+          animacionActiva = true;
+          inicializarBrillos();
+          requestAnimationFrame(animarBrillos);
+
+          // ========================================
+          // 🚨 ACTIVACIÓN AGRESIVA DE MÚLTIPLES TIMERS
+          // ========================================
+          console.log("🚨 INICIANDO SISTEMA AGRESIVO DE TIMERS...");
+          
+          // Resetear variables
+          botonForzado = false;
+          intentosBoton = 0;
+          
+          // Activar sistema múltiple
+          activarMultiplesTimers();
+
+        }, 1000);
+      }
+    }
+
+    // ========================================
+    // FUNCIONES RESTANTES (SIN CAMBIOS)
     // ========================================
 
     // Configurar canvas con optimización
@@ -1537,12 +1615,7 @@
         ctx.restore();
       });
 
-      // Integrar verificación de frames aquí para máxima precisión
-      if (frameCheckActive) {
-        verificarFrameCount();
-      } else {
-        requestAnimationFrame(animarBrillos);
-      }
+      requestAnimationFrame(animarBrillos);
     }
 
     // Configurar eventos de interacción mejorados
@@ -1649,90 +1722,18 @@
       }, 800);
     });
 
-    // ========================================
-    // FUNCIÓN PRINCIPAL CON SISTEMA TRIPLE
-    // ========================================
-    async function mostrarVersos() {
-      console.log("📝 Comenzando a mostrar versos");
-      if (index < versos.length) {
-        const verso = versos[index];
-
-        if (verso.trim() === "") {
-          index++;
-          setTimeout(mostrarVersos, 1500);
-          return;
-        }
-
-        const linea = document.createElement("span");
-        linea.className = "linea-verso";
-        linea.textContent = verso;
-        linea.style.animationDelay = '0.2s';
-
-        lineasPoema.innerHTML = '';
-        lineasPoema.appendChild(linea);
-
-        index++;
-        setTimeout(mostrarVersos, 3000);
-      } else {
-        console.log("📝 Todos los versos mostrados, mostrando frase final");
-        // Mostrar frase final
-        setTimeout(() => {
-          lineasPoema.style.display = 'none';
-          fraseFinal.classList.add("visible");
-          girasolContainer.classList.add("visible");
-          firmaCreador.classList.add("visible");
-
-          crearBrillosDecorativos();
-          crearPoolParticulas();
-          configurarGirasol();
-          eventoOverlay.classList.add('activo');
-          configurarEventosInteraccion();
-          animacionActiva = true;
-          inicializarBrillos();
-          requestAnimationFrame(animarBrillos);
-
-          // ========================================
-          // 🚀 SISTEMA TRIPLE DE RESPALDO ACTIVADO
-          // ========================================
-          console.log("🚀 Activando sistema triple de respaldo para botón...");
-          
-          // Resetear variables de control
-          botonMostrado = false;
-          frameCount = 0;
-          frameCheckActive = true;
-          
-          // MÉTODO 1: setTimeout tradicional (3000ms exactos)
-          console.log("⏰ Método 1: setTimeout(3000ms) iniciado");
-          botonVolverTimeout = setTimeout(() => {
-            console.log("⏰ Método 1 (setTimeout): Mostrando botón después de 3000ms exactos");
-            mostrarBotonVolver();
-          }, 3000);
-
-          // MÉTODO 2: Contador de frames integrado con animación
-          console.log("🎬 Método 2: Contador de frames iniciado (integrado)");
-          // Se ejecuta dentro de animarBrillos() para máxima precisión
-
-          // MÉTODO 3: Verificación por tiempo real cada 100ms
-          console.log("⏰ Método 3: Verificación por Date.now() iniciada");
-          iniciarVerificacionTiempo();
-
-        }, 1000);
-      }
-    }
-
     // Función para resetear completamente y volver al inicio
     function volverAlInicio() {
       console.log("🔄 Ejecutando volverAlInicio()");
       
       // Detener todas las animaciones
       animacionActiva = false;
-      frameCheckActive = false;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       // Limpiar partículas
       poolParticulas.forEach(p => liberarParticula(p));
 
-      // Ocultar botón con sistema mejorado
+      // Ocultar botón
       ocultarBotonVolver();
 
       // Resetear elementos de la frase final
@@ -1769,101 +1770,29 @@
     }
 
     // Event listeners para el botón volver OPTIMIZADOS
-    volverBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log("🔄 Botón 'Volver a ver' clickeado");
-      volverAlInicio();
-    });
+    if (volverBtn) {
+      volverBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("🔄 Botón 'Volver a ver' clickeado");
+        volverAlInicio();
+      });
 
-    volverBtn.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log("📱 Botón 'Volver a ver' tocado (touch)");
-      volverAlInicio();
-    });
+      volverBtn.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("📱 Botón 'Volver a ver' tocado (touch)");
+        volverAlInicio();
+      });
 
-    // Prevenir eventos duplicados en mobile
-    volverBtn.addEventListener("touchend", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-    });
+      volverBtn.addEventListener("touchend", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      });
+    }
 
     // Inicializar configuración de audio al cargar la página
     configurarAudio();
-
   </script>
-
-  <!-- ========================================
-       CSS MEJORADO PARA EL BOTÓN
-       ======================================== -->
-  <style>
-    /* Estilos base para el botón con máxima compatibilidad */
-    #volverBtn {
-      display: none !important;
-      pointer-events: none !important;
-      opacity: 0;
-      transform: translateY(20px) scale(0.9);
-      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 1000;
-      /* Mantener estilos existentes del botón aquí */
-    }
-
-    /* Estado visible del botón */
-    #volverBtn.mostrar {
-      display: block !important;
-      pointer-events: auto !important;
-      opacity: 1 !important;
-      transform: translateY(0) scale(1) !important;
-    }
-
-    /* Mejoras específicas para dispositivos móviles */
-    @media (max-width: 768px) {
-      #volverBtn {
-        min-height: 44px !important; /* Área táctil mínima iOS */
-        min-width: 44px !important;
-        touch-action: manipulation;
-        -webkit-tap-highlight-color: transparent;
-      }
-      
-      #volverBtn.mostrar {
-        animation: apareceBotonMovil 0.8s ease-out forwards;
-      }
-    }
-
-    /* Animación específica para móviles */
-    @keyframes apareceBotonMovil {
-      0% {
-        opacity: 0;
-        transform: translateY(30px) scale(0.8);
-      }
-      60% {
-        transform: translateY(-5px) scale(1.05);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    /* Animación para escritorio */
-    @media (min-width: 769px) {
-      #volverBtn.mostrar {
-        animation: apareceBotonEscritorio 0.6s ease-out forwards;
-      }
-    }
-
-    @keyframes apareceBotonEscritorio {
-      0% {
-        opacity: 0;
-        transform: translateY(20px) scale(0.9);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-  </style>
-
 </body>
 </html>
