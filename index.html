@@ -1246,13 +1246,13 @@
       "sin saber que ya eras primavera.",
       "",
       "Vinieron pruebas, caminos cerrados,",
-      "y tú seguiste avanzando, aún en caminos quebrados.",
+      "y tú seguiste avanzando, aún en senderos quebrados.",
       "Decías \"soy fuerte\" en tu caminar,",
       "como quien lucha sin aparentar.",
       "",
       "No es fácil subir a la cima cuando hay peso,",
       "pero tú sigue avanzando, sin dar retroceso.",
-      "Porque en cada paso, Dios va contigo con su inmenso amor,",
+      "Porque en cada paso, Dios va contigo con su gran amor,",
       "y es Él quien siempre guía tu camino y tu gran corazón.",
       "",
       "Yo siempre estoy presente, dispuesto a ayudarte,",
@@ -1673,6 +1673,11 @@
     function volverAlInicio() {
       console.log("🔄 Ejecutando volverAlInicio()");
       
+    // Detener y resetear el audio inmediatamente
+    audioFondo.pause();
+    audioFondo.currentTime = 0;
+    audioIniciado = false; // Resetear la bandera para permitir nueva reproducción
+
       // Detener todas las animaciones
       animacionActiva = false;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -1712,6 +1717,13 @@
         setTimeout(() => {
           seccion2020.style.opacity = '1';
           seccion2020.style.transform = 'scale(1)';
+
+            // Reiniciar la música después de 3 segundos
+      setTimeout(() => {
+        console.log("🎵 Reiniciando música después de 3 segundos...");
+        iniciarAudioConFadeIn();
+      }, 3000);
+      
         }, 100);
       }, 300);
     }
