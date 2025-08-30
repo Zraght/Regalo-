@@ -559,8 +559,10 @@
 
     /* Estado 1: Estático (después de la estrella fugaz) */
     .girasol-emoji.estatico {
+      animation: none;
+  filter: brightness(1);
+}
       /* Sin animaciones especiales, solo el filtro base */
-    }
 
     /* Estado 2: Brillo intermitente */
     .girasol-emoji.brillo-intermitente {
@@ -582,58 +584,60 @@
       }
     }
 
-    /* Estado 3: Movimiento con brillo constante */
-    .girasol-emoji.movimiento-constante {
-      filter: 
-        drop-shadow(0 0 20px rgba(255, 224, 102, 0.8))
-        brightness(1.2);
-      animation: balanceoConstante 3s ease-in-out infinite;
-    }
+   /* Estado 3: Movimiento constante - CORREGIDO */
+.girasol-emoji.movimiento-constante {
+  filter: 
+    drop-shadow(0 0 20px rgba(255, 224, 102, 0.8))
+    brightness(1.2);
+  animation: balanceoConstante 3s ease-in-out infinite;
+}
 
-    @keyframes balanceoConstante {
-      0%, 100% {
-        transform: translateX(-50%) rotate(-8deg) scale(1.02);
-      }
-      50% {
-        transform: translateX(-50%) rotate(8deg) scale(1.02);
-      }
-    }
+@keyframes balanceoConstante {
+  0%, 100% {
+    transform: translateX(-50%) scale(1.02);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.05);
+  }
+}
 
-    /* Estado 4: Agrandado con brillo intenso */
-    .girasol-emoji.agrandado-intenso {
-      filter: 
-        drop-shadow(0 0 30px rgba(255, 224, 102, 1))
-        drop-shadow(0 0 50px rgba(255, 255, 255, 0.8))
-        brightness(1.5);
-      animation: balanceoIntensivo 2.5s ease-in-out infinite;
-      transform: translateX(-50%) scale(1.25);
-    }
+/* Estado 4: Agrandado intenso */
+.girasol-emoji.agrandado-intenso {
+  filter: 
+    drop-shadow(0 0 30px rgba(255, 224, 102, 1))
+    drop-shadow(0 0 50px rgba(255, 255, 255, 0.8))
+    brightness(1.5);
+  animation: balanceoIntensivo 2.5s ease-in-out infinite;
+  transform: translateX(-50%) scale(1.25);
+}
 
-    @keyframes balanceoIntensivo {
-      0%, 100% {
-        transform: translateX(-50%) rotate(-12deg) scale(1.25);
-      }
-      50% {
-        transform: translateX(-50%) rotate(12deg) scale(1.3);
-      }
-    }
+@keyframes balanceoIntensivo {
+  0%, 100% {
+    transform: translateX(-50%) scale(1.25);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.3);
+  }
+}
 
-    /* Efectos hover para todos los estados */
-    .girasol-emoji:hover {
-      transform: translateX(-50%) scale(1.1);
-    }
+/* Efectos hover corregidos */
+.girasol-emoji:hover {
+  transform: translateX(-50%) scale(1.1);
+}
 
-    .girasol-emoji.movimiento-constante:hover {
-      animation-duration: 2s;
-    }
+.girasol-emoji.movimiento-constante:hover {
+  animation-duration: 2s;
+  transform: translateX(-50%) scale(1.1);
+}
 
-    .girasol-emoji.agrandado-intenso:hover {
-      animation-duration: 2s;
-      filter: 
-        drop-shadow(0 0 40px rgba(255, 224, 102, 1))
-        drop-shadow(0 0 60px rgba(255, 255, 255, 0.9))
-        brightness(1.7);
-    }
+.girasol-emoji.agrandado-intenso:hover {
+  animation-duration: 2s;
+  filter: 
+    drop-shadow(0 0 40px rgba(255, 224, 102, 1))
+    drop-shadow(0 0 60px rgba(255, 255, 255, 0.9))
+    brightness(1.7);
+  transform: translateX(-50%) scale(1.35);
+}
 
     .girasol-flor {
       width: 70px;
