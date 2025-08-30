@@ -470,7 +470,60 @@
       text-shadow: 0 0 20px rgba(255, 248, 194, 0.6);
     }
 
-    /* Girasol estilo emoji 2D con brillo pulsante MÁS NOTORIO */
+    /* =========================================
+       🌟 ESTRELLA FUGAZ - NUEVA IMPLEMENTACIÓN
+    ========================================= */
+    .estrella-fugaz {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: radial-gradient(circle, #ffffff, #ffdd44, rgba(255, 255, 255, 0));
+      border-radius: 50%;
+      z-index: 5;
+      opacity: 0;
+      filter: drop-shadow(0 0 8px #ffdd44);
+      will-change: transform, opacity;
+    }
+
+    /* Cola de la estrella */
+    .estrella-fugaz::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -20px;
+      width: 20px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255, 221, 68, 0.8), rgba(255, 255, 255, 1));
+      border-radius: 1px;
+      transform: translateY(-50%);
+      filter: blur(0.5px);
+    }
+
+    /* Animación de la estrella fugaz */
+    @keyframes estrellaFugaz {
+      0% {
+        opacity: 0;
+        transform: translateX(-100px) translateY(-100px) scale(0.5);
+      }
+      10% {
+        opacity: 1;
+        transform: translateX(-80px) translateY(-80px) scale(1);
+      }
+      90% {
+        opacity: 1;
+        transform: translateX(40px) translateY(40px) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(60px) translateY(60px) scale(0.3);
+      }
+    }
+
+    /* =========================================
+       🌻 GIRASOL MEJORADO - SISTEMA DE ESTADOS
+    ========================================= */
+
+    /* Girasol estilo emoji 2D con sistema de estados mejorado */
     .girasol-container {
       position: absolute;
       top: 20%;
@@ -491,20 +544,6 @@
 
     .girasol-container.visible {
       opacity: 1;
-      animation: llamarAtencion 4s ease-in-out infinite;
-    }
-
-    /* Animación para llamar la atención */
-    @keyframes llamarAtencion {
-      0%, 70%, 100% {
-        transform: translateX(-50%) scale(1);
-      }
-      10%, 20% {
-        transform: translateX(-50%) scale(1.15);
-      }
-      15% {
-        transform: translateX(-50%) scale(1.2);
-      }
     }
 
     .girasol-emoji {
@@ -512,15 +551,88 @@
       flex-direction: column;
       align-items: center;
       cursor: pointer;
-      transition: transform 0.3s ease-out;
-      will-change: transform;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform, filter;
       position: relative;
       filter: drop-shadow(0 0 15px rgba(255, 224, 102, 0.6));
     }
 
+    /* Estado 1: Estático (después de la estrella fugaz) */
+    .girasol-emoji.estatico {
+      /* Sin animaciones especiales, solo el filtro base */
+    }
+
+    /* Estado 2: Brillo intermitente */
+    .girasol-emoji.brillo-intermitente {
+      animation: brilloIntermitente 2.5s ease-in-out infinite;
+    }
+
+    @keyframes brilloIntermitente {
+      0%, 70%, 100% {
+        filter: 
+          drop-shadow(0 0 15px rgba(255, 224, 102, 0.6))
+          brightness(1);
+      }
+      15%, 25% {
+        filter: 
+          drop-shadow(0 0 25px rgba(255, 224, 102, 0.9))
+          drop-shadow(0 0 40px rgba(255, 255, 255, 0.6))
+          brightness(1.3);
+        transform: translateX(-50%) scale(1.05);
+      }
+    }
+
+    /* Estado 3: Movimiento con brillo constante */
+    .girasol-emoji.movimiento-constante {
+      filter: 
+        drop-shadow(0 0 20px rgba(255, 224, 102, 0.8))
+        brightness(1.2);
+      animation: balanceoConstante 3s ease-in-out infinite;
+    }
+
+    @keyframes balanceoConstante {
+      0%, 100% {
+        transform: translateX(-50%) rotate(-8deg) scale(1.02);
+      }
+      50% {
+        transform: translateX(-50%) rotate(8deg) scale(1.02);
+      }
+    }
+
+    /* Estado 4: Agrandado con brillo intenso */
+    .girasol-emoji.agrandado-intenso {
+      filter: 
+        drop-shadow(0 0 30px rgba(255, 224, 102, 1))
+        drop-shadow(0 0 50px rgba(255, 255, 255, 0.8))
+        brightness(1.5);
+      animation: balanceoIntensivo 2.5s ease-in-out infinite;
+      transform: translateX(-50%) scale(1.25);
+    }
+
+    @keyframes balanceoIntensivo {
+      0%, 100% {
+        transform: translateX(-50%) rotate(-12deg) scale(1.25);
+      }
+      50% {
+        transform: translateX(-50%) rotate(12deg) scale(1.3);
+      }
+    }
+
+    /* Efectos hover para todos los estados */
     .girasol-emoji:hover {
-      transform: scale(1.2);
-      filter: drop-shadow(0 0 25px rgba(255, 224, 102, 0.8));
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    .girasol-emoji.movimiento-constante:hover {
+      animation-duration: 2s;
+    }
+
+    .girasol-emoji.agrandado-intenso:hover {
+      animation-duration: 2s;
+      filter: 
+        drop-shadow(0 0 40px rgba(255, 224, 102, 1))
+        drop-shadow(0 0 60px rgba(255, 255, 255, 0.9))
+        brightness(1.7);
     }
 
     .girasol-flor {
@@ -582,43 +694,6 @@
       left: -10px;
       transform: rotate(-30deg);
       box-shadow: 0 0 3px rgba(76, 175, 80, 0.4);
-    }
-
-    /* Brillo pulsante del girasol MÁS INTENSO */
-    .girasol-brillo {
-      position: absolute;
-      top: -12px;
-      right: -12px;
-      width: 24px;
-      height: 24px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(255, 255, 0, 0.7), rgba(255, 224, 102, 0.4), transparent);
-      border-radius: 50%;
-      z-index: 5;
-      animation: brilloPulsanteIntensivo 2s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    @keyframes brilloPulsanteIntensivo {
-      0%, 100% {
-        opacity: 0.8;
-        transform: scale(1);
-        box-shadow: 0 0 10px rgba(255, 255, 0, 0.6);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.4);
-        box-shadow: 0 0 20px rgba(255, 255, 0, 0.9);
-      }
-    }
-
-    .girasol-emoji.balanceando {
-      animation: balanceoSuave 2s ease-in-out;
-    }
-
-    @keyframes balanceoSuave {
-      0%, 100% { transform: rotate(0deg) scale(1); }
-      25% { transform: rotate(-15deg) scale(1.1); }
-      75% { transform: rotate(15deg) scale(1.1); }
     }
 
     /* Brillos decorativos de fondo */
@@ -802,6 +877,16 @@
         bottom: 25px;
         right: 25px;
       }
+
+      .girasol-flor {
+        width: 80px;
+        height: 80px;
+      }
+
+      .estrella-fugaz {
+        width: 8px;
+        height: 8px;
+      }
     }
 
     /* DESKTOP ESTÁNDAR - 1024px a 1199px */
@@ -830,6 +915,11 @@
         padding: 9px 13px;
         bottom: 22px;
         right: 22px;
+      }
+
+      .girasol-flor {
+        width: 75px;
+        height: 75px;
       }
     }
 
@@ -867,13 +957,6 @@
       .girasol-flor {
         width: 65px;
         height: 65px;
-      }
-
-      .girasol-brillo {
-        width: 22px;
-        height: 22px;
-        top: -10px;
-        right: -10px;
       }
 
       .firma-creador {
@@ -959,13 +1042,6 @@
         height: 60px;
       }
 
-      .girasol-brillo {
-        width: 20px;
-        height: 20px;
-        top: -8px;
-        right: -8px;
-      }
-
       .girasol-container {
         top: 15%;
       }
@@ -976,6 +1052,11 @@
         bottom: 15px;
         right: 15px;
         border-radius: 10px;
+      }
+
+      .estrella-fugaz {
+        width: 5px;
+        height: 5px;
       }
     }
 
@@ -1028,13 +1109,6 @@
       .girasol-flor {
         width: 55px;
         height: 55px;
-      }
-
-      .girasol-brillo {
-        width: 18px;
-        height: 18px;
-        top: -6px;
-        right: -6px;
       }
 
       .firma-creador {
@@ -1097,19 +1171,17 @@
         height: 50px;
       }
 
-      .girasol-brillo {
-        width: 16px;
-        height: 16px;
-        top: -5px;
-        right: -5px;
-      }
-
       .firma-creador {
         font-size: 0.75rem;
         padding: 4px 8px;
         bottom: 10px;
         right: 10px;
         border-radius: 6px;
+      }
+
+      .estrella-fugaz {
+        width: 4px;
+        height: 4px;
       }
     }
   </style>
@@ -1157,9 +1229,9 @@
         Tu navegador no soporta el elemento video.
       </video>
       
-      <!-- Girasol interactivo estilo emoji con brillo -->
+      <!-- Girasol interactivo mejorado con sistema de estados -->
       <div class="girasol-container" id="girasolContainer">
-        <div class="girasol-emoji" id="girasolEmoji">
+        <div class="girasol-emoji estatico" id="girasolEmoji">
           <div class="girasol-flor">
             <div class="petalo-pequeno"></div>
             <div class="petalo-pequeno"></div>
@@ -1174,8 +1246,6 @@
           <div class="girasol-tallo">
             <div class="girasol-hoja"></div>
           </div>
-          <!-- Brillo pulsante -->
-          <div class="girasol-brillo"></div>
         </div>
       </div>
 
@@ -1228,7 +1298,16 @@
     const firmaCreador = document.querySelector(".firma-creador");
     const audioFondo = document.getElementById("audioFondo");
 
-    // Variables de control
+    // ===================================
+    // 🌟 SISTEMA DE ESTADOS DEL GIRASOL
+    // ===================================
+    let estadoGirasol = {
+      fase: 0, // 0: oculto, 1: estrella fugaz, 2: estático, 3: brillo intermitente, 4: movimiento constante, 5: agrandado intenso
+      clickCount: 0,
+      estrellaLanzada: false
+    };
+
+    // Variables de control existentes
     let isPressed = false;
     let pressTimeout = null;
     const poolParticulas = [];
@@ -1263,6 +1342,93 @@
       "mientras yo te marqué una huella... con mi fiel presencia."
     ];
 
+    // ===================================
+    // 🌟 FUNCIONES DE LA ESTRELLA FUGAZ
+    // ===================================
+    function crearEstrellaFugaz() {
+      console.log("🌟 Creando estrella fugaz...");
+      
+      const estrella = document.createElement('div');
+      estrella.className = 'estrella-fugaz';
+      
+      // Posicionar la estrella en la esquina superior izquierda del girasol
+      const girasolRect = girasolContainer.getBoundingClientRect();
+      const startX = girasolRect.left - 80;
+      const startY = girasolRect.top - 80;
+      
+      estrella.style.left = startX + 'px';
+      estrella.style.top = startY + 'px';
+      
+      // Agregar al DOM
+      document.body.appendChild(estrella);
+      
+      // Iniciar animación inmediatamente
+      setTimeout(() => {
+        estrella.style.animation = 'estrellaFugaz 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards';
+      }, 100);
+      
+      // Remover la estrella y activar siguiente fase
+      setTimeout(() => {
+        estrella.remove();
+        activarBrilloIntermitente();
+        console.log("🌟 Estrella fugaz completada, activando brillo intermitente");
+      }, 2000);
+    }
+
+    // ===================================
+    // 🌻 FUNCIONES DE CONTROL DEL GIRASOL
+    // ===================================
+    function activarBrilloIntermitente() {
+      estadoGirasol.fase = 3;
+      girasol.className = 'girasol-emoji brillo-intermitente';
+      console.log("🌻 Estado: Brillo intermitente activado");
+    }
+
+    function activarMovimientoConstante() {
+      estadoGirasol.fase = 4;
+      girasol.className = 'girasol-emoji movimiento-constante';
+      console.log("🌻 Estado: Movimiento constante activado");
+    }
+
+    function activarAgrandadoIntenso() {
+      estadoGirasol.fase = 5;
+      girasol.className = 'girasol-emoji agrandado-intenso';
+      console.log("🌻 Estado: Agrandado intenso activado");
+    }
+
+    function manejarClickGirasol() {
+      console.log(`🌻 Click en girasol. Estado actual: ${estadoGirasol.fase}, Clicks: ${estadoGirasol.clickCount}`);
+      
+      // Crear brillos en la posición del girasol
+      const rect = girasol.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      switch(estadoGirasol.fase) {
+        case 3: // Brillo intermitente -> Movimiento constante
+          estadoGirasol.clickCount = 1;
+          crearBrillosSutiles(centerX, centerY, 15);
+          activarMovimientoConstante();
+          break;
+          
+        case 4: // Movimiento constante -> Agrandado intenso
+          estadoGirasol.clickCount = 2;
+          crearBrillosSutiles(centerX, centerY, 20);
+          activarAgrandadoIntenso();
+          break;
+          
+        case 5: // Agrandado intenso -> Efecto extra
+          estadoGirasol.clickCount++;
+          crearBrillosSutiles(centerX, centerY, 25);
+          // Añadir un pulso extra de brillo
+          girasol.style.animation = 'balanceoIntensivo 1.5s ease-in-out infinite';
+          break;
+          
+        default:
+          console.log("🌻 Click ignorado - estado no válido para interacción");
+      }
+    }
+
     // FUNCIÓN OPTIMIZADA PARA MOSTRAR EL BOTÓN
     function mostrarBotonVolver() {
       console.log("🎯 Mostrando botón volver...");
@@ -1272,7 +1438,6 @@
         return;
       }
 
-      // Aplicar la clase mostrar para activar la transición
       volverBtn.classList.add('mostrar');
       console.log("✅ Botón volver mostrado exitosamente");
     }
@@ -1318,19 +1483,27 @@
           girasolContainer.classList.add("visible");
           firmaCreador.classList.add("visible");
 
+          // Iniciar la secuencia de la estrella fugaz después de 2 segundos
+          setTimeout(() => {
+            if (!estadoGirasol.estrellaLanzada) {
+              estadoGirasol.estrellaLanzada = true;
+              crearEstrellaFugaz();
+            }
+          }, 2000);
+
           crearBrillosDecorativos();
           crearPoolParticulas();
-          configurarGirasol();
+          configurarEventosGirasol();
           eventoOverlay.classList.add('activo');
           configurarEventosInteraccion();
           animacionActiva = true;
           inicializarBrillos();
           requestAnimationFrame(animarBrillos);
 
-          // MOSTRAR BOTÓN DESPUÉS DE 3 SEGUNDOS
+          // MOSTRAR BOTÓN DESPUÉS DE 6 SEGUNDOS (para que vean la secuencia completa)
           setTimeout(() => {
             mostrarBotonVolver();
-          }, 3000);
+          }, 6000);
 
         }, 1000);
       }
@@ -1627,31 +1800,33 @@
       });
     }
 
-    // Configurar eventos del girasol
-    function configurarGirasol() {
-      girasol.addEventListener('click', () => {
-        girasol.classList.add('balanceando');
-        const rect = girasol.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        crearBrillosSutiles(centerX, centerY, 12);
-        
-        setTimeout(() => {
-          girasol.classList.remove('balanceando');
-        }, 2000);
+    // ===================================
+    // 🌻 CONFIGURAR EVENTOS DEL GIRASOL
+    // ===================================
+    function configurarEventosGirasol() {
+      // Prevenir la propagación de eventos en el girasol para evitar conflictos
+      girasol.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        manejarClickGirasol();
       });
 
       girasol.addEventListener('touchstart', (e) => {
         e.preventDefault();
-        girasol.classList.add('balanceando');
-        const rect = girasol.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        crearBrillosSutiles(centerX, centerY, 12);
-        
-        setTimeout(() => {
-          girasol.classList.remove('balanceando');
-        }, 2000);
+        e.stopPropagation();
+        manejarClickGirasol();
+      });
+
+      // Prevenir doble tap zoom en móviles
+      girasol.addEventListener('touchend', (e) => {
+        e.preventDefault();
+      });
+
+      // Agregar eventos de hover para mejorar la experiencia
+      girasol.addEventListener('mouseenter', () => {
+        if (estadoGirasol.fase >= 3) {
+          girasol.style.cursor = 'pointer';
+        }
       });
     }
 
@@ -1671,14 +1846,35 @@
       }, 800);
     });
 
+    // ===================================
+    // 🔄 FUNCIÓN RESET MEJORADA
+    // ===================================
+    function resetearEstadoGirasol() {
+      estadoGirasol = {
+        fase: 0,
+        clickCount: 0,
+        estrellaLanzada: false
+      };
+      
+      girasol.className = 'girasol-emoji estatico';
+      girasol.style.animation = '';
+      
+      // Remover cualquier estrella fugaz residual
+      document.querySelectorAll('.estrella-fugaz').forEach(estrella => {
+        estrella.remove();
+      });
+      
+      console.log("🔄 Estado del girasol reseteado completamente");
+    }
+
     // Función para resetear completamente y volver al inicio
     function volverAlInicio() {
       console.log("🔄 Ejecutando volverAlInicio()");
       
-    // Detener y resetear el audio inmediatamente
-    audioFondo.pause();
-    audioFondo.currentTime = 0;
-    audioIniciado = false; // Resetear la bandera para permitir nueva reproducción
+      // Detener y resetear el audio inmediatamente
+      audioFondo.pause();
+      audioFondo.currentTime = 0;
+      audioIniciado = false;
 
       // Detener todas las animaciones
       animacionActiva = false;
@@ -1702,6 +1898,9 @@
       lineasPoema.innerHTML = "";
       index = 0;
 
+      // Resetear estado del girasol
+      resetearEstadoGirasol();
+
       // Detener eventos
       isPressed = false;
       if (pressTimeout) {
@@ -1720,19 +1919,18 @@
           seccion2020.style.opacity = '1';
           seccion2020.style.transform = 'scale(1)';
 
-            // Reiniciar la música después de 3 segundos
-      setTimeout(() => {
-        console.log("🎵 Reiniciando música después de 3 segundos...");
-        iniciarAudioConFadeIn();
-      }, 3000);
-      
+          // Reiniciar la música después de 3 segundos
+          setTimeout(() => {
+            console.log("🎵 Reiniciando música después de 3 segundos...");
+            iniciarAudioConFadeIn();
+          }, 3000);
+          
         }, 100);
       }, 300);
     }
 
     // Event listeners para el botón volver - CORREGIDOS Y SIMPLIFICADOS
     if (volverBtn) {
-      // Agregar eventos de forma simple y directa
       volverBtn.addEventListener("click", function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -1747,12 +1945,10 @@
         volverAlInicio();
       });
 
-      // Agregar event listener para debug
       volverBtn.addEventListener("mousedown", function(e) {
         console.log("🖱️ Mouse down en botón volver");
       });
 
-      // Para asegurar que funciona, agregar también doble click
       volverBtn.addEventListener("dblclick", function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -1766,7 +1962,7 @@
     // Inicializar configuración de audio al cargar la página
     configurarAudio();
 
-    // Agregar debug para verificar que el botón está en el DOM
+    // Debug para verificar que el botón está en el DOM
     console.log("🔍 Verificando botón volver:", volverBtn);
     console.log("🔍 Elemento existe:", !!volverBtn);
     if (volverBtn) {
@@ -1774,6 +1970,13 @@
       console.log("🔍 Estilos computados z-index:", getComputedStyle(volverBtn).zIndex);
       console.log("🔍 Pointer events:", getComputedStyle(volverBtn).pointerEvents);
     }
+
+    // ===================================
+    // 🚀 INICIALIZACIÓN FINAL
+    // ===================================
+    console.log("🌟 Sistema de girasol interactivo inicializado");
+    console.log("📱 Optimizado para todos los dispositivos");
+    console.log("🌻 Estados disponibles: estático -> brillo intermitente -> movimiento -> agrandado");
   </script>
 </body>
 </html>
