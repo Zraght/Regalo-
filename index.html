@@ -521,7 +521,7 @@
 }
 
     /* =========================================
-       🌻 GIRASOL MEJORADO - SISTEMA DE ESTADOS
+       🌻 GIRASOL MEJORADO - SISTEMA DE ESTADOS SIMPLIFICADO
     ========================================= */
 
     /* Girasol estilo emoji 2D con sistema de estados mejorado */
@@ -559,24 +559,20 @@
     }
 
     /* =========================================
-   🌻 GIRASOL CORREGIDO - ELIMINAR DOBLE TRANSFORM
-========================================= */
-
-/* =========================================
-   🌻 GIRASOL - SECUENCIA CORRECTA
+   🌻 GIRASOL CORREGIDO - UN SOLO CLICK
 ========================================= */
 
 /* Estado 1: Estático (después de estrella fugaz) */
 .girasol-emoji.estatico {
   animation: none;
   filter: drop-shadow(0 0 15px rgba(255, 224, 102, 0.6)) brightness(1);
-  transform: none; /* Sin transformaciones */
+  transform: none;
 }
 
 /* Estado 2: Brillo intermitente - COMPLETAMENTE ESTÁTICO */
 .girasol-emoji.brillo-intermitente {
   animation: brilloIntermitente 2.5s ease-in-out infinite;
-  transform: none; /* SIN MOVIMIENTO - Solo cambio de brillo */
+  transform: none;
 }
 
 @keyframes brilloIntermitente {
@@ -584,46 +580,26 @@
     filter: 
       drop-shadow(0 0 15px rgba(255, 224, 102, 0.6))
       brightness(1);
-    /* SIN TRANSFORM - Completamente estático */
   }
   15%, 25% {
     filter: 
       drop-shadow(0 0 25px rgba(255, 224, 102, 0.9))
       drop-shadow(0 0 40px rgba(255, 255, 255, 0.6))
       brightness(1.3);
-    /* SIN TRANSFORM - Solo cambio de brillo */
   }
 }
 
-/* Estado 3: PRIMER CLICK - Movimiento + brillo constante */
-.girasol-emoji.movimiento-constante {
-  filter: 
-    drop-shadow(0 0 20px rgba(255, 224, 102, 0.8))
-    brightness(1.2);
-  animation: balanceoConstante 3s ease-in-out infinite;
-  transform: none; /* Base sin transform */
-}
-
-@keyframes balanceoConstante {
-  0%, 100% {
-    transform: rotate(-5deg) scale(1.02);
-  }
-  50% {
-    transform: rotate(5deg) scale(1.02);
-  }
-}
-
-/* Estado 4: SEGUNDO CLICK - Agrandado + brillo intenso */
-.girasol-emoji.agrandado-intenso {
+/* Estado 3: PRIMER Y ÚNICO CLICK - Movimiento, agrandado y brillo intenso TODO EN UNO */
+.girasol-emoji.completo-activado {
   filter: 
     drop-shadow(0 0 30px rgba(255, 224, 102, 1))
     drop-shadow(0 0 50px rgba(255, 255, 255, 0.8))
     brightness(1.5);
-  animation: balanceoIntensivo 2.5s ease-in-out infinite;
-  transform: scale(1.25); /* Base agrandada */
+  animation: balanceoCompleto 2.5s ease-in-out infinite;
+  transform: scale(1.25);
 }
 
-@keyframes balanceoIntensivo {
+@keyframes balanceoCompleto {
   0%, 100% {
     transform: rotate(-3deg) scale(1.25);
   }
@@ -632,29 +608,16 @@
   }
 }
 
-/* Hover solo para estados interactivos */
-.girasol-emoji:hover {
-  transform: scale(1.1) !important;
-}
-*/
-
-/* MANTENER solo estas reglas específicas por estado */
+/* Hover para estados interactivos */
 .girasol-emoji.brillo-intermitente:hover {
   cursor: pointer;
   transform: scale(1.05);
   transition: transform 0.2s ease;
 }
 
-.girasol-emoji.movimiento-constante:hover {
+.girasol-emoji.completo-activado:hover {
   cursor: pointer;
-  transform: scale(1.05);
-  transition: transform 0.2s ease;
-  animation-duration: 2s;
-}
-
-.girasol-emoji.agrandado-intenso:hover {
-  cursor: pointer;
-  transform: scale(1.35); /* Más grande que el base de 1.25 */
+  transform: scale(1.35);
   transition: transform 0.2s ease;
   animation-duration: 2s;
   filter: 
@@ -666,19 +629,6 @@
 /* Estado estático NO es interactivo */
 .girasol-emoji.estatico:hover {
   cursor: default;
-
-}
-
-.girasol-emoji.movimiento-constante:hover {
-  animation-duration: 2s;
-}
-
-.girasol-emoji.agrandado-intenso:hover {
-  animation-duration: 2s;
-  filter: 
-    drop-shadow(0 0 40px rgba(255, 224, 102, 1))
-    drop-shadow(0 0 60px rgba(255, 255, 255, 0.9))
-    brightness(1.7);
 }
 
     .girasol-flor {
@@ -893,21 +843,21 @@
     }
 
     /* ============================================
-       RESPONSIVE DESIGN - TAMAÑOS OPTIMIZADOS
+       RESPONSIVE DESIGN - TAMAÑOS OPTIMIZADOS MEJORADOS
     ============================================ */
 
     /* DESKTOP - 1200px y más */
     @media screen and (min-width: 1200px) {
       #lineas-poema {
-        font-size: 3.2rem;
+        font-size: 3.6rem; /* Aumentado de 3.2rem */
       }
 
       .texto-final {
-        font-size: 2.8rem;
+        font-size: 3.2rem; /* Aumentado de 2.8rem */
       }
 
       .felicitacion {
-        font-size: 2rem;
+        font-size: 2.2rem; /* Aumentado de 2rem */
       }
 
       #volver {
@@ -938,15 +888,15 @@
     /* DESKTOP ESTÁNDAR - 1024px a 1199px */
     @media screen and (max-width: 1199px) and (min-width: 1024px) {
       #lineas-poema {
-        font-size: 2.8rem;
+        font-size: 3.2rem; /* Aumentado de 2.8rem */
       }
 
       .texto-final {
-        font-size: 2.4rem;
+        font-size: 2.8rem; /* Aumentado de 2.4rem */
       }
 
       .felicitacion {
-        font-size: 1.8rem;
+        font-size: 2rem; /* Aumentado de 1.8rem */
       }
 
       #volver {
@@ -985,15 +935,15 @@
       }
 
       #lineas-poema {
-        font-size: 2.4rem;
+        font-size: 2.8rem; /* Aumentado de 2.4rem */
       }
 
       .texto-final {
-        font-size: 2.1rem;
+        font-size: 2.5rem; /* Aumentado de 2.1rem */
       }
 
       .felicitacion {
-        font-size: 1.6rem;
+        font-size: 1.8rem; /* Aumentado de 1.6rem */
       }
 
       .frase-final {
@@ -1051,16 +1001,16 @@
       }
 
       #lineas-poema {
-        font-size: 2.2rem;
+        font-size: 2.6rem; /* Aumentado de 2.2rem */
       }
 
       .texto-final {
-        font-size: 1.9rem;
+        font-size: 2.3rem; /* Aumentado de 1.9rem */
         padding: 0 1rem;
       }
 
       .felicitacion {
-        font-size: 1.4rem;
+        font-size: 1.6rem; /* Aumentado de 1.4rem */
       }
 
       .frase-final {
@@ -1128,15 +1078,15 @@
       }
 
       #lineas-poema {
-        font-size: 2rem;
+        font-size: 2.4rem; /* Aumentado de 2rem */
       }
 
       .texto-final {
-        font-size: 1.7rem;
+        font-size: 2.1rem; /* Aumentado de 1.7rem */
       }
 
       .felicitacion {
-        font-size: 1.3rem;
+        font-size: 1.5rem; /* Aumentado de 1.3rem */
       }
 
       #boton2025 {
@@ -1188,15 +1138,15 @@
       }
 
       #lineas-poema {
-        font-size: 1.8rem;
+        font-size: 2.2rem; /* Aumentado de 1.8rem */
       }
 
       .texto-final {
-        font-size: 1.5rem;
+        font-size: 1.9rem; /* Aumentado de 1.5rem */
       }
 
       .felicitacion {
-        font-size: 1.2rem;
+        font-size: 1.4rem; /* Aumentado de 1.2rem */
       }
 
       #boton2025 {
@@ -1345,12 +1295,13 @@
     const audioFondo = document.getElementById("audioFondo");
 
     // ===================================
-    // 🌟 SISTEMA DE ESTADOS DEL GIRASOL
+    // 🌟 SISTEMA DE ESTADOS DEL GIRASOL SIMPLIFICADO
     // ===================================
     let estadoGirasol = {
-      fase: 0, // 0: oculto, 1: estrella fugaz, 2: estático, 3: brillo intermitente, 4: movimiento constante, 5: agrandado intenso
+      fase: 0, // 0: oculto, 1: estrella fugaz, 2: estático, 3: brillo intermitente, 4: completo activado
       clickCount: 0,
-      estrellaLanzada: false
+      estrellaLanzada: false,
+      yaTocado: false // Nuevo: controla si ya se hizo el único click permitido
     };
 
     // Variables de control existentes
@@ -1428,56 +1379,36 @@
     }
 
     // ===================================
-    // 🌻 FUNCIONES DE CONTROL DEL GIRASOL
+    // 🌻 FUNCIONES DE CONTROL DEL GIRASOL SIMPLIFICADAS
     // ===================================
     function activarBrilloIntermitente() {
       estadoGirasol.fase = 3;
       girasol.className = 'girasol-emoji brillo-intermitente';
-      console.log("🌻 Estado: Brillo intermitente activado");
+      console.log("🌻 Estado: Brillo intermitente activado - Listo para UN SOLO click");
     }
 
-    function activarMovimientoConstante() {
+    function activarCompletoActivado() {
       estadoGirasol.fase = 4;
-      girasol.className = 'girasol-emoji movimiento-constante';
-      console.log("🌻 Estado: Movimiento constante activado");
-    }
-
-    function activarAgrandadoIntenso() {
-      estadoGirasol.fase = 5;
-      girasol.className = 'girasol-emoji agrandado-intenso';
-      console.log("🌻 Estado: Agrandado intenso activado");
+      estadoGirasol.yaTocado = true;
+      girasol.className = 'girasol-emoji completo-activado';
+      console.log("🌻 Estado: Completo activado - Movimiento, agrandado y brillo intenso TODO EN UNO");
     }
 
     function manejarClickGirasol() {
-      console.log(`🌻 Click en girasol. Estado actual: ${estadoGirasol.fase}, Clicks: ${estadoGirasol.clickCount}`);
+      console.log(`🌻 Click en girasol. Estado actual: ${estadoGirasol.fase}, Ya tocado: ${estadoGirasol.yaTocado}`);
       
-      // Crear brillos en la posición del girasol
-      const rect = girasol.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      
-      switch(estadoGirasol.fase) {
-        case 3: // Brillo intermitente -> Movimiento constante
-          estadoGirasol.clickCount = 1;
-          crearBrillosSutiles(centerX, centerY, 15);
-          activarMovimientoConstante();
-          break;
-          
-        case 4: // Movimiento constante -> Agrandado intenso
-          estadoGirasol.clickCount = 2;
-          crearBrillosSutiles(centerX, centerY, 20);
-          activarAgrandadoIntenso();
-          break;
-          
-        case 5: // Agrandado intenso -> Efecto extra
-          estadoGirasol.clickCount++;
-          crearBrillosSutiles(centerX, centerY, 25);
-          // Añadir un pulso extra de brillo
-          girasol.style.animation = 'balanceoIntensivo 1.5s ease-in-out infinite';
-          break;
-          
-        default:
-          console.log("🌻 Click ignorado - estado no válido para interacción");
+      // Solo permitir UN click en el estado de brillo intermitente
+      if (estadoGirasol.fase === 3 && !estadoGirasol.yaTocado) {
+        // Crear brillos en la posición del girasol
+        const rect = girasol.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        estadoGirasol.clickCount = 1;
+        crearBrillosSutiles(centerX, centerY, 25); // Más brillos para el efecto completo
+        activarCompletoActivado();
+      } else {
+        console.log("🌻 Click ignorado - ya se realizó el único click permitido o estado no válido");
       }
     }
 
@@ -1853,7 +1784,7 @@
     }
 
     // ===================================
-    // 🌻 CONFIGURAR EVENTOS DEL GIRASOL
+    // 🌻 CONFIGURAR EVENTOS DEL GIRASOL SIMPLIFICADOS
     // ===================================
     function configurarEventosGirasol() {
       // Prevenir la propagación de eventos en el girasol para evitar conflictos
@@ -1876,7 +1807,7 @@
 
       // Agregar eventos de hover para mejorar la experiencia
       girasol.addEventListener('mouseenter', () => {
-        if (estadoGirasol.fase >= 3) {
+        if (estadoGirasol.fase === 3 && !estadoGirasol.yaTocado) {
           girasol.style.cursor = 'pointer';
         }
       });
@@ -1899,13 +1830,14 @@
     });
 
     // ===================================
-    // 🔄 FUNCIÓN RESET MEJORADA
+    // 🔄 FUNCIÓN RESET MEJORADA Y SIMPLIFICADA
     // ===================================
     function resetearEstadoGirasol() {
       estadoGirasol = {
         fase: 0,
         clickCount: 0,
-        estrellaLanzada: false
+        estrellaLanzada: false,
+        yaTocado: false // Resetear el control de click único
       };
       
       girasol.className = 'girasol-emoji estatico';
@@ -1916,7 +1848,7 @@
         estrella.remove();
       });
       
-      console.log("🔄 Estado del girasol reseteado completamente");
+      console.log("🔄 Estado del girasol reseteado completamente - Listo para nuevo ciclo");
     }
 
     // Función para resetear completamente y volver al inicio
@@ -2026,9 +1958,10 @@
     // ===================================
     // 🚀 INICIALIZACIÓN FINAL
     // ===================================
-    console.log("🌟 Sistema de girasol interactivo inicializado");
+    console.log("🌟 Sistema de girasol interactivo SIMPLIFICADO inicializado");
     console.log("📱 Optimizado para todos los dispositivos");
-    console.log("🌻 Estados disponibles: estático -> brillo intermitente -> movimiento -> agrandado");
+    console.log("🌻 UN SOLO CLICK: brillo intermitente -> completo activado (movimiento + agrandado + brillo intenso)");
+    console.log("📝 Texto del poema 2025 AUMENTADO para mejor legibilidad en móviles");
   </script>
 </body>
 </html>
